@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>spritePrefix</key>
+		<string>watermelon</string>
+		<key>baseScale</key>
+		<integer>1</integer>
+		<key>baseMass</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>spritePrefix</key>
+		<string>lemon</string>
+		<key>baseScale</key>
+		<real>0.75</real>
+		<key>baseMass</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>spritePrefix</key>
+		<string>blueberry</string>
+		<key>baseScale</key>
+		<real>0.3</real>
+		<key>baseMass</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>spritePrefix</key>
+		<string>orange</string>
+		<key>baseScale</key>
+		<real>0.5</real>
+		<key>baseMass</key>
+		<integer>1</integer>
+	</dict>
+</array>
+</plist>
