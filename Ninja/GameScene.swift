@@ -10,20 +10,19 @@ import SpriteKit
 import GameplayKit
 
 
-
 enum PhysicsCategories:UInt32 {
     case character = 0b001
     case enemy = 0b010
     case sidewall = 0b100
     case topwall = 0b1000
+    case powerup = 0b10000
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var player:Player! = nil
-    var moving = false
     var running = false
-    var enemies = Set<Enemy>()
+    var enemies:[Enemy] = []
     var enemyList:[Enemy] = []
     var spawnRate = 10
     var maxEnemies = 2
@@ -41,8 +40,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
+        let shader = SKShader(fileNamed: "bw.fsh")
+    
+        
         let bgNode = SKSpriteNode(imageNamed: "jungle")
+        //bgNode.texture = nil
+        //bgNode.shader = shader
         bgNode.size = self.frame.size
+  
+        
+        //print(shader.source)
+
         addChild(bgNode)
         bgNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         bgNode.zPosition = -1
@@ -55,20 +64,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createScoreBoard()
         loadEnemies()
         
-        animateGameStart()
-        
-
-    
-        
-        let enemy = Enemy(withTextureName: "watermelon")
-        enemy.position = bgNode.position
-        enemy.zPosition = 2000
-        enemy.physicsBody = nil
-        //addChild(enemy)
+        startGame()
         
     }
     
+    func startGame()
+    {
+        animateGameStart()
+    }
     
+    
+    // Preload enemies so we can just clone from this array.
     func loadEnemies()
     {
         let filename = NSBundle.mainBundle().pathForResource("fruitlist", ofType: "plist")
@@ -77,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 //print(data["spritePrefix"])
                 let fruit = Enemy(withTextureName: data["spritePrefix"] as! String)
                 fruit.setScale(data["baseScale"] as! CGFloat)
-                //fruit.physicsBody?.mass = data["baseMass"] as! CGFloat
+                fruit.physicsBody?.mass = data["baseMass"] as! CGFloat
                 enemyList.append(fruit)
             }
         }
@@ -123,25 +129,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createScoreBoard()
     {
         menuLayer = SKNode()
-        let bar = SKSpriteNode(texture: SKTexture(imageNamed:"topbar"), size: CGSize(width: self.frame.size.width, height: self.frame.size.height/10))
-        menuLayer.addChild(bar)
-        menuLayer.position = CGPoint(x: self.frame.width/2, y: self.frame.height-bar.size.height/2)
+        //let bar = SKSpriteNode(texture: SKTexture(imageNamed:"topbar"), size: CGSize(width: self.frame.size.width, height: self.frame.size.height/10))
+        //menuLayer.addChild(bar)
+        menuLayer.position = CGPoint(x: self.frame.width/2, y: self.frame.height-size.height/10)
 
-        let recessNode = SKSpriteNode(texture: SKTexture(imageNamed:"scoreRecess"), size: CGSize(width: bar.size.width/5, height: bar.size.height*0.7))
-        let fontScaleFactor =  min(recessNode.size.width/scoreNode.frame.width, recessNode.size.height/scoreNode.frame.height)*0.8
-        scoreNode.fontSize *= fontScaleFactor
-        bar.addChild(recessNode)
-        recessNode.addChild(scoreNode)
-        scoreNode.position = CGPoint(x: CGRectGetMidX(recessNode.frame)-scoreNode.frame.width/4, y: CGRectGetMidY(recessNode.frame)-scoreNode.frame.height/2)
-        
+        //let recessNode = SKSpriteNode(texture: SKTexture(imageNamed:"scoreRecess"), size: CGSize(width: bar.size.width/5, height: bar.size.height*0.7))
+        //let fontScaleFactor =  min(recessNode.size.width/scoreNode.frame.width, recessNode.size.height/scoreNode.frame.height)*0.8
+        //scoreNode.fontSize *= fontScaleFactor
+        //bar.addChild(recessNode)
+        //recessNode.addChild(scoreNode)
+        //scoreNode.position = CGPoint(x: CGRectGetMidX(recessNode.frame)-scoreNode.frame.width/4, y: CGRectGetMidY(recessNode.frame)-scoreNode.frame.height/2)
+        scoreNode.fontName = "French_Fries"
+        menuLayer.addChild(scoreNode)
         addChild(menuLayer)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
         var firstBody:SKPhysicsBody
         var secondBody:SKPhysicsBody
-        
-        //print(contact)
         
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             firstBody = contact.bodyA
@@ -154,9 +159,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.enemy.rawValue) {
             if let enemy = secondBody.node as? Enemy {
                 enemy.squash()
-                enemies.remove(enemy)
+                //enemies.remove(enemy)
             }
-            endGame()
+            //endGame()
         }
         
         if (firstBody.categoryBitMask == PhysicsCategories.enemy.rawValue && secondBody.categoryBitMask == PhysicsCategories.topwall.rawValue) {
@@ -171,7 +176,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        
+        if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
+            if let powerUp = secondBody.node as? Powerup {
+                powerUp.removeFromParent()
+            }
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -187,7 +196,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         
             let direction = getTouchDirection(touch)
-            //print(direction)
             changeCharacterState(direction)
             
         }
@@ -228,16 +236,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.spawnDanger()
                 scoreSinceLastSpawn = 0
             }
+            
+            if (shouldSpawnStar() ) {
+                self.spawnStar()
+                //print("Spawning star at score \(score)")
+            }
+        }
+    }
+    
+    func shouldSpawnStar() -> Bool
+    {
+        if (score % 40 == 0) {
+            return true
         }
         
+        return false
     }
     
     func updateEnemies()
     {
-        for enemySprite in enemies {
+        for (index, enemySprite) in enemies.enumerate() {
             if enemySprite.position.x - enemySprite.size.width/2 > self.frame.size.width && self.running {
                 enemySprite.removeFromParent()
-                enemies.remove(enemySprite)
+                enemies.removeAtIndex(index)
             }
             
             enemySprite.physicsBody?.angularVelocity = -7.0
@@ -247,15 +268,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnDanger()
     {
-        let enemySprite = enemyList.randomItem().clone()
+        var enemySprite:Enemy
+        let lastSpawn = enemies.last?.textureName
+        
+        repeat {
+             enemySprite = enemyList.randomItem().clone()
+        } while (enemySprite.textureName == lastSpawn)
+        
+        
         let spawnHeight = CGFloat.random(min: self.frame.height*0.66, max: self.frame.height - enemySprite.frame.size.height)
         let minSpeed = enemySprite.physicsBody!.mass * 100
         let moveSpeed = CGFloat.random(min: minSpeed, max: minSpeed*2.5)
         enemySprite.position = CGPoint(x:0, y: spawnHeight)
         addChild(enemySprite)
         enemySprite.physicsBody?.applyImpulse(CGVector(dx:moveSpeed, dy:0))
-        enemies.insert(enemySprite)
-        //print(enemySprite.textureName, ":", enemySprite.physicsBody?.mass)
+        enemies.append(enemySprite)
     }
     
     
@@ -266,6 +293,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.state.enterState(Standing)
 
         self.addChild(player)
+    }
+    
+    
+    
+    func spawnStar()
+    {
+        /*let sprite = SKShapeNode(circleOfRadius: 10.0)
+        sprite.fillColor = SKColor.yellowColor()*/
+        
+        let star = Powerup(withType: "star")
+        
+        let xPos = CGFloat.random(min: 0, max: self.frame.width)
+        
+        let position = CGPoint(x: xPos, y: self.frame.height + star.frame.height)
+        
+        star.position = position
+        star.scaleAsSize = CGSize(width: 20, height: 25)
+    
+    
+        addChild(star)
     }
     
     func killCharacter()
@@ -310,65 +357,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func checkUpdateDifficulty()
     {
-        if (score % 30 == 0) {
+        if (score % 60 == 0 && spawnRate > 0) {
             spawnRate-=1
         }
-        
-        if (score % 100 == 0) {
+        if (score % 100 == 0 && spawnRate < 10) {
             maxEnemies+=1
         }
     }
     
-    /*func animateCountdown()
-    {
-        let countdownLayer = SKNode()
-        countdownLayer.zPosition = 100
-        countdownLayer.name = "countdown"
-        countdownLayer.position = CGPoint(x: size.width/2, y: size.height/2)
-        let color = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
-        let transparentLayer = SKSpriteNode(color: color, size: self.size)
-        countdownLayer.addChild(transparentLayer)
-        addChild(countdownLayer)
-        
-        let countdownLabel = SKLabelNode(fontNamed: "DJB Belly Button-Outtie")
-        countdownLabel.fontSize = 300
-        countdownLabel.text = "Ready?"
-        countdownLayer.addChild(countdownLabel)
-        
-        var countDownTimer = 3
-        let wait = SKAction.waitForDuration(0.75)
-        let updateLabel = SKAction.runBlock({
-            if countDownTimer == 0 {
-                countdownLabel.text = "Go!"
-            } else {
-                countdownLabel.text = String(countDownTimer)
-                countDownTimer -= 1
-            }
-        })
-        
-        let doTimer = SKAction.sequence([updateLabel, wait])
-        self.runAction(SKAction.repeatAction(doTimer, count: 4)) {
-            self.animateGameStart()
-        }
-    }
     
     func animateGameStart()
     {
-        let slide = SKAction.moveBy(CGVector(dx: 0, dy: -size.height), duration: 0.3)
-        slide.timingMode = .EaseOut
-        if let countdownNode = childNodeWithName("countdown") {
-            countdownNode.runAction(slide) {
-                self.running = true
-                self.startTimer()
-            }
-        }
-    }*/
-    
-    func animateGameStart()
-    {
-        let countDownTimer = CountdownNode(size: self.size, count: 3, delay: 0.75, bgColor: UIColor.clearColor())
+        let countDownTimer = CountdownNode(size: self.size, count: 3, delay: 0.75, bgColor: UIColor.blackColor())
+        countDownTimer.alpha = 0.5
+        countDownTimer.finalText = "GO!"
+        countDownTimer.initialText = "READY?"
         addChild(countDownTimer)
-        countDownTimer.start(nil)
+        countDownTimer.start() {
+            self.running = true
+            self.startTimer()
+        }
     }
 
 }
@@ -377,6 +385,12 @@ extension Array {
     func randomItem() -> Element {
         let index = Int(arc4random_uniform(UInt32(self.count)))
         return self[index]
+    }
+}
+
+extension CGRect {
+    func getMidPoint() -> CGPoint {
+        return CGPoint(x: self.midX, y: self.midY)
     }
 }
 

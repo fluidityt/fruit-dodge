@@ -34,6 +34,17 @@ public extension SKNode {
       yScale = newValue.y
     }
   }
+    
+  /** Lets you treat the node's scale as a CGSize value */
+  public var scaleAsSize: CGSize {
+    get {
+        return frame.size
+    }
+    set {
+        xScale = newValue.width/frame.size.width
+        yScale = newValue.height/frame.size.height
+    }
+  }
 
   /**
    * Runs an action on the node that performs a closure or function after 

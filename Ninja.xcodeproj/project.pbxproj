@@ -27,20 +27,24 @@
 		F93C430B1D79CB97006572C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93C43091D79CB97006572C9 /* LaunchScreen.storyboard */; };
 		F93C43161D79CB97006572C9 /* NinjaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C43151D79CB97006572C9 /* NinjaTests.swift */; };
 		F93C43211D79CB97006572C9 /* NinjaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C43201D79CB97006572C9 /* NinjaUITests.swift */; };
+		F952E3D51E4E17AF0012CCA1 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F952E3D41E4E17AF0012CCA1 /* Powerup.swift */; };
+		F952E3D71E4E1CC80012CCA1 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = F952E3D61E4E1CC80012CCA1 /* star.png */; };
+		F952E3D91E55D8870012CCA1 /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F952E3D81E55D8870012CCA1 /* Collectible.swift */; };
+		F952E3DB1E55DE540012CCA1 /* Flashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F952E3DA1E55DE540012CCA1 /* Flashing.swift */; };
 		F95B2A5D1E2E6C88007A62EC /* CountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */; };
 		F95D2EF51D8BF23700542CD9 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95D2EF41D8BF23700542CD9 /* Enemy.swift */; };
 		F960928E1DA7F37E00749623 /* splat.wav in Resources */ = {isa = PBXBuildFile; fileRef = F960928D1DA7F37E00749623 /* splat.wav */; };
 		F96092901DA7FAD500749623 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960928F1DA7FAD500749623 /* MenuViewController.swift */; };
 		F96092931DA7FDCC00749623 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = F96092921DA7FDCC00749623 /* play.png */; };
-		F967BB121D93EF9A0023E414 /* Defeated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F967BB111D93EF9A0023E414 /* Defeated.swift */; };
+		F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F972700A1E44E94600D4F796 /* French_Fries.ttf */; };
+		F972700E1E4A06DD00D4F796 /* shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F972700D1E4A06DD00D4F796 /* shader.fsh */; };
+		F97270101E4A23AC00D4F796 /* bw.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F972700F1E4A23AC00D4F796 /* bw.fsh */; };
 		F9896C461D9ACB3700B53571 /* monkey.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9896C451D9ACB3700B53571 /* monkey.atlas */; };
 		F9896C501D9D718400B53571 /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9896C4F1D9D718400B53571 /* bounce.mp3 */; };
 		F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9A176FD1DCB929900534EBA /* fruitlist.plist */; };
 		F9A1C44D1DE8A1EC007D4E42 /* fruit.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9A1C44C1DE8A1EC007D4E42 /* fruit.atlas */; };
 		F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BFCB2A1D92ACED0095A8EA /* Player.swift */; };
-		F9CB94CD1D806D17001E8318 /* Standing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CC1D806D16001E8318 /* Standing.swift */; };
-		F9CB94CF1D806E41001E8318 /* RunLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CE1D806E41001E8318 /* RunLeft.swift */; };
-		F9CB94D11D806E4D001E8318 /* RunRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94D01D806E4D001E8318 /* RunRight.swift */; };
+		F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CC1D806D16001E8318 /* PlayerStates.swift */; };
 		F9CB94D31D807036001E8318 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94D21D807036001E8318 /* PlayerState.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,20 +92,24 @@
 		F93C431C1D79CB97006572C9 /* NinjaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NinjaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F93C43201D79CB97006572C9 /* NinjaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NinjaUITests.swift; sourceTree = "<group>"; };
 		F93C43221D79CB97006572C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F952E3D41E4E17AF0012CCA1 /* Powerup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
+		F952E3D61E4E1CC80012CCA1 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		F952E3D81E55D8870012CCA1 /* Collectible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
+		F952E3DA1E55DE540012CCA1 /* Flashing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flashing.swift; sourceTree = "<group>"; };
 		F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownNode.swift; sourceTree = "<group>"; };
 		F95D2EF41D8BF23700542CD9 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		F960928D1DA7F37E00749623 /* splat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splat.wav; sourceTree = "<group>"; };
 		F960928F1DA7FAD500749623 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		F96092921DA7FDCC00749623 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
-		F967BB111D93EF9A0023E414 /* Defeated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defeated.swift; sourceTree = "<group>"; };
+		F972700A1E44E94600D4F796 /* French_Fries.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = French_Fries.ttf; sourceTree = "<group>"; };
+		F972700D1E4A06DD00D4F796 /* shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.fsh; sourceTree = "<group>"; };
+		F972700F1E4A23AC00D4F796 /* bw.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bw.fsh; sourceTree = "<group>"; };
 		F9896C451D9ACB3700B53571 /* monkey.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = monkey.atlas; sourceTree = "<group>"; };
 		F9896C4F1D9D718400B53571 /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bounce.mp3; sourceTree = "<group>"; };
 		F9A176FD1DCB929900534EBA /* fruitlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fruitlist.plist; sourceTree = "<group>"; };
 		F9A1C44C1DE8A1EC007D4E42 /* fruit.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fruit.atlas; sourceTree = "<group>"; };
 		F9BFCB2A1D92ACED0095A8EA /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		F9CB94CC1D806D16001E8318 /* Standing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Standing.swift; sourceTree = "<group>"; };
-		F9CB94CE1D806E41001E8318 /* RunLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLeft.swift; sourceTree = "<group>"; };
-		F9CB94D01D806E4D001E8318 /* RunRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunRight.swift; sourceTree = "<group>"; };
+		F9CB94CC1D806D16001E8318 /* PlayerStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStates.swift; sourceTree = "<group>"; };
 		F9CB94D21D807036001E8318 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerState.swift; path = ../PlayerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +180,9 @@
 		F93C42FB1D79CB97006572C9 /* Ninja */ = {
 			isa = PBXGroup;
 			children = (
+				F952E3D11E4CD0A30012CCA1 /* New Group */,
+				F972700C1E4A01DF00D4F796 /* Shaders */,
+				F97270091E44E92C00D4F796 /* Fonts */,
 				F96092911DA7FBD200749623 /* Sounds */,
 				F9896C451D9ACB3700B53571 /* monkey.atlas */,
 				F9216BD51D917FB500E8E923 /* SKTUtils */,
@@ -179,6 +190,8 @@
 				F93C42FC1D79CB97006572C9 /* AppDelegate.swift */,
 				F93C43001D79CB97006572C9 /* GameScene.swift */,
 				F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */,
+				F952E3D41E4E17AF0012CCA1 /* Powerup.swift */,
+				F952E3D61E4E1CC80012CCA1 /* star.png */,
 				F960928F1DA7FAD500749623 /* MenuViewController.swift */,
 				F9BFCB2A1D92ACED0095A8EA /* Player.swift */,
 				F95D2EF41D8BF23700542CD9 /* Enemy.swift */,
@@ -212,6 +225,31 @@
 			path = NinjaUITests;
 			sourceTree = "<group>";
 		};
+		F952E3D11E4CD0A30012CCA1 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		F952E3D21E4CD0BD0012CCA1 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				F9CB94D21D807036001E8318 /* PlayerState.swift */,
+				F9CB94CC1D806D16001E8318 /* PlayerStates.swift */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		F952E3D31E4CD2A80012CCA1 /* Powerup */ = {
+			isa = PBXGroup;
+			children = (
+				F952E3D81E55D8870012CCA1 /* Collectible.swift */,
+				F952E3DA1E55DE540012CCA1 /* Flashing.swift */,
+			);
+			name = Powerup;
+			sourceTree = "<group>";
+		};
 		F96092911DA7FBD200749623 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,14 +259,28 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		F97270091E44E92C00D4F796 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F972700A1E44E94600D4F796 /* French_Fries.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		F972700C1E4A01DF00D4F796 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				F972700D1E4A06DD00D4F796 /* shader.fsh */,
+				F972700F1E4A23AC00D4F796 /* bw.fsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
 		F9CB94CB1D806CF9001E8318 /* States */ = {
 			isa = PBXGroup;
 			children = (
-				F9CB94D21D807036001E8318 /* PlayerState.swift */,
-				F9CB94CC1D806D16001E8318 /* Standing.swift */,
-				F967BB111D93EF9A0023E414 /* Defeated.swift */,
-				F9CB94CE1D806E41001E8318 /* RunLeft.swift */,
-				F9CB94D01D806E4D001E8318 /* RunRight.swift */,
+				F952E3D31E4CD2A80012CCA1 /* Powerup */,
+				F952E3D21E4CD0BD0012CCA1 /* Player */,
 			);
 			name = States;
 			sourceTree = "<group>";
@@ -343,12 +395,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
 				F9A1C44D1DE8A1EC007D4E42 /* fruit.atlas in Resources */,
 				F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */,
 				F9896C501D9D718400B53571 /* bounce.mp3 in Resources */,
 				F96092931DA7FDCC00749623 /* play.png in Resources */,
 				F960928E1DA7F37E00749623 /* splat.wav in Resources */,
+				F97270101E4A23AC00D4F796 /* bw.fsh in Resources */,
+				F972700E1E4A06DD00D4F796 /* shader.fsh in Resources */,
 				F9896C461D9ACB3700B53571 /* monkey.atlas in Resources */,
+				F952E3D71E4E1CC80012CCA1 /* star.png in Resources */,
 				F93C430B1D79CB97006572C9 /* LaunchScreen.storyboard in Resources */,
 				F93C43081D79CB97006572C9 /* Assets.xcassets in Resources */,
 				F93C43061D79CB97006572C9 /* Main.storyboard in Resources */,
@@ -376,28 +432,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9CB94CF1D806E41001E8318 /* RunLeft.swift in Sources */,
+				F952E3D51E4E17AF0012CCA1 /* Powerup.swift in Sources */,
 				F9216BE91D917FB500E8E923 /* SKNode+Extensions.swift in Sources */,
 				F9216BEC1D917FB500E8E923 /* SKTTimingFunctions.swift in Sources */,
 				F9216BE21D917FB500E8E923 /* CGFloat+Extensions.swift in Sources */,
 				F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */,
 				F9216BE71D917FB500E8E923 /* SKAction+SpecialEffects.swift in Sources */,
 				F93C43011D79CB97006572C9 /* GameScene.swift in Sources */,
+				F952E3D91E55D8870012CCA1 /* Collectible.swift in Sources */,
 				F9216BE61D917FB500E8E923 /* SKAction+Extensions.swift in Sources */,
 				F9216BEA1D917FB500E8E923 /* SKTAudio.swift in Sources */,
 				F9216BEB1D917FB500E8E923 /* SKTEffects.swift in Sources */,
-				F9CB94D11D806E4D001E8318 /* RunRight.swift in Sources */,
 				F9216BE41D917FB500E8E923 /* CGVector+Extensions.swift in Sources */,
 				F9CB94D31D807036001E8318 /* PlayerState.swift in Sources */,
 				F95B2A5D1E2E6C88007A62EC /* CountdownNode.swift in Sources */,
-				F967BB121D93EF9A0023E414 /* Defeated.swift in Sources */,
 				F95D2EF51D8BF23700542CD9 /* Enemy.swift in Sources */,
 				F9216BE31D917FB500E8E923 /* CGPoint+Extensions.swift in Sources */,
 				F9216BE81D917FB500E8E923 /* SKColor+Extensions.swift in Sources */,
-				F9CB94CD1D806D17001E8318 /* Standing.swift in Sources */,
+				F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */,
 				F9216BE51D917FB500E8E923 /* Int+Extensions.swift in Sources */,
 				F93C43031D79CB97006572C9 /* GameViewController.swift in Sources */,
 				F9216BED1D917FB500E8E923 /* Vector3.swift in Sources */,
+				F952E3DB1E55DE540012CCA1 /* Flashing.swift in Sources */,
 				F93C42FD1D79CB97006572C9 /* AppDelegate.swift in Sources */,
 				F96092901DA7FAD500749623 /* MenuViewController.swift in Sources */,
 			);
