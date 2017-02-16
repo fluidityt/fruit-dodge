@@ -12,9 +12,11 @@ import GameplayKit
 class Powerup: SKSpriteNode {
     
     var state:GKStateMachine? = nil
+    var timeInExistence:CFTimeInterval = 0.0
     
     init(withType:String) {
         
+    
         let texture = SKTexture(imageNamed: "star")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         
@@ -26,7 +28,7 @@ class Powerup: SKSpriteNode {
         self.physicsBody?.allowsRotation = false
         
         state = GKStateMachine(states: [Collectible(withPowerup: self)])
-        
+        self.name = "powerup"
     }
     
     

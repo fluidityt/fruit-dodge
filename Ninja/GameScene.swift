@@ -21,6 +21,7 @@ enum PhysicsCategories:UInt32 {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var player:Player! = nil
+    var lastUpdateTime:NSTimeInterval = 0.0
     var running = false
     var enemies:[Enemy] = []
     var enemyList:[Enemy] = []
@@ -229,8 +230,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        
+        var timeSinceLast = currentTime - lastUpdateTime
+        self.lastUpdateTime = currentTime
+        if (timeSinceLast > 1) {
+            timeSinceLast = 1.0/60.0
+        }
+        
+
         if (running) {
-            player.state.updateWithDeltaTime(currentTime)
+            
+            self.enumerateChildNodesWithName("powerup", usingBlock: { node, stop in
+                if let powerup = node as? Powerup {
+                    powerup.state?.updateWithDeltaTime(timeSinceLast)
+                }
+            })
+            
             updateEnemies()
             if (shouldSpawnEnemy()) {
                 self.spawnDanger()
@@ -310,9 +325,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         star.position = position
         star.scaleAsSize = CGSize(width: 20, height: 25)
-    
+        
     
         addChild(star)
+        star.state?.enterState(Collectible)
     }
     
     func killCharacter()
