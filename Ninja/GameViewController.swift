@@ -19,7 +19,7 @@ class GameViewController: UIViewController {
         
         super.viewDidLayoutSubviews()
 
-         let gameSize = CGSize(width: 1024, height: 768)
+         let gameSize = CGSize(width: 2048, height: 1536)
         
          let scene = GameScene(size: gameSize)
             // Configure the view.
@@ -32,10 +32,10 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .ResizeFill
+            scene.scaleMode = .AspectFill
             
             skView.presentScene(scene)
-            //skView.showsPhysics = true
+            skView.showsPhysics = true
         
     }
 

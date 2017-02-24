@@ -20,7 +20,9 @@ class Collectible: GKState {
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {
         powerup.timeInExistence+=seconds
-        print(powerup.timeInExistence)
+        if powerup.timeInExistence > 4.0 {
+            powerup.state!.enterState(Flashing)
+        }
     }
     
     override func isValidNextState(stateClass: AnyClass) -> Bool {

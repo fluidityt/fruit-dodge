@@ -18,7 +18,14 @@ class Flashing: GKState {
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {
-        print(seconds);
+        powerup.timeInExistence+=seconds
+        if powerup.timeInExistence > 2.0 {
+            powerup.removeFromParent()
+        }
+    }
+    
+    override func didEnterWithPreviousState(previousState: GKState?) {
+        self.powerup.flash()
     }
 }
 

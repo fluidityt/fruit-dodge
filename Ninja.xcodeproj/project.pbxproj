@@ -28,14 +28,16 @@
 		F93C43161D79CB97006572C9 /* NinjaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C43151D79CB97006572C9 /* NinjaTests.swift */; };
 		F93C43211D79CB97006572C9 /* NinjaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C43201D79CB97006572C9 /* NinjaUITests.swift */; };
 		F952E3D51E4E17AF0012CCA1 /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F952E3D41E4E17AF0012CCA1 /* Powerup.swift */; };
-		F952E3D71E4E1CC80012CCA1 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = F952E3D61E4E1CC80012CCA1 /* star.png */; };
 		F952E3D91E55D8870012CCA1 /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F952E3D81E55D8870012CCA1 /* Collectible.swift */; };
 		F952E3DB1E55DE540012CCA1 /* Flashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F952E3DA1E55DE540012CCA1 /* Flashing.swift */; };
+		F952E3DD1E5B56B90012CCA1 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F952E3DC1E5B56B90012CCA1 /* bg.png */; };
 		F95B2A5D1E2E6C88007A62EC /* CountdownNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */; };
 		F95D2EF51D8BF23700542CD9 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95D2EF41D8BF23700542CD9 /* Enemy.swift */; };
 		F960928E1DA7F37E00749623 /* splat.wav in Resources */ = {isa = PBXBuildFile; fileRef = F960928D1DA7F37E00749623 /* splat.wav */; };
 		F96092901DA7FAD500749623 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960928F1DA7FAD500749623 /* MenuViewController.swift */; };
 		F96092931DA7FDCC00749623 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = F96092921DA7FDCC00749623 /* play.png */; };
+		F9658DF21E5F618B00233B6A /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = F9658DF11E5F618B00233B6A /* star.png */; };
+		F9658E1F1E608DA600233B6A /* resized.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9658E1E1E608DA600233B6A /* resized.atlas */; };
 		F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F972700A1E44E94600D4F796 /* French_Fries.ttf */; };
 		F972700E1E4A06DD00D4F796 /* shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F972700D1E4A06DD00D4F796 /* shader.fsh */; };
 		F97270101E4A23AC00D4F796 /* bw.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F972700F1E4A23AC00D4F796 /* bw.fsh */; };
@@ -93,14 +95,16 @@
 		F93C43201D79CB97006572C9 /* NinjaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NinjaUITests.swift; sourceTree = "<group>"; };
 		F93C43221D79CB97006572C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F952E3D41E4E17AF0012CCA1 /* Powerup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
-		F952E3D61E4E1CC80012CCA1 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		F952E3D81E55D8870012CCA1 /* Collectible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
 		F952E3DA1E55DE540012CCA1 /* Flashing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flashing.swift; sourceTree = "<group>"; };
+		F952E3DC1E5B56B90012CCA1 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownNode.swift; sourceTree = "<group>"; };
 		F95D2EF41D8BF23700542CD9 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		F960928D1DA7F37E00749623 /* splat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splat.wav; sourceTree = "<group>"; };
 		F960928F1DA7FAD500749623 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		F96092921DA7FDCC00749623 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		F9658DF11E5F618B00233B6A /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		F9658E1E1E608DA600233B6A /* resized.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = resized.atlas; sourceTree = "<group>"; };
 		F972700A1E44E94600D4F796 /* French_Fries.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = French_Fries.ttf; sourceTree = "<group>"; };
 		F972700D1E4A06DD00D4F796 /* shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.fsh; sourceTree = "<group>"; };
 		F972700F1E4A23AC00D4F796 /* bw.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bw.fsh; sourceTree = "<group>"; };
@@ -189,13 +193,15 @@
 				F9CB94CB1D806CF9001E8318 /* States */,
 				F93C42FC1D79CB97006572C9 /* AppDelegate.swift */,
 				F93C43001D79CB97006572C9 /* GameScene.swift */,
+				F93C43021D79CB97006572C9 /* GameViewController.swift */,
 				F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */,
 				F952E3D41E4E17AF0012CCA1 /* Powerup.swift */,
-				F952E3D61E4E1CC80012CCA1 /* star.png */,
+				F9658DF11E5F618B00233B6A /* star.png */,
 				F960928F1DA7FAD500749623 /* MenuViewController.swift */,
+				F952E3DC1E5B56B90012CCA1 /* bg.png */,
 				F9BFCB2A1D92ACED0095A8EA /* Player.swift */,
 				F95D2EF41D8BF23700542CD9 /* Enemy.swift */,
-				F93C43021D79CB97006572C9 /* GameViewController.swift */,
+				F9658E1E1E608DA600233B6A /* resized.atlas */,
 				F96092921DA7FDCC00749623 /* play.png */,
 				F93C43041D79CB97006572C9 /* Main.storyboard */,
 				F9A1C44C1DE8A1EC007D4E42 /* fruit.atlas */,
@@ -395,16 +401,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9658E1F1E608DA600233B6A /* resized.atlas in Resources */,
 				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
 				F9A1C44D1DE8A1EC007D4E42 /* fruit.atlas in Resources */,
 				F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */,
 				F9896C501D9D718400B53571 /* bounce.mp3 in Resources */,
+				F952E3DD1E5B56B90012CCA1 /* bg.png in Resources */,
 				F96092931DA7FDCC00749623 /* play.png in Resources */,
 				F960928E1DA7F37E00749623 /* splat.wav in Resources */,
 				F97270101E4A23AC00D4F796 /* bw.fsh in Resources */,
+				F9658DF21E5F618B00233B6A /* star.png in Resources */,
 				F972700E1E4A06DD00D4F796 /* shader.fsh in Resources */,
 				F9896C461D9ACB3700B53571 /* monkey.atlas in Resources */,
-				F952E3D71E4E1CC80012CCA1 /* star.png in Resources */,
 				F93C430B1D79CB97006572C9 /* LaunchScreen.storyboard in Resources */,
 				F93C43081D79CB97006572C9 /* Assets.xcassets in Resources */,
 				F93C43061D79CB97006572C9 /* Main.storyboard in Resources */,

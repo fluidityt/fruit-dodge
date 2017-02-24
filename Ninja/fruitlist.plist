@@ -14,7 +14,7 @@
 		<key>spritePrefix</key>
 		<string>lemon</string>
 		<key>baseScale</key>
-		<real>0.75</real>
+		<integer>1</integer>
 		<key>baseMass</key>
 		<integer>1</integer>
 	</dict>
@@ -22,7 +22,7 @@
 		<key>spritePrefix</key>
 		<string>blueberry</string>
 		<key>baseScale</key>
-		<real>0.3</real>
+		<integer>1</integer>
 		<key>baseMass</key>
 		<integer>1</integer>
 	</dict>
@@ -30,7 +30,7 @@
 		<key>spritePrefix</key>
 		<string>orange</string>
 		<key>baseScale</key>
-		<real>0.5</real>
+		<integer>1</integer>
 		<key>baseMass</key>
 		<integer>1</integer>
 	</dict>

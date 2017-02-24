@@ -8,46 +8,41 @@
 
 import UIKit
 import SpriteKit
+import GameplayKit
 
 class Player: SKSpriteNode {
     
     var state:PlayerState!
-    let idleTexture = SKTexture(imageNamed: "monkey_run_1")
+    var idleTextures = [SKTexture]()
     var runTextures = [SKTexture]()
     var defeatedTexture = SKTexture(imageNamed: "monkey_dead")
-    var runSpeed:CGFloat {
-        guard let view = scene?.view else {
-            return UIScreen.mainScreen().bounds.width / 3.0
-        }
-        
-        print(view.frame.width/3.0)
-        return view.frame.width / 3.1459
-    }
+    var runSpeed:CGFloat = 500
     
     var moving:Bool {
         return self.physicsBody?.velocity.dx > 0
     }
-    
+   
     var cropNode = SKCropNode();
     var maskNode:SKSpriteNode
     
     init() {
-        let ratio = idleTexture.size().height / idleTexture.size().width
-        let height = UIScreen.mainScreen().bounds.height/7
         
-        let textureSize = CGSize(width: height/ratio, height: height)
-        maskNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: textureSize.width, height: textureSize.height))
+        maskNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 246, height: 295))
 
-        super.init(texture: idleTexture, color: UIColor.clearColor(), size: textureSize)
+        super.init(texture: SKTexture(imageNamed: "idle_0"), color: UIColor.clearColor(), size: CGSize(width: 246, height: 295))
+        loadTextures()
         
-        loadRunTextures()
         
         state = PlayerState(player:self)
         
         // Scale down physics body size so it isn't larger than the actual player.
-        let physicsBodySize = CGSize(width: textureSize.width*0.7, height: textureSize.height*0.9)
+        let physicsBodySize = CGSize(width: idleTextures[0].size().width*0.9, height: idleTextures[0].size().height)
+        print(physicsBodySize)
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: physicsBodySize)
+        
+        
+        self.physicsBody = SKPhysicsBody(texture: idleTextures[0], size: idleTextures[0].size())
         self.physicsBody?.categoryBitMask = PhysicsCategories.character.rawValue
         self.physicsBody?.collisionBitMask = PhysicsCategories.topwall.rawValue | PhysicsCategories.sidewall.rawValue
         self.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
@@ -63,13 +58,26 @@ class Player: SKSpriteNode {
         cropNode.hidden = true
     }
     
-    internal func loadRunTextures()
+    internal func loadTextures()
     {
-        for i in 2...8 {
-            let texture = SKTexture(imageNamed: "monkey_run_\(i)")
+        for i in 0...7 {
+            let texture = SKTexture(imageNamed: "run_\(i)")
             runTextures.append(texture)
-            
         }
+        
+        for i in 0...11 {
+            let texture = SKTexture(imageNamed: "idle_\(i)")
+            idleTextures.append(texture)
+        }
+    }
+    
+    func enterState(state:GKState) {
+        //self.state.enterState()
+    }
+    
+    func kill()
+    {
+        self.state.enterState(Defeated)
     }
     
     required init?(coder aDecoder: NSCoder) {

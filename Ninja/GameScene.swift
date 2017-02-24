@@ -20,6 +20,7 @@ enum PhysicsCategories:UInt32 {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var playableRect:CGRect
     var player:Player! = nil
     var lastUpdateTime:NSTimeInterval = 0.0
     var running = false
@@ -30,9 +31,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreSinceLastSpawn = 0
     var score:Int = 0 {
         didSet {
-            checkUpdateDifficulty()
+            doScoreChecks()
             scoreNode.text = String(score)
             scoreSinceLastSpawn+=score-oldValue
+        }
+    }
+    
+    var starScore:Int = 0 {
+        didSet {
+            if let scoreNode = menuLayer.childNodeWithName("starscore") as? SKLabelNode {
+                scoreNode.text = String(starScore)
+            }
         }
     }
     
@@ -45,7 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let shader = SKShader(fileNamed: "bw.fsh")
     
         
-        let bgNode = SKSpriteNode(imageNamed: "jungle")
+        let bgNode = SKSpriteNode(imageNamed: "bg-1")
         //bgNode.texture = nil
         //bgNode.shader = shader
         bgNode.size = self.frame.size
@@ -58,7 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bgNode.zPosition = -1
         self.physicsWorld.contactDelegate = self
         
-        self.physicsWorld.gravity = CGVector(dx: 0, dy: -4.5)
+        //self.physicsWorld.gravity = CGVector(dx: 0, dy: -4.5)
         view.multipleTouchEnabled = true
         spawnCharacter()
         createWalls()
@@ -66,7 +75,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loadEnemies()
         
         startGame()
+        debugDrawPlayableArea()
         
+    }
+    
+    /*
+     * Taken from Ray Wenderlich p73
+    */
+    override init(size: CGSize)
+    {
+        let maxAspectRatio:CGFloat = 16.0/9.0
+        let playableHeight = size.width / maxAspectRatio
+        let playableMargin = (size.height-playableHeight)/2.0
+        playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
+        
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func debugDrawPlayableArea()
+    {
+        let shape = SKShapeNode()
+        let path = CGPathCreateMutable()
+        CGPathAddRect(path, nil, playableRect)
+        shape.path = path
+        shape.strokeColor = SKColor.redColor()
+        shape.lineWidth = 4.0
+        addChild(shape)
     }
     
     func startGame()
@@ -83,7 +121,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for data in enemyData {
                 //print(data["spritePrefix"])
                 let fruit = Enemy(withTextureName: data["spritePrefix"] as! String)
-                fruit.setScale(data["baseScale"] as! CGFloat)
+                //fruit.setScale(data["baseScale"] as! CGFloat)
+                fruit.setScale(2.0)
                 fruit.physicsBody?.mass = data["baseMass"] as! CGFloat
                 enemyList.append(fruit)
             }
@@ -92,7 +131,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createWalls()
     {
-        let floorHeight = self.frame.size.height/10.0
+        let floorHeight:CGFloat = 270.0
         let leftWall = SKNode(); let rightWall = SKNode(); let ceiling = SKNode(); let floor = SKNode()
         leftWall.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointZero, toPoint: CGPoint(x: 0, y: self.frame.height))
         rightWall.physicsBody = SKPhysicsBody(edgeFromPoint: CGPoint(x: self.frame.width, y: 0), toPoint: CGPoint(x:self.frame.width, y: self.frame.height))
@@ -142,6 +181,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //scoreNode.position = CGPoint(x: CGRectGetMidX(recessNode.frame)-scoreNode.frame.width/4, y: CGRectGetMidY(recessNode.frame)-scoreNode.frame.height/2)
         scoreNode.fontName = "French_Fries"
         menuLayer.addChild(scoreNode)
+        
+        let starScoreNode = SKLabelNode(fontNamed: "French_Fries")
+        starScoreNode.name = "starscore"
+        starScoreNode.text = "0"
+        
+        starScoreNode.position = CGPoint(x: -self.frame.width/10, y: 0)
+        menuLayer.addChild(starScoreNode)
+        
         addChild(menuLayer)
     }
     
@@ -180,6 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
             if let powerUp = secondBody.node as? Powerup {
                 powerUp.removeFromParent()
+                didExecutePowerup(powerUp)
             }
         }
     }
@@ -252,10 +300,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 scoreSinceLastSpawn = 0
             }
             
-            if (shouldSpawnStar() ) {
-                self.spawnStar()
-                //print("Spawning star at score \(score)")
-            }
         }
     }
     
@@ -304,41 +348,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnCharacter()
     {
         player = Player()
-        player.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.frame.size.height/10.0+player.frame.size.height/2)
+
         player.state.enterState(Standing)
 
         self.addChild(player)
+        
+        player.position = CGPoint(x: CGRectGetMidX(self.frame), y: 270 + player.frame.size.height/2)
     }
     
     
     
     func spawnStar()
     {
-        /*let sprite = SKShapeNode(circleOfRadius: 10.0)
-        sprite.fillColor = SKColor.yellowColor()*/
-        
-        let star = Powerup(withType: "star")
+        guard let star = PowerupFactory.createPowerupOfType("star") else {
+            return
+        }
         
         let xPos = CGFloat.random(min: 0, max: self.frame.width)
         
         let position = CGPoint(x: xPos, y: self.frame.height + star.frame.height)
         
         star.position = position
-        star.scaleAsSize = CGSize(width: 20, height: 25)
+        
         
     
         addChild(star)
         star.state?.enterState(Collectible)
     }
     
-    func killCharacter()
+    func doScoreChecks()
     {
-        player.state.enterState(Defeated)
+        checkUpdateDifficulty()
+        if(shouldSpawnStar()) {
+            spawnStar()
+        }
     }
+
     
     func endGame()
     {
-        killCharacter()
+        player.kill()
         stopTimer()
         running = false
         let restartNode = SKSpriteNode(imageNamed: "restart")
@@ -394,7 +443,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.startTimer()
         }
     }
+}
 
+extension GameScene: Powerupable
+{
+    func didExecutePowerup(powerup: Powerup) {
+        powerup.action(self)
+    }
 }
 
 extension Array {
