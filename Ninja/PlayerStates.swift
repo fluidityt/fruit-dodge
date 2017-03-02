@@ -43,12 +43,16 @@ class Defeated: GKState {
     override func didEnterWithPreviousState(previousState: GKState?) {
         node.physicsBody?.velocity.dx = 0
         node.removeActionForKey("running")
-        node.texture = nil
+        node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: node.size.height*0.8, height: node.size.width))
+        node.physicsBody?.categoryBitMask = PhysicsCategories.character.rawValue
+        node.physicsBody?.collisionBitMask = PhysicsCategories.topwall.rawValue | PhysicsCategories.sidewall.rawValue
+        node.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
+        /*node.texture = nil
         node.cropNode.hidden = false
         let pos = node.cropNode.position - CGPoint(x: 0, y: node.size.height/2)
         node.maskNode.runAction(SKAction.moveTo(CGPoint(x:0, y:node.size.height/2), duration: 0.05))
-        node.cropNode.runAction(SKAction.moveTo(pos, duration: 0.05))
-        
+        node.cropNode.runAction(SKAction.moveTo(pos, duration: 0.05))*/
+        node.runAction(SKAction.animateWithTextures(node.defeatedTextures, timePerFrame: 0.01, resize: true, restore: false))
     }
     
     override func isValidNextState(stateClass: AnyClass) -> Bool {

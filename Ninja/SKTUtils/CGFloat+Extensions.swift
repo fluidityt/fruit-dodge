@@ -102,3 +102,8 @@ public func shortestAngleBetween(angle1: CGFloat, angle2: CGFloat) -> CGFloat {
     }
     return angle
 }
+
+
+public func - (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize(width: left.width - right.width, height: left.height - right.height)
+}

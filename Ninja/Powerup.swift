@@ -9,10 +9,9 @@
 import UIKit
 import GameplayKit
 
-protocol Powerupable
+protocol Powerupable:class
 {
     func didExecutePowerup(powerup:Powerup)
-    //var delegate:AnyObject { get set }
 }
 
 class PowerupFactory {
@@ -42,8 +41,10 @@ class Powerup: SKSpriteNode {
     
     var state:GKStateMachine? = nil
     var timeInExistence:CFTimeInterval = 0.0
+    weak var delegate:Powerupable?
+    var collectionSound:SKAction?
     
-    init() {
+    private init() {
         
     
         let texture = SKTexture(imageNamed: "star")
@@ -67,7 +68,7 @@ class Powerup: SKSpriteNode {
     
     func flash()
     {
-        let fadeoutAction = SKAction.fadeOutWithDuration(0.1)
+        let fadeoutAction = SKAction.fadeAlphaTo(0.01, duration: 0.1)
         let fadeinAction = SKAction.fadeInWithDuration(0.1)
         let flashAction = SKAction.sequence([fadeoutAction, fadeinAction])
         self.runAction(SKAction.repeatActionForever(flashAction))
@@ -78,16 +79,20 @@ class Powerup: SKSpriteNode {
         // Remove action
     }
     
-    func action(obj: AnyObject) {}
+    func action() {
+        delegate?.didExecutePowerup(self)
+    }
     
 }
 
 class Star:Powerup
 {
-    override func action(obj: AnyObject) {
-        
-        let scene = obj as! GameScene
-        
-        scene.starScore+=1
+    override init() {
+        super.init()
+        collectionSound = SKAction.playSoundFileNamed("star_collect.mp3", waitForCompletion: false)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

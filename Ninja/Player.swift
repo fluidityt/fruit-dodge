@@ -15,8 +15,9 @@ class Player: SKSpriteNode {
     var state:PlayerState!
     var idleTextures = [SKTexture]()
     var runTextures = [SKTexture]()
-    var defeatedTexture = SKTexture(imageNamed: "monkey_dead")
+    var defeatedTextures = [SKTexture]()
     var runSpeed:CGFloat = 500
+    var lives = 3
     
     var moving:Bool {
         return self.physicsBody?.velocity.dx > 0
@@ -29,14 +30,14 @@ class Player: SKSpriteNode {
         
         maskNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 246, height: 295))
 
-        super.init(texture: SKTexture(imageNamed: "idle_0"), color: UIColor.clearColor(), size: CGSize(width: 246, height: 295))
+        super.init(texture: SKTexture(imageNamed: "idle_0"), color: UIColor.clearColor(), size: CGSize(width: 166, height: 221))
         loadTextures()
         
         
         state = PlayerState(player:self)
         
         // Scale down physics body size so it isn't larger than the actual player.
-        let physicsBodySize = CGSize(width: idleTextures[0].size().width*0.9, height: idleTextures[0].size().height)
+        let physicsBodySize = CGSize(width: self.texture!.size().width*0.9, height: self.texture!.size().height)
         print(physicsBodySize)
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: physicsBodySize)
@@ -52,10 +53,10 @@ class Player: SKSpriteNode {
         self.physicsBody?.linearDamping = 0.0
         
         
-        cropNode.maskNode = maskNode
+        /*cropNode.maskNode = maskNode
         cropNode.addChild(SKSpriteNode(texture: defeatedTexture, size: size))
         addChild(cropNode)
-        cropNode.hidden = true
+        cropNode.hidden = true*/
     }
     
     internal func loadTextures()
@@ -68,6 +69,11 @@ class Player: SKSpriteNode {
         for i in 0...11 {
             let texture = SKTexture(imageNamed: "idle_\(i)")
             idleTextures.append(texture)
+        }
+        
+        for i in 0...11 {
+            let texture = SKTexture(imageNamed: "die_\(i)")
+            defeatedTextures.append(texture)
         }
     }
     

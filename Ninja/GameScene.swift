@@ -18,7 +18,7 @@ enum PhysicsCategories:UInt32 {
     case powerup = 0b10000
 }
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
     
     var playableRect:CGRect
     var player:Player! = nil
@@ -75,7 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loadEnemies()
         
         startGame()
-        debugDrawPlayableArea()
+        //debugDrawPlayableArea()
         
     }
     
@@ -121,8 +121,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for data in enemyData {
                 //print(data["spritePrefix"])
                 let fruit = Enemy(withTextureName: data["spritePrefix"] as! String)
-                //fruit.setScale(data["baseScale"] as! CGFloat)
-                fruit.setScale(2.0)
+                let baseScale = (data["baseScale"] as! CGFloat)
+                fruit.setScale(2.0*baseScale)
                 fruit.physicsBody?.mass = data["baseMass"] as! CGFloat
                 enemyList.append(fruit)
             }
@@ -168,11 +168,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createScoreBoard()
     {
+        
+        let diff = self.frame.size - self.playableRect.size
+        //print(diff)
+        
+        
+        
         menuLayer = SKNode()
         //let bar = SKSpriteNode(texture: SKTexture(imageNamed:"topbar"), size: CGSize(width: self.frame.size.width, height: self.frame.size.height/10))
         //menuLayer.addChild(bar)
-        menuLayer.position = CGPoint(x: self.frame.width/2, y: self.frame.height-size.height/10)
+        menuLayer.position = CGPoint(x: self.frame.width/2, y: (self.frame.height - diff.height/2) - 100)
 
+        print(menuLayer.position)
+        
         //let recessNode = SKSpriteNode(texture: SKTexture(imageNamed:"scoreRecess"), size: CGSize(width: bar.size.width/5, height: bar.size.height*0.7))
         //let fontScaleFactor =  min(recessNode.size.width/scoreNode.frame.width, recessNode.size.height/scoreNode.frame.height)*0.8
         //scoreNode.fontSize *= fontScaleFactor
@@ -185,6 +193,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let starScoreNode = SKLabelNode(fontNamed: "French_Fries")
         starScoreNode.name = "starscore"
         starScoreNode.text = "0"
+        scoreNode.fontSize = 120
+        starScoreNode.fontSize = 120
         
         starScoreNode.position = CGPoint(x: -self.frame.width/10, y: 0)
         menuLayer.addChild(starScoreNode)
@@ -192,52 +202,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(menuLayer)
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
-        var firstBody:SKPhysicsBody
-        var secondBody:SKPhysicsBody
-        
-        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        } else {
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        
-        if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.enemy.rawValue) {
-            if let enemy = secondBody.node as? Enemy {
-                enemy.squash()
-                //enemies.remove(enemy)
-            }
-            //endGame()
-        }
-        
-        if (firstBody.categoryBitMask == PhysicsCategories.enemy.rawValue && secondBody.categoryBitMask == PhysicsCategories.topwall.rawValue) {
-            if let enemy = firstBody.node as? Enemy {
-                enemy.bounce()
-            }
-        }
-        
-        if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.sidewall.rawValue) {
-            if let player = firstBody.node as? Player {
-                player.state.enterState(Standing)
-            }
-        }
-        
-        if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
-            if let powerUp = secondBody.node as? Powerup {
-                powerUp.removeFromParent()
-                didExecutePowerup(powerUp)
-            }
-        }
-    }
+
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
         for touch in touches {
             let location = touch.locationInNode(self)
-        
+            //print(location)
             if let node = self.nodeAtPoint(location) as? SKSpriteNode {
                 if node.name == "restart" {
                     restart()
@@ -305,7 +277,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func shouldSpawnStar() -> Bool
     {
-        if (score % 40 == 0) {
+        if (score % 10 == 0) {
             return true
         }
         
@@ -358,29 +330,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    func spawnStar()
+    func spawnPowerup(ofType:String)
     {
-        guard let star = PowerupFactory.createPowerupOfType("star") else {
+        
+        
+        guard let powerup = PowerupFactory.createPowerupOfType(ofType) else {
             return
         }
         
-        let xPos = CGFloat.random(min: 0, max: self.frame.width)
+        var xPos:CGFloat = 750
         
-        let position = CGPoint(x: xPos, y: self.frame.height + star.frame.height)
+        print(nodeAtPoint(CGPoint(x: xPos, y: 331)))
         
-        star.position = position
+        powerup.delegate = self
+        repeat {
+            xPos = CGFloat.random(min: 0, max: self.frame.width)
+        }
+        while (
+        self.nodeAtPoint(CGPoint(x: xPos, y: 331)) is Powerup
+            || self.nodeAtPoint(CGPoint(x: xPos-powerup.size.width/2, y: 331)) is Powerup
+            || self.nodeAtPoint(CGPoint(x: xPos+powerup.size.width/2, y: 331)) is Powerup
+        )
         
+
+        let position = CGPoint(x: xPos, y: self.frame.height + powerup.frame.height)
+        print(position)
         
-    
-        addChild(star)
-        star.state?.enterState(Collectible)
+        powerup.position = position
+        addChild(powerup)
+        powerup.state?.enterState(Collectible)
     }
     
     func doScoreChecks()
     {
         checkUpdateDifficulty()
         if(shouldSpawnStar()) {
-            spawnStar()
+            spawnPowerup("star")
         }
     }
 
@@ -393,6 +378,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let restartNode = SKSpriteNode(imageNamed: "restart")
         restartNode.zPosition = 1000
         restartNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        restartNode.scaleAsSize = CGSize(width: 300, height: 300)
         restartNode.name = "restart"
         addChild(restartNode)
     }
@@ -448,7 +434,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 extension GameScene: Powerupable
 {
     func didExecutePowerup(powerup: Powerup) {
-        powerup.action(self)
+        
+        switch(powerup) {
+        case is Star:
+            self.starScore+=1
+        default:
+            return
+        }
+    }
+}
+
+extension GameScene: SKPhysicsContactDelegate
+{
+    func didBeginContact(contact: SKPhysicsContact) {
+        var firstBody:SKPhysicsBody
+        var secondBody:SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.enemy.rawValue) {
+            if let enemy = secondBody.node as? Enemy {
+                enemy.squash()
+                //enemies.remove(enemy)
+            }
+            //endGame()
+        }
+        
+        if (firstBody.categoryBitMask == PhysicsCategories.enemy.rawValue && secondBody.categoryBitMask == PhysicsCategories.topwall.rawValue) {
+            if let enemy = firstBody.node as? Enemy {
+                enemy.bounce()
+            }
+        }
+        
+        if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.sidewall.rawValue) {
+            if let player = firstBody.node as? Player {
+                player.state.enterState(Standing)
+            }
+        }
+        
+        if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
+            if let powerUp = secondBody.node as? Powerup {
+                powerUp.runAction(powerUp.collectionSound!, completion: { Void in
+                    powerUp.removeFromParent()
+                    powerUp.action()
+                })
+                
+                
+                //powerUp.action()
+            }
+        }
     }
 }
 

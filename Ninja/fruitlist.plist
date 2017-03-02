@@ -22,7 +22,7 @@
 		<key>spritePrefix</key>
 		<string>blueberry</string>
 		<key>baseScale</key>
-		<integer>1</integer>
+		<real>0.5</real>
 		<key>baseMass</key>
 		<integer>1</integer>
 	</dict>

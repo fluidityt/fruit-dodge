@@ -39,14 +39,29 @@ class CountdownNode: SKSpriteNode {
         }
     }
     
+    override var alpha: CGFloat {
+        get {
+            return self.bgLayer.alpha
+        } set {
+            self.bgLayer.alpha = newValue
+        }
+    }
+    
     var scaleHeight:CGFloat = 0.4
+    var bgLayer:SKSpriteNode
     
     init(size: CGSize, count: Int, delay: NSTimeInterval, bgColor:UIColor)
     {
         self.count = count
         self.internalCount = count
         self.delay = delay
-        super.init(texture: nil, color: bgColor, size: size)
+        
+        bgLayer = SKSpriteNode(texture: nil, color: bgColor, size: size)
+        //bgLayer.zPosition = -1
+        super.init(texture: nil, color: UIColor.clearColor(), size: size)
+        bgLayer.position = CGPoint(x: size.width/2, y: size.height/2)
+        self.addChild(bgLayer)
+        self.zPosition = 10000
         anchorPoint = CGPoint(x: 0, y: 0)
         countdownLabel.text = String(count)
         initChildren()
@@ -64,7 +79,8 @@ class CountdownNode: SKSpriteNode {
         countdownLayer.addChild(countdownLabel)
       
         let fontScaleFactor =  min(size.width/countdownLabel.frame.width, size.height/countdownLabel.frame.height)
-        countdownLabel.fontSize *= fontScaleFactor*scaleHeight
+        //countdownLabel.fontSize *= fontScaleFactor*scaleHeight
+        countdownLabel.fontSize = 500
         countdownLabel.verticalAlignmentMode = .Center
         countdownLabel.position = CGPoint(x:0, y: 0)
         
