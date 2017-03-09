@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "09DD5204768D17955A38D1C1BC332335D7157DB1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "09DD5204768D17955A38D1C1BC332335D7157DB1" : 9223372036854775807,
+    "243F91E912E79D9FD58BB3065FB08C070D6BA52C" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A0B6470C-609E-43B5-A285-A36ECD25F68C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "09DD5204768D17955A38D1C1BC332335D7157DB1" : "Ninja\/",
+    "243F91E912E79D9FD58BB3065FB08C070D6BA52C" : "Ninja\/Ninja\/SpriteKitLightning-Swift\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Ninja",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Ninja.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/prolific8\/fruit-dodge.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "09DD5204768D17955A38D1C1BC332335D7157DB1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andrew8712\/SpriteKitLightning-Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "243F91E912E79D9FD58BB3065FB08C070D6BA52C"
+    }
+  ]
+}
