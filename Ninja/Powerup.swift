@@ -28,6 +28,8 @@ class PowerupFactory {
             switch(type) {
                 case "star":
                 return Star()
+                case "lightning":
+                return Lightning()
             default:
                 return nil;
             }
@@ -42,12 +44,12 @@ class Powerup: SKSpriteNode {
     var state:GKStateMachine? = nil
     var timeInExistence:CFTimeInterval = 0.0
     weak var delegate:Powerupable?
-    var collectionSound:SKAction?
+    var collectionSound:SKAction = SKAction()
     
-    private init() {
+    private init(texture:String) {
         
     
-        let texture = SKTexture(imageNamed: "star")
+        let texture = SKTexture(imageNamed: texture)
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: texture.size().width, height: texture.size().height))
@@ -87,8 +89,8 @@ class Powerup: SKSpriteNode {
 
 class Star:Powerup
 {
-    override init() {
-        super.init()
+    init() {
+        super.init(texture: "newstar")
         collectionSound = SKAction.playSoundFileNamed("star_collect.mp3", waitForCompletion: false)
     }
     
@@ -96,3 +98,16 @@ class Star:Powerup
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class Lightning:Powerup
+{
+    init() {
+        super.init(texture: "lightning")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+

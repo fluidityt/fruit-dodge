@@ -52,11 +52,6 @@ class Player: SKSpriteNode {
         self.physicsBody?.friction = 0.0
         self.physicsBody?.linearDamping = 0.0
         
-        
-        /*cropNode.maskNode = maskNode
-        cropNode.addChild(SKSpriteNode(texture: defeatedTexture, size: size))
-        addChild(cropNode)
-        cropNode.hidden = true*/
     }
     
     internal func loadTextures()
@@ -84,6 +79,11 @@ class Player: SKSpriteNode {
     func kill()
     {
         self.state.enterState(Defeated)
+    }
+    
+    func decreaseLives()
+    {
+        self.lives -= 1
     }
     
     required init?(coder aDecoder: NSCoder) {

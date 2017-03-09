@@ -20,6 +20,8 @@ enum PhysicsCategories:UInt32 {
 
 class GameScene: SKScene {
     
+    // MARK: Properties
+    
     var playableRect:CGRect
     var player:Player! = nil
     var lastUpdateTime:NSTimeInterval = 0.0
@@ -48,15 +50,12 @@ class GameScene: SKScene {
     var menuLayer:SKNode!
     let scoreNode = SKLabelNode(text: "0")
 
+    //MARK: Init
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
-        let shader = SKShader(fileNamed: "bw.fsh")
-    
-        
-        let bgNode = SKSpriteNode(imageNamed: "bg-1")
-        //bgNode.texture = nil
-        //bgNode.shader = shader
+        let bgNode = SKSpriteNode(imageNamed: "bg")
         bgNode.size = self.frame.size
   
         
@@ -67,7 +66,6 @@ class GameScene: SKScene {
         bgNode.zPosition = -1
         self.physicsWorld.contactDelegate = self
         
-        //self.physicsWorld.gravity = CGVector(dx: 0, dy: -4.5)
         view.multipleTouchEnabled = true
         spawnCharacter()
         createWalls()
@@ -76,6 +74,14 @@ class GameScene: SKScene {
         
         startGame()
         //debugDrawPlayableArea()
+        
+        let lightningNode = LightningNode(size: CGSize(width: 1, height:1))
+        lightningNode.zPosition = 500000
+        
+        lightningNode.position = CGPoint(x: self.frame.midX, y: self.frame.height)
+        lightningNode.name = "lightning"
+        
+        addChild(lightningNode)
         
     }
     
@@ -112,6 +118,7 @@ class GameScene: SKScene {
         animateGameStart()
     }
     
+    //MARK: Preloading and setup
     
     // Preload enemies so we can just clone from this array.
     func loadEnemies()
@@ -146,8 +153,19 @@ class GameScene: SKScene {
         floor.physicsBody?.categoryBitMask = PhysicsCategories.topwall.rawValue
         
         self.addChild(leftWall); addChild(rightWall); addChild(ceiling); addChild(floor)
-        
-        
+    }
+    
+    func animateGameStart()
+    {
+        let countDownTimer = CountdownNode(size: self.size, count: 3, delay: 0.75, bgColor: UIColor.blackColor())
+        countDownTimer.alpha = 0.5
+        countDownTimer.finalText = "GO!"
+        countDownTimer.initialText = "READY?"
+        addChild(countDownTimer)
+        countDownTimer.start() {
+            self.running = true
+            self.startTimer()
+        }
     }
     
     func startTimer()
@@ -170,23 +188,11 @@ class GameScene: SKScene {
     {
         
         let diff = self.frame.size - self.playableRect.size
-        //print(diff)
-        
-        
         
         menuLayer = SKNode()
-        //let bar = SKSpriteNode(texture: SKTexture(imageNamed:"topbar"), size: CGSize(width: self.frame.size.width, height: self.frame.size.height/10))
-        //menuLayer.addChild(bar)
         menuLayer.position = CGPoint(x: self.frame.width/2, y: (self.frame.height - diff.height/2) - 100)
 
         print(menuLayer.position)
-        
-        //let recessNode = SKSpriteNode(texture: SKTexture(imageNamed:"scoreRecess"), size: CGSize(width: bar.size.width/5, height: bar.size.height*0.7))
-        //let fontScaleFactor =  min(recessNode.size.width/scoreNode.frame.width, recessNode.size.height/scoreNode.frame.height)*0.8
-        //scoreNode.fontSize *= fontScaleFactor
-        //bar.addChild(recessNode)
-        //recessNode.addChild(scoreNode)
-        //scoreNode.position = CGPoint(x: CGRectGetMidX(recessNode.frame)-scoreNode.frame.width/4, y: CGRectGetMidY(recessNode.frame)-scoreNode.frame.height/2)
         scoreNode.fontName = "French_Fries"
         menuLayer.addChild(scoreNode)
         
@@ -202,6 +208,8 @@ class GameScene: SKScene {
         addChild(menuLayer)
     }
     
+    
+    // MARK: Touches
 
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -216,9 +224,10 @@ class GameScene: SKScene {
                 }
             }
         
-            let direction = getTouchDirection(touch)
-            changeCharacterState(direction)
-            
+            if (running) {
+                let direction = getTouchDirection(touch)
+                changeCharacterState(direction)
+            }
         }
     }
     
@@ -229,10 +238,6 @@ class GameScene: SKScene {
         if (event?.allTouches()?.count == 1) {
             player.state.enterState(Standing)
         }
-    }
-        
-    func changeCharacterState(state: GKState.Type) {
-        player.state.enterState(state)
     }
     
     
@@ -247,6 +252,13 @@ class GameScene: SKScene {
         }
     }
     
+    func changeCharacterState(state: GKState.Type) {
+        player.state.enterState(state)
+    }
+    
+    
+
+    // MARK: Game loop and update logic
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
@@ -275,18 +287,25 @@ class GameScene: SKScene {
         }
     }
     
-    func shouldSpawnStar() -> Bool
+    func shouldSpawnPowerup() -> [String]
     {
+        var toSpawn = [String]()
+        
         if (score % 10 == 0) {
-            return true
+            toSpawn.append("star")
         }
         
-        return false
+        if (score % 30 == 0) {
+            toSpawn.append("lightning")
+        }
+        
+        return toSpawn
     }
     
     func updateEnemies()
     {
         for (index, enemySprite) in enemies.enumerate() {
+            
             if enemySprite.position.x - enemySprite.size.width/2 > self.frame.size.width && self.running {
                 enemySprite.removeFromParent()
                 enemies.removeAtIndex(index)
@@ -332,17 +351,15 @@ class GameScene: SKScene {
     
     func spawnPowerup(ofType:String)
     {
-        
-        
         guard let powerup = PowerupFactory.createPowerupOfType(ofType) else {
             return
         }
         
-        var xPos:CGFloat = 750
-        
-        print(nodeAtPoint(CGPoint(x: xPos, y: 331)))
-        
         powerup.delegate = self
+        
+        var xPos:CGFloat
+        
+        // Randomly generate x value for powerup until we're sure it will not overlap one that already exists.
         repeat {
             xPos = CGFloat.random(min: 0, max: self.frame.width)
         }
@@ -364,9 +381,13 @@ class GameScene: SKScene {
     func doScoreChecks()
     {
         checkUpdateDifficulty()
-        if(shouldSpawnStar()) {
-            spawnPowerup("star")
+        
+        let powerups = shouldSpawnPowerup()
+        
+        for powerupName in powerups {
+            spawnPowerup(powerupName)
         }
+        
     }
 
     
@@ -416,20 +437,20 @@ class GameScene: SKScene {
         }
     }
     
-    
-    func animateGameStart()
+    func checkEnemyHit(enemy: Enemy)
     {
-        let countDownTimer = CountdownNode(size: self.size, count: 3, delay: 0.75, bgColor: UIColor.blackColor())
-        countDownTimer.alpha = 0.5
-        countDownTimer.finalText = "GO!"
-        countDownTimer.initialText = "READY?"
-        addChild(countDownTimer)
-        countDownTimer.start() {
-            self.running = true
-            self.startTimer()
+        if (player.lives < 1) {
+            player.kill()
+        } else {
+            player.decreaseLives()
         }
+        
     }
+    
+
 }
+
+// MARK: Powerup Delegate
 
 extension GameScene: Powerupable
 {
@@ -438,11 +459,56 @@ extension GameScene: Powerupable
         switch(powerup) {
         case is Star:
             self.starScore+=1
+        case is Lightning:
+            destroyEnemies()
         default:
             return
         }
     }
+    
+    
+    func destroyEnemies()
+    {
+        
+        if let node = self.childNodeWithName("lightning") as? LightningNode {
+            node.targetPoints.removeAll(keepCapacity: false)
+            node.startLightning()
+        }
+        
+        
+        for (index, enemySprite) in enemies.enumerate() {
+            
+            let velocity = CGPoint(vector: enemySprite.physicsBody!.velocity)
+            
+            enemySprite.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            enemySprite.physicsBody?.angularVelocity = 0.0
+            enemySprite.physicsBody?.affectedByGravity = false
+            
+            if let node = self.childNodeWithName("lightning") as? LightningNode {
+                node.targetPoints.append(node.convertPoint(enemySprite.position, fromNode: self))
+            }
+            
+            let pop = SKAction.group([SKAction.screenShakeWithNode(enemySprite, amount:velocity/30, oscillations: 10, duration: 1.0)])
+            
+            let removeAction = SKAction.sequence([pop, SKAction.removeFromParent()])
+            enemySprite.runAction(removeAction)
+        }
+        
+        
+        if let node = self.childNodeWithName("lightning") as? LightningNode {
+            
+            let switchOffLightning = SKAction.runBlock({ () in
+                node.stopLightning()
+            })
+            
+            node.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), switchOffLightning]))
+        }
+        
+        enemies.removeAll()
+    }
 }
+
+// MARK: Physics Delegate
 
 extension GameScene: SKPhysicsContactDelegate
 {
@@ -460,10 +526,8 @@ extension GameScene: SKPhysicsContactDelegate
         
         if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.enemy.rawValue) {
             if let enemy = secondBody.node as? Enemy {
-                enemy.squash()
-                //enemies.remove(enemy)
+                checkEnemyHit(enemy)
             }
-            //endGame()
         }
         
         if (firstBody.categoryBitMask == PhysicsCategories.enemy.rawValue && secondBody.categoryBitMask == PhysicsCategories.topwall.rawValue) {
@@ -480,16 +544,15 @@ extension GameScene: SKPhysicsContactDelegate
         
         if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
             if let powerUp = secondBody.node as? Powerup {
-                powerUp.runAction(powerUp.collectionSound!, completion: { Void in
+                powerUp.runAction(powerUp.collectionSound, completion: { Void in
                     powerUp.removeFromParent()
                     powerUp.action()
                 })
-                
-                
-                //powerUp.action()
             }
         }
     }
+    
+
 }
 
 extension Array {

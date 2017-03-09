@@ -9,10 +9,11 @@
 import UIKit
 import SpriteKit
 
-class Healthbar: SKNode {
+class Menubar: SKNode {
 
     override init() {
         super.init()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
