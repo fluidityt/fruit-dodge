@@ -1,4 +1,4 @@
-//
+
 //  MenuViewController.swift
 //  Ninja
 //
@@ -14,18 +14,9 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*let jungle = UIImage(named: "jungle")
-        let bgView = UIImageView(image: jungle)
-        bgView.frame.size = view.frame.size
-        self.view.addSubview(bgView)
-        let playButton = UIImage(named: "play")
-        let playButtonView = UIImageView(image: playButton)
-        //playButtonView.frame = CGRect(x: bgView.frame.size.width/2, y: bgView.frame.size.height/2, width: 100, height: 100)
-        playButtonView.center = bgView.center
-        bgView.userInteractionEnabled = true
         
-        bgView.addSubview(playButtonView)
-         */
+        Enemy.preloadTextures()
+
         beginButton.userInteractionEnabled = true
         beginButton.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(begin)))
         

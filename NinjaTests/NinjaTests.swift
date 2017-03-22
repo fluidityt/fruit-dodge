@@ -14,6 +14,7 @@ class NinjaTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
     
     override func tearDown() {
@@ -21,9 +22,25 @@ class NinjaTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testDecreaseLives() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let player = Player()
+        
+        player.decreaseLives()
+        
+        XCTAssertEqual(player.lives, 2)
+    }
+    
+    func testDefeated() {
+        let player = Player()
+        
+        player.kill()
+        
+        //XCTAssertEqual( NSStringFromClass(player.state.currentState), NSStringFromClass(Defeated))
+        
+        
     }
     
     func testPerformanceExample() {

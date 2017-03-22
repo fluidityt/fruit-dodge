@@ -20,7 +20,7 @@ class PlayerState: GKStateMachine {
         
         var states = [GKState]()
     
-        states = [Standing(), RunRight(), RunLeft(), Defeated()]
+        states = [Standing(), RunRight(), RunLeft(), Defeated(), Hit()]
         super.init(states: states)
     }    
 }

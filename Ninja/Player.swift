@@ -16,20 +16,25 @@ class Player: SKSpriteNode {
     var idleTextures = [SKTexture]()
     var runTextures = [SKTexture]()
     var defeatedTextures = [SKTexture]()
+    var hitTextures = [SKTexture]()
     var runSpeed:CGFloat = 500
     var lives = 3
+    var invincibleTimer:NSTimeInterval = 0.0
     
     var moving:Bool {
         return self.physicsBody?.velocity.dx > 0
     }
+    
+    var invincible:Bool {
+        guard let bitMask = self.physicsBody?.contactTestBitMask else {
+            return false
+        }
+        return bitMask & PhysicsCategories.enemy.rawValue == 0
+    }
    
-    var cropNode = SKCropNode();
-    var maskNode:SKSpriteNode
     
     init() {
         
-        maskNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 246, height: 295))
-
         super.init(texture: SKTexture(imageNamed: "idle_0"), color: UIColor.clearColor(), size: CGSize(width: 166, height: 221))
         loadTextures()
         
@@ -38,15 +43,14 @@ class Player: SKSpriteNode {
         
         // Scale down physics body size so it isn't larger than the actual player.
         let physicsBodySize = CGSize(width: self.texture!.size().width*0.9, height: self.texture!.size().height)
-        print(physicsBodySize)
-        
+ 
         self.physicsBody = SKPhysicsBody(rectangleOfSize: physicsBodySize)
         
         
         self.physicsBody = SKPhysicsBody(texture: idleTextures[0], size: idleTextures[0].size())
         self.physicsBody?.categoryBitMask = PhysicsCategories.character.rawValue
         self.physicsBody?.collisionBitMask = PhysicsCategories.topwall.rawValue | PhysicsCategories.sidewall.rawValue
-        self.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
+        self.physicsBody?.contactTestBitMask = PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.friction = 0.0
@@ -70,6 +74,11 @@ class Player: SKSpriteNode {
             let texture = SKTexture(imageNamed: "die_\(i)")
             defeatedTextures.append(texture)
         }
+        
+        for i in 0...2 {
+            let texture = SKTexture(imageNamed: "hurt_\(i)")
+            hitTextures.append(texture)
+        }
     }
     
     func enterState(state:GKState) {
@@ -78,12 +87,29 @@ class Player: SKSpriteNode {
     
     func kill()
     {
+        self.lives = 0
         self.state.enterState(Defeated)
     }
     
     func decreaseLives()
     {
         self.lives -= 1
+    }
+    
+    func makeInvincible(forDuration:NSTimeInterval)
+    {
+        self.invincibleTimer = forDuration
+        self.blendMode = .Add
+        self.color = SKColor.redColor()
+        self.physicsBody?.contactTestBitMask = PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
+    }
+    
+    func makeVincible()
+    {
+        self.invincibleTimer = 0.0
+        self.blendMode = .Alpha
+        self.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
+        print(self.physicsBody?.contactTestBitMask)
     }
     
     required init?(coder aDecoder: NSCoder) {

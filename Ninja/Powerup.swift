@@ -76,11 +76,7 @@ class Powerup: SKSpriteNode {
         self.runAction(SKAction.repeatActionForever(flashAction))
     }
     
-    func stopFlashing()
-    {
-        // Remove action
-    }
-    
+
     func action() {
         delegate?.didExecutePowerup(self)
     }

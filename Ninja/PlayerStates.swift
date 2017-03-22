@@ -32,7 +32,7 @@ class Standing: GKState {
         case is Defeated.Type:
             return true
         default:
-            return false
+            return true
         }
     }
 }
@@ -57,19 +57,32 @@ class Defeated: GKState {
 
 class Hit: GKState {
     
+    var entryState:GKState.Type?
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-        node.physicsBody?.velocity.dx = 0
+        
+        self.entryState = previousState!.dynamicType
+        
         node.removeActionForKey("running")
-        node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: node.size.height*0.8, height: node.size.width))
-        node.physicsBody?.categoryBitMask = PhysicsCategories.character.rawValue
-        node.physicsBody?.collisionBitMask = PhysicsCategories.topwall.rawValue | PhysicsCategories.sidewall.rawValue
-        node.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
-        node.runAction(SKAction.animateWithTextures(node.defeatedTextures, timePerFrame: 0.01, resize: true, restore: false))
+        node.runAction(SKAction.animateWithTextures(node.hitTextures, timePerFrame: 0.10)) {
+            
+            self.node.state.enterState(self.entryState!)
+        }
+        
+    }
+    
+    /*override func updateWithDeltaTime(seconds: NSTimeInterval) {
+        if (seconds > 2.0) {
+                node.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
+        }
+    }*/
+    
+    override func willExitWithNextState(nextState: GKState) {
+        
     }
     
     override func isValidNextState(stateClass: AnyClass) -> Bool {
-        return false
+        return true
     }
 }
 
@@ -94,7 +107,7 @@ class RunLeft: GKState {
         case is Defeated.Type:
             return true
         default:
-            return false
+            return true
         }
     }
     
@@ -105,11 +118,7 @@ class RunLeft: GKState {
 
 class RunRight: GKState {
     
-    //var node:Player
-    var startTime:Double = 0.0
-    
     override func didEnterWithPreviousState(previousState: GKState?) {
-        startTime = CACurrentMediaTime()
         node.removeActionForKey("running")
         node.xScale = abs(node.xScale)
         node.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(node.runTextures, timePerFrame: 0.05)), withKey: "running")
@@ -125,24 +134,18 @@ class RunRight: GKState {
         case is Defeated.Type:
             return true
         default:
-            return false
+            return true
         }
     }
     
     
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {
-        //node.physicsBody?.velocity.dx = 200
-        //print(seconds)
-        /*if (lastUpdate == 0.0) {
-         node.timeMoving = CGFloat(seconds)
-         } else {
-         node.timeMoving = node.timeMoving - CGFloat(seconds)
-         }*/
+
     }
     
     override func willExitWithNextState(nextState: GKState) {
-        //print(CACurrentMediaTime() - startTime)
+        
     }
 }
 

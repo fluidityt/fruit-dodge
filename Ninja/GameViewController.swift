@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
-
+        
          let gameSize = CGSize(width: 2048, height: 1536)
         
          let scene = GameScene(size: gameSize)

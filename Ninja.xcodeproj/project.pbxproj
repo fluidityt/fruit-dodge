@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F9076C691E71BDD80002FF38 /* icons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9076C681E71BDD80002FF38 /* icons.atlas */; };
+		F9076C6F1E799E6D0002FF38 /* resized.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9076C6E1E799E6D0002FF38 /* resized.atlas */; };
 		F9216BE21D917FB500E8E923 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BD61D917FB500E8E923 /* CGFloat+Extensions.swift */; };
 		F9216BE31D917FB500E8E923 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BD71D917FB500E8E923 /* CGPoint+Extensions.swift */; };
 		F9216BE41D917FB500E8E923 /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BD81D917FB500E8E923 /* CGVector+Extensions.swift */; };
@@ -46,7 +47,6 @@
 		F95D2EF51D8BF23700542CD9 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95D2EF41D8BF23700542CD9 /* Enemy.swift */; };
 		F960928E1DA7F37E00749623 /* splat.wav in Resources */ = {isa = PBXBuildFile; fileRef = F960928D1DA7F37E00749623 /* splat.wav */; };
 		F96092901DA7FAD500749623 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960928F1DA7FAD500749623 /* MenuViewController.swift */; };
-		F9658E211E65B3FA00233B6A /* resized.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9658E201E65B3FA00233B6A /* resized.atlas */; };
 		F9658E231E65DFCA00233B6A /* star_collect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9658E221E65DFCA00233B6A /* star_collect.mp3 */; };
 		F9658E251E6879C600233B6A /* Menubar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9658E241E6879C600233B6A /* Menubar.swift */; };
 		F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F972700A1E44E94600D4F796 /* French_Fries.ttf */; };
@@ -80,6 +80,7 @@
 
 /* Begin PBXFileReference section */
 		F9076C681E71BDD80002FF38 /* icons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = icons.atlas; sourceTree = "<group>"; };
+		F9076C6E1E799E6D0002FF38 /* resized.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = resized.atlas; sourceTree = "<group>"; };
 		F9216BD61D917FB500E8E923 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		F9216BD71D917FB500E8E923 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		F9216BD81D917FB500E8E923 /* CGVector+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
@@ -124,7 +125,6 @@
 		F95D2EF41D8BF23700542CD9 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		F960928D1DA7F37E00749623 /* splat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splat.wav; sourceTree = "<group>"; };
 		F960928F1DA7FAD500749623 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		F9658E201E65B3FA00233B6A /* resized.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = resized.atlas; sourceTree = "<group>"; };
 		F9658E221E65DFCA00233B6A /* star_collect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = star_collect.mp3; sourceTree = "<group>"; };
 		F9658E241E6879C600233B6A /* Menubar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menubar.swift; sourceTree = "<group>"; };
 		F972700A1E44E94600D4F796 /* French_Fries.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = French_Fries.ttf; sourceTree = "<group>"; };
@@ -269,11 +269,11 @@
 				F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */,
 				F93C356D1E697D30009C7DA3 /* SpriteKitLightning-Swift */,
 				F952E3D41E4E17AF0012CCA1 /* Powerup.swift */,
+				F9076C6E1E799E6D0002FF38 /* resized.atlas */,
 				F960928F1DA7FAD500749623 /* MenuViewController.swift */,
 				F952E3DC1E5B56B90012CCA1 /* bg.png */,
 				F9BFCB2A1D92ACED0095A8EA /* Player.swift */,
 				F95D2EF41D8BF23700542CD9 /* Enemy.swift */,
-				F9658E201E65B3FA00233B6A /* resized.atlas */,
 				F93C43041D79CB97006572C9 /* Main.storyboard */,
 				F9A1C44C1DE8A1EC007D4E42 /* fruit.atlas */,
 				F93C43071D79CB97006572C9 /* Assets.xcassets */,
@@ -466,13 +466,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9658E211E65B3FA00233B6A /* resized.atlas in Resources */,
 				F93C359A1E697D30009C7DA3 /* shock2.aiff in Resources */,
 				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
 				F93C359B1E697D30009C7DA3 /* shock3.aiff in Resources */,
 				F9A1C44D1DE8A1EC007D4E42 /* fruit.atlas in Resources */,
 				F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */,
 				F9896C501D9D718400B53571 /* bounce.mp3 in Resources */,
+				F9076C6F1E799E6D0002FF38 /* resized.atlas in Resources */,
 				F952E3DD1E5B56B90012CCA1 /* bg.png in Resources */,
 				F960928E1DA7F37E00749623 /* splat.wav in Resources */,
 				F97270101E4A23AC00D4F796 /* bw.fsh in Resources */,
@@ -690,6 +690,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2AACAPTHUB;
 				INFOPLIST_FILE = Ninja/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.Ninja;
@@ -702,6 +703,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2AACAPTHUB;
 				INFOPLIST_FILE = Ninja/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.Ninja;

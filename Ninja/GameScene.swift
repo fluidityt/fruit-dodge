@@ -26,7 +26,9 @@ class GameScene: SKScene {
     var player:Player! = nil
     var lastUpdateTime:NSTimeInterval = 0.0
     var running = false
-    var enemies:[Enemy] = []
+    var enemies:[SKNode] {
+        return children.filter({$0.name == "enemy"})
+    }
     var enemyList:[Enemy] = []
     var spawnRate = 10
     var maxEnemies = 2
@@ -58,8 +60,6 @@ class GameScene: SKScene {
         let bgNode = SKSpriteNode(imageNamed: "bg")
         bgNode.size = self.frame.size
   
-        
-        //print(shader.source)
 
         addChild(bgNode)
         bgNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
@@ -81,6 +81,7 @@ class GameScene: SKScene {
         lightningNode.position = CGPoint(x: self.frame.midX, y: self.frame.height)
         lightningNode.name = "lightning"
         
+        
         addChild(lightningNode)
         
     }
@@ -94,6 +95,8 @@ class GameScene: SKScene {
         let playableHeight = size.width / maxAspectRatio
         let playableMargin = (size.height-playableHeight)/2.0
         playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
+        
+        SKTextureAtlas.preloadTextureAtlasesNamed(["resized", "icons", "fruit"]) {_,_ in }
         
         super.init(size: size)
     }
@@ -192,7 +195,6 @@ class GameScene: SKScene {
         menuLayer = SKNode()
         menuLayer.position = CGPoint(x: self.frame.width/2, y: (self.frame.height - diff.height/2) - 100)
 
-        print(menuLayer.position)
         scoreNode.fontName = "French_Fries"
         menuLayer.addChild(scoreNode)
         
@@ -272,20 +274,23 @@ class GameScene: SKScene {
 
         if (running) {
             
-            self.enumerateChildNodesWithName("powerup", usingBlock: { node, stop in
-                if let powerup = node as? Powerup {
-                    powerup.state?.updateWithDeltaTime(timeSinceLast)
-                }
-            })
-            
             updateEnemies()
+            updatePlayer(timeSinceLast)
+            
             if (shouldSpawnEnemy()) {
                 self.spawnDanger()
                 scoreSinceLastSpawn = 0
             }
             
         }
+        
+        self.enumerateChildNodesWithName("powerup", usingBlock: { node, stop in
+            if let powerup = node as? Powerup {
+                powerup.state?.updateWithDeltaTime(timeSinceLast)
+            }
+        })
     }
+
     
     func shouldSpawnPowerup() -> [String]
     {
@@ -295,36 +300,53 @@ class GameScene: SKScene {
             toSpawn.append("star")
         }
         
-        if (score % 30 == 0) {
+        if (score % 100 == 0) {
             toSpawn.append("lightning")
         }
         
         return toSpawn
     }
     
+    func updatePlayer(interval:CFTimeInterval)
+    {
+        if (player.invincibleTimer > 0.0) {
+            player.invincibleTimer -= interval
+        } else {
+            if (player.invincible) {
+                player.makeVincible()
+            }
+        }
+    }
+    
     func updateEnemies()
     {
-        for (index, enemySprite) in enemies.enumerate() {
+        self.enumerateChildNodesWithName("enemy", usingBlock: { node, stop in
             
-            if enemySprite.position.x - enemySprite.size.width/2 > self.frame.size.width && self.running {
-                enemySprite.removeFromParent()
-                enemies.removeAtIndex(index)
-            }
-            
-            enemySprite.physicsBody?.angularVelocity = -7.0
-        }
+            if let enemySprite = node as? Enemy {
+                if enemySprite.position.x - enemySprite.size.width/2 > self.frame.size.width && self.running {
+                    enemySprite.removeFromParent()
+                }
+                
+                enemySprite.physicsBody?.angularVelocity = -7.0
+                }
+            })
     }
     
     
     func spawnDanger()
     {
         var enemySprite:Enemy
-        let lastSpawn = enemies.last?.textureName
+        
+        struct enemyData {
+            static var lastSpawn = ""
+        }
         
         repeat {
              enemySprite = enemyList.randomItem().clone()
-        } while (enemySprite.textureName == lastSpawn)
+        } while (enemySprite.textureName == enemyData.lastSpawn)
         
+        enemyData.lastSpawn = enemySprite.textureName
+    
         
         let spawnHeight = CGFloat.random(min: self.frame.height*0.66, max: self.frame.height - enemySprite.frame.size.height)
         let minSpeed = enemySprite.physicsBody!.mass * 100
@@ -332,7 +354,6 @@ class GameScene: SKScene {
         enemySprite.position = CGPoint(x:0, y: spawnHeight)
         addChild(enemySprite)
         enemySprite.physicsBody?.applyImpulse(CGVector(dx:moveSpeed, dy:0))
-        enemies.append(enemySprite)
     }
     
     
@@ -371,7 +392,6 @@ class GameScene: SKScene {
         
 
         let position = CGPoint(x: xPos, y: self.frame.height + powerup.frame.height)
-        print(position)
         
         powerup.position = position
         addChild(powerup)
@@ -414,6 +434,7 @@ class GameScene: SKScene {
     
     func shouldSpawnEnemy() -> Bool
     {
+        //let enemies =
         // Always spawn if there are no enemies at all.
         if (enemies.count < 1) {
             return true;
@@ -429,22 +450,20 @@ class GameScene: SKScene {
     
     func checkUpdateDifficulty()
     {
-        if (score % 60 == 0 && spawnRate > 0) {
+        if (score % 100 == 0 && spawnRate > 0) {
             spawnRate-=1
         }
-        if (score % 100 == 0 && spawnRate < 10) {
+        if (score % 150 == 0 && spawnRate < 10) {
             maxEnemies+=1
         }
     }
     
     func checkEnemyHit(enemy: Enemy)
     {
-        if (player.lives < 1) {
-            player.kill()
-        } else {
-            player.decreaseLives()
+        if (!player.invincible) {
+            enemy.squash()
+            endGame()
         }
-        
     }
     
 
@@ -476,7 +495,7 @@ extension GameScene: Powerupable
         }
         
         
-        for (index, enemySprite) in enemies.enumerate() {
+        for (_, enemySprite) in enemies.enumerate() {
             
             let velocity = CGPoint(vector: enemySprite.physicsBody!.velocity)
             
@@ -504,7 +523,6 @@ extension GameScene: Powerupable
             node.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), switchOffLightning]))
         }
         
-        enemies.removeAll()
     }
 }
 

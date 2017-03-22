@@ -9,20 +9,30 @@
 import UIKit
 import SpriteKit
 
+struct EnemyTextures {
+    static var atlas:SKTextureAtlas?
+    
+    static func preloadTextures()
+    {
+        atlas = SKTextureAtlas(named: "fruit")
+        atlas?.preloadWithCompletionHandler() {}
+    }
+}
+
 class Enemy: SKSpriteNode {
     
     var textures = [SKTexture]()
     let textureName:String
     var squashTextures = [SKTexture]()
     
-    let bounceSound = SKAction.playSoundFileNamed("bounce", waitForCompletion: false)
-    let whackSound = SKAction.playSoundFileNamed("splat.wav", waitForCompletion: false)
+    static let bounceSound = SKAction.playSoundFileNamed("bounce", waitForCompletion: false)
+    static let whackSound = SKAction.playSoundFileNamed("splat.wav", waitForCompletion: false)
 
     init(withTextureName:String)
     {
         textureName = withTextureName
         
-        for i in 1...3 {
+        for i in 1...1 {
             let texture = SKTexture(imageNamed: "\(textureName)\(i)")
             textures.append(texture)
         }
@@ -32,15 +42,9 @@ class Enemy: SKSpriteNode {
             squashTextures.append(squashTexture)
         }
         
-        
         super.init(texture: textures[0], color:UIColor.clearColor(), size: textures[0].size())
         
         self.name = "enemy"
-        
-        if (UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
-            //self.setScale(CGFloat.random(min: 0.4, max: 0.75))
-            //self.scaleAsPoint = CGPoint(x: 10, y: 10)
-        }
         
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         
@@ -61,19 +65,19 @@ class Enemy: SKSpriteNode {
     
     func blink()
     {
-        let blinkAction = SKAction.repeatActionForever(SKAction.afterDelay(Double(CGFloat.random(min: 1, max: 2)), performAction: SKAction.animateWithTextures(textures, timePerFrame: 0.05, resize:false, restore:true)))
-        self.runAction(blinkAction, withKey: "blink")
+        //let blinkAction = SKAction.repeatActionForever(SKAction.afterDelay(Double(CGFloat.random(min: 1, max: 2)), performAction: SKAction.animateWithTextures(textures, timePerFrame: 0.05, resize:false, restore:true)))
+        //self.runAction(blinkAction, withKey: "blink")
     }
     
     func bounce()
     {
-        self.runAction(self.bounceSound)
+        self.runAction(Enemy.bounceSound)
     }
     
     func squash()
     {
         self.removeActionForKey("blink")
-        self.runAction(whackSound)
+        self.runAction(Enemy.whackSound)
         let squashAnimation = SKAction.animateWithTextures(squashTextures, timePerFrame: 0.004, resize: true, restore: false)
         self.physicsBody?.angularVelocity = 0.0
         self.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
@@ -89,6 +93,16 @@ class Enemy: SKSpriteNode {
         let enemy = Enemy(withTextureName: self.textureName)
         enemy.scaleAsPoint = self.scaleAsPoint
         return enemy
+    }
+    
+    class func preloadTextures()
+    {
+
+    }
+    
+    class func spawnRandom(except: [String]) -> Enemy
+    {
+        return Enemy(withTextureName: "orange")
     }
     
 }
