@@ -19,8 +19,9 @@ class Flashing: GKState {
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {
         powerup.timeInExistence+=seconds
-        if powerup.timeInExistence > 6.0 {
+        if powerup.timeInExistence > powerup.lifeTime {
             powerup.removeFromParent()
+            powerup.deactivate()
         }
     }
     

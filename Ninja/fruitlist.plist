@@ -3,6 +3,14 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>baseMass</key>
+		<integer>1</integer>
+		<key>baseScale</key>
+		<integer>1</integer>
+		<key>spritePrefix</key>
+		<string>raspberry</string>
+	</dict>
+	<dict>
 		<key>spritePrefix</key>
 		<string>watermelon</string>
 		<key>baseScale</key>

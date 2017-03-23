@@ -12,6 +12,7 @@ import GameplayKit
 protocol Powerupable:class
 {
     func didExecutePowerup(powerup:Powerup)
+    func didFinishExecutingPower(powerup:Powerup)
 }
 
 class PowerupFactory {
@@ -45,6 +46,7 @@ class Powerup: SKSpriteNode {
     var timeInExistence:CFTimeInterval = 0.0
     weak var delegate:Powerupable?
     var collectionSound:SKAction = SKAction()
+    var lifeTime:CFTimeInterval = 6.0
     
     private init(texture:String) {
         
@@ -77,9 +79,15 @@ class Powerup: SKSpriteNode {
     }
     
 
-    func action() {
+    func activate() {
         delegate?.didExecutePowerup(self)
     }
+    
+    func deactivate() {
+        delegate?.didFinishExecutingPower(self)
+    }
+    
+    
     
 }
 

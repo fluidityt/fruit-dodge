@@ -75,6 +75,10 @@ class GameScene: SKScene {
         startGame()
         //debugDrawPlayableArea()
         
+        let cheatRecogniser = UITapGestureRecognizer(target: self, action: #selector(self.destroyEnemies))
+        cheatRecogniser.numberOfTapsRequired = 4
+        self.view?.addGestureRecognizer(cheatRecogniser)
+        
         let lightningNode = LightningNode(size: CGSize(width: 1, height:1))
         lightningNode.zPosition = 500000
         
@@ -486,6 +490,10 @@ extension GameScene: Powerupable
     }
     
     
+    func didFinishExecutingPower(powerup: Powerup) {
+        
+    }
+    
     func destroyEnemies()
     {
         
@@ -564,7 +572,7 @@ extension GameScene: SKPhysicsContactDelegate
             if let powerUp = secondBody.node as? Powerup {
                 powerUp.runAction(powerUp.collectionSound, completion: { Void in
                     powerUp.removeFromParent()
-                    powerUp.action()
+                    powerUp.activate()
                 })
             }
         }

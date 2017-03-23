@@ -9,13 +9,15 @@
 import UIKit
 import SpriteKit
 
-struct EnemyTextures {
-    static var atlas:SKTextureAtlas?
+struct TextureLoader {
+    static var atlases:[SKTextureAtlas]?
     
     static func preloadTextures()
     {
-        atlas = SKTextureAtlas(named: "fruit")
-        atlas?.preloadWithCompletionHandler() {}
+        atlases = [SKTextureAtlas(named: "fruit"), SKTextureAtlas(named: "resize"), SKTextureAtlas(named: "icons")]
+        SKTextureAtlas.preloadTextureAtlases(atlases!, withCompletionHandler: {
+            print("Preloaded textures")
+        })
     }
 }
 
@@ -78,7 +80,7 @@ class Enemy: SKSpriteNode {
     {
         self.removeActionForKey("blink")
         self.runAction(Enemy.whackSound)
-        let squashAnimation = SKAction.animateWithTextures(squashTextures, timePerFrame: 0.004, resize: true, restore: false)
+        let squashAnimation = SKAction.animateWithTextures(squashTextures, timePerFrame: 0.016, resize: true, restore: false)
         self.physicsBody?.angularVelocity = 0.0
         self.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
         self.physicsBody?.affectedByGravity = false
@@ -93,16 +95,6 @@ class Enemy: SKSpriteNode {
         let enemy = Enemy(withTextureName: self.textureName)
         enemy.scaleAsPoint = self.scaleAsPoint
         return enemy
-    }
-    
-    class func preloadTextures()
-    {
-
-    }
-    
-    class func spawnRandom(except: [String]) -> Enemy
-    {
-        return Enemy(withTextureName: "orange")
     }
     
 }
