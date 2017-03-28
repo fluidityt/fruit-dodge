@@ -24,6 +24,9 @@ class GameViewController: UIViewController {
          let scene = GameScene(size: gameSize)
             // Configure the view.
             let skView = self.view as! SKView
+        
+            TextureLoader.preloadTextures()
+
 
             skView.showsFPS = true
             skView.showsNodeCount = true

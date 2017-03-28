@@ -21,6 +21,7 @@
 		F9216BEB1D917FB500E8E923 /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BDF1D917FB500E8E923 /* SKTEffects.swift */; };
 		F9216BEC1D917FB500E8E923 /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BE01D917FB500E8E923 /* SKTTimingFunctions.swift */; };
 		F9216BED1D917FB500E8E923 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BE11D917FB500E8E923 /* Vector3.swift */; };
+		F929D3461E8963AE0089BF82 /* fruit.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F929D3451E8963AE0089BF82 /* fruit.atlas */; };
 		F93C35951E697D30009C7DA3 /* LightningBoltNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C35781E697D30009C7DA3 /* LightningBoltNode.swift */; };
 		F93C35961E697D30009C7DA3 /* LightningLineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C35791E697D30009C7DA3 /* LightningLineNode.swift */; };
 		F93C35971E697D30009C7DA3 /* LightningNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C357A1E697D30009C7DA3 /* LightningNode.swift */; };
@@ -58,7 +59,6 @@
 		F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BFCB2A1D92ACED0095A8EA /* Player.swift */; };
 		F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CC1D806D16001E8318 /* PlayerStates.swift */; };
 		F9CB94D31D807036001E8318 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94D21D807036001E8318 /* PlayerState.swift */; };
-		F9E9A9811E8427FB0064FC14 /* fruit.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9E9A9801E8427FB0064FC14 /* fruit.atlas */; };
 		F9E9A9831E842C340064FC14 /* Burst.sks in Resources */ = {isa = PBXBuildFile; fileRef = F9E9A9821E842C340064FC14 /* Burst.sks */; };
 		F9E9A9851E842D220064FC14 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E9A9841E842D220064FC14 /* drop.png */; };
 /* End PBXBuildFile section */
@@ -95,6 +95,7 @@
 		F9216BDF1D917FB500E8E923 /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		F9216BE01D917FB500E8E923 /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		F9216BE11D917FB500E8E923 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		F929D3451E8963AE0089BF82 /* fruit.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fruit.atlas; sourceTree = "<group>"; };
 		F93C35781E697D30009C7DA3 /* LightningBoltNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningBoltNode.swift; sourceTree = "<group>"; };
 		F93C35791E697D30009C7DA3 /* LightningLineNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningLineNode.swift; sourceTree = "<group>"; };
 		F93C357A1E697D30009C7DA3 /* LightningNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningNode.swift; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		F9BFCB2A1D92ACED0095A8EA /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F9CB94CC1D806D16001E8318 /* PlayerStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStates.swift; sourceTree = "<group>"; };
 		F9CB94D21D807036001E8318 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerState.swift; path = ../PlayerState.swift; sourceTree = "<group>"; };
-		F9E9A9801E8427FB0064FC14 /* fruit.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fruit.atlas; sourceTree = "<group>"; };
 		F9E9A9821E842C340064FC14 /* Burst.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Burst.sks; sourceTree = "<group>"; };
 		F9E9A9841E842D220064FC14 /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -278,11 +278,11 @@
 				F9076C6E1E799E6D0002FF38 /* resized.atlas */,
 				F960928F1DA7FAD500749623 /* MenuViewController.swift */,
 				F952E3DC1E5B56B90012CCA1 /* bg.png */,
-				F9E9A9801E8427FB0064FC14 /* fruit.atlas */,
 				F9BFCB2A1D92ACED0095A8EA /* Player.swift */,
 				F95D2EF41D8BF23700542CD9 /* Enemy.swift */,
 				F93C43041D79CB97006572C9 /* Main.storyboard */,
 				F93C43071D79CB97006572C9 /* Assets.xcassets */,
+				F929D3451E8963AE0089BF82 /* fruit.atlas */,
 				F93C43091D79CB97006572C9 /* LaunchScreen.storyboard */,
 				F93C430C1D79CB97006572C9 /* Info.plist */,
 				F9A176FD1DCB929900534EBA /* fruitlist.plist */,
@@ -472,6 +472,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F929D3461E8963AE0089BF82 /* fruit.atlas in Resources */,
 				F93C359A1E697D30009C7DA3 /* shock2.aiff in Resources */,
 				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
 				F93C359B1E697D30009C7DA3 /* shock3.aiff in Resources */,
@@ -482,7 +483,6 @@
 				F952E3DD1E5B56B90012CCA1 /* bg.png in Resources */,
 				F9E9A9851E842D220064FC14 /* drop.png in Resources */,
 				F960928E1DA7F37E00749623 /* splat.wav in Resources */,
-				F9E9A9811E8427FB0064FC14 /* fruit.atlas in Resources */,
 				F97270101E4A23AC00D4F796 /* bw.fsh in Resources */,
 				F93C359C1E697D30009C7DA3 /* shock4.aiff in Resources */,
 				F972700E1E4A06DD00D4F796 /* shader.fsh in Resources */,

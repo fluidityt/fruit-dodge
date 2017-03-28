@@ -15,8 +15,6 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TextureLoader.preloadTextures()
-
         beginButton.userInteractionEnabled = true
         beginButton.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(begin)))
         
