@@ -26,8 +26,8 @@ class GameScene: SKScene {
     var player:Player! = nil
     var lastUpdateTime:NSTimeInterval = 0.0
     var running = false
-    var enemies:[SKNode] {
-        return children.filter({$0.name == "enemy"})
+    var enemies:[Enemy] {
+        return children.filter({$0.name == "enemy"}) as! [Enemy]
     }
     var enemyList:[Enemy] = []
     var spawnRate = 10
@@ -75,9 +75,9 @@ class GameScene: SKScene {
         startGame()
         //debugDrawPlayableArea()
         
-        let cheatRecogniser = UITapGestureRecognizer(target: self, action: #selector(self.destroyEnemies))
-        cheatRecogniser.numberOfTapsRequired = 4
-        self.view?.addGestureRecognizer(cheatRecogniser)
+        //let cheatRecogniser = UITapGestureRecognizer(target: self, action: #selector(self.destroyEnemies))
+        //cheatRecogniser.numberOfTapsRequired = 4
+        //self.view?.addGestureRecognizer(cheatRecogniser)
         
         let lightningNode = LightningNode(size: CGSize(width: 1, height:1))
         lightningNode.zPosition = 500000
@@ -99,8 +99,6 @@ class GameScene: SKScene {
         let playableHeight = size.width / maxAspectRatio
         let playableMargin = (size.height-playableHeight)/2.0
         playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
-        
-        SKTextureAtlas.preloadTextureAtlasesNamed(["resized", "icons", "fruit"]) {_,_ in }
         
         super.init(size: size)
     }
@@ -133,7 +131,6 @@ class GameScene: SKScene {
         let filename = NSBundle.mainBundle().pathForResource("fruitlist", ofType: "plist")
         if let enemyData = NSArray(contentsOfFile: filename!) as? [[String:AnyObject]] {
             for data in enemyData {
-                //print(data["spritePrefix"])
                 let fruit = Enemy(withTextureName: data["spritePrefix"] as! String)
                 let baseScale = (data["baseScale"] as! CGFloat)
                 fruit.setScale(2.0*baseScale)
@@ -193,12 +190,12 @@ class GameScene: SKScene {
     
     func createScoreBoard()
     {
-        
-        let diff = self.frame.size - self.playableRect.size
+        let convertedPoint = convertPointFromView(CGPoint(x: UIScreen.mainScreen().bounds.size.width/2, y: UIScreen.mainScreen().bounds.height/10))
         
         menuLayer = SKNode()
-        menuLayer.position = CGPoint(x: self.frame.width/2, y: (self.frame.height - diff.height/2) - 100)
-
+        menuLayer.position = convertedPoint
+        
+        
         scoreNode.fontName = "French_Fries"
         menuLayer.addChild(scoreNode)
         
@@ -208,7 +205,7 @@ class GameScene: SKScene {
         scoreNode.fontSize = 120
         starScoreNode.fontSize = 120
         
-        starScoreNode.position = CGPoint(x: -self.frame.width/10, y: 0)
+        starScoreNode.position = CGPoint(x: -self.frame.width/3, y: 0)
         menuLayer.addChild(starScoreNode)
         
         addChild(menuLayer)
@@ -277,7 +274,6 @@ class GameScene: SKScene {
         
 
         if (running) {
-            
             updateEnemies()
             updatePlayer(timeSinceLast)
             
@@ -503,13 +499,15 @@ extension GameScene: Powerupable
         }
         
         
-        for (_, enemySprite) in enemies.enumerate() {
+        for enemySprite in enemies {
             
             let velocity = CGPoint(vector: enemySprite.physicsBody!.velocity)
             
-            enemySprite.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            /*enemySprite.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             enemySprite.physicsBody?.angularVelocity = 0.0
-            enemySprite.physicsBody?.affectedByGravity = false
+            enemySprite.physicsBody?.affectedByGravity = false*/
+            
+            enemySprite.physicsBody = nil
             
             if let node = self.childNodeWithName("lightning") as? LightningNode {
                 node.targetPoints.append(node.convertPoint(enemySprite.position, fromNode: self))
@@ -517,7 +515,7 @@ extension GameScene: Powerupable
             
             let pop = SKAction.group([SKAction.screenShakeWithNode(enemySprite, amount:velocity/30, oscillations: 10, duration: 1.0)])
             
-            let removeAction = SKAction.sequence([pop, SKAction.removeFromParent()])
+            let removeAction = SKAction.sequence([pop, SKAction.runBlock({ enemySprite.squash() })])
             enemySprite.runAction(removeAction)
         }
         
