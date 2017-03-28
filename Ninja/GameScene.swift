@@ -320,16 +320,14 @@ class GameScene: SKScene {
     
     func updateEnemies()
     {
-        self.enumerateChildNodesWithName("enemy", usingBlock: { node, stop in
+        for enemySprite in enemies {
             
-            if let enemySprite = node as? Enemy {
-                if enemySprite.position.x - enemySprite.size.width/2 > self.frame.size.width && self.running {
-                    enemySprite.removeFromParent()
-                }
-                
-                enemySprite.physicsBody?.angularVelocity = -7.0
-                }
-            })
+            if enemySprite.position.x - enemySprite.size.width/2 > self.frame.size.width && self.running {
+                enemySprite.removeFromParent()
+            }
+            
+            enemySprite.physicsBody?.angularVelocity = -7.0
+        }
     }
     
     
@@ -477,6 +475,7 @@ extension GameScene: Powerupable
         
         switch(powerup) {
         case is Star:
+            print("Increasing score")
             self.starScore+=1
         case is Lightning:
             destroyEnemies()
@@ -569,8 +568,7 @@ extension GameScene: SKPhysicsContactDelegate
         if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
             if let powerUp = secondBody.node as? Powerup {
                 powerUp.runAction(powerUp.collectionSound, completion: { Void in
-                    powerUp.removeFromParent()
-                    powerUp.activate()
+                    powerUp.state?.enterState(Collected)
                 })
             }
         }

@@ -30,7 +30,7 @@ class Collectible: GKState {
         case is Flashing.Type :
             return true
         default:
-            return false
+            return true
         }
     }
 }

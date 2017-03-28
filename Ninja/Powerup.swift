@@ -61,7 +61,7 @@ class Powerup: SKSpriteNode {
         self.physicsBody?.collisionBitMask = PhysicsCategories.topwall.rawValue | PhysicsCategories.powerup.rawValue
         self.physicsBody?.allowsRotation = false
         
-        state = GKStateMachine(states: [Collectible(withPowerup: self), Flashing(withPowerup:self)])
+        state = GKStateMachine(states: [Collectible(withPowerup: self), Flashing(withPowerup:self), Collected(withPowerup: self)])
         self.name = "powerup"
     }
     

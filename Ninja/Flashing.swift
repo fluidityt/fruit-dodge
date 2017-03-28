@@ -30,4 +30,23 @@ class Flashing: GKState {
     }
 }
 
+class Collected: GKState {
+    
+    var powerup:Powerup
+    
+    init(withPowerup powerup:Powerup)
+    {
+        self.powerup = powerup
+    }
+    
+    override func didEnterWithPreviousState(previousState: GKState?) {
+        powerup.removeFromParent()
+        powerup.activate()
+    }
+    
+    override func isValidNextState(stateClass: AnyClass) -> Bool {
+        return false
+    }
+}
+
 
