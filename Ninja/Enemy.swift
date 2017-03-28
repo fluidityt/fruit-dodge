@@ -1,4 +1,4 @@
-//
+ //
 //  Enemy.swift
 //  Ninja
 //
@@ -14,10 +14,12 @@ struct TextureLoader {
     
     static func preloadTextures()
     {
-        atlases = [SKTextureAtlas(named: "fruit"), SKTextureAtlas(named: "resize"), SKTextureAtlas(named: "icons")]
-        SKTextureAtlas.preloadTextureAtlases(atlases!, withCompletionHandler: {
-            print("Preloaded textures")
-        })
+        if atlases == nil {
+            atlases = [SKTextureAtlas(named: "fruit"), SKTextureAtlas(named: "resized"), SKTextureAtlas(named: "icons")]
+            SKTextureAtlas.preloadTextureAtlases(atlases!, withCompletionHandler: {
+                print("Preloaded textures")
+            })
+        }
     }
 }
 
@@ -80,7 +82,7 @@ class Enemy: SKSpriteNode {
     {
         self.removeActionForKey("blink")
         self.runAction(Enemy.whackSound)
-        let squashAnimation = SKAction.animateWithTextures(squashTextures, timePerFrame: 0.016, resize: true, restore: false)
+        let squashAnimation = SKAction.animateWithTextures(squashTextures, timePerFrame: 0.032, resize: true, restore: false)
         self.physicsBody?.angularVelocity = 0.0
         self.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
         self.physicsBody?.affectedByGravity = false
