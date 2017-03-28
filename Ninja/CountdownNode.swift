@@ -78,8 +78,6 @@ class CountdownNode: SKSpriteNode {
         countdownLayer.position = CGPoint(x: size.width/2, y: size.height/2)
         countdownLayer.addChild(countdownLabel)
       
-        let fontScaleFactor =  min(size.width/countdownLabel.frame.width, size.height/countdownLabel.frame.height)
-        //countdownLabel.fontSize *= fontScaleFactor*scaleHeight
         countdownLabel.fontSize = 500
         countdownLabel.verticalAlignmentMode = .Center
         countdownLabel.position = CGPoint(x:0, y: 0)
