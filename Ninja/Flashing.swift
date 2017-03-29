@@ -40,6 +40,7 @@ class Collected: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
+        powerup.runAction(powerup.collectionSound)
         powerup.removeFromParent()
         powerup.activate()
     }

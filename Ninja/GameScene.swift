@@ -567,9 +567,7 @@ extension GameScene: SKPhysicsContactDelegate
         
         if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
             if let powerUp = secondBody.node as? Powerup {
-                powerUp.runAction(powerUp.collectionSound, completion: { Void in
-                    powerUp.state?.enterState(Collected)
-                })
+                powerUp.state?.enterState(Collected)
             }
         }
     }
