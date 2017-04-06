@@ -411,15 +411,54 @@ class GameScene: SKScene {
     
     func endGame()
     {
+        if (!running) {
+            return
+        }
+        
         player.kill()
         stopTimer()
         running = false
         let restartNode = SKSpriteNode(imageNamed: "restart")
-        restartNode.zPosition = 1000
-        restartNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        
+        let gameoverNode = SKNode()
+        gameoverNode.zPosition = 10000
+        
+        let bgNode = SKSpriteNode(imageNamed: "window_shop.png")
+        
+        let end = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        
+        // Make sure the node is positioned before you create the move effect, or it won't work!
+        gameoverNode.position =  CGPoint(x: self.frame.getMidPoint().x, y: self.frame.height+bgNode.frame.height)
+        
+        let effect = SKTMoveEffect(node: gameoverNode, duration: 0.7, startPosition: gameoverNode.position, endPosition: end)
+        
+        let move = SKAction.actionWithEffect(effect)
+        effect.timingFunction = SKTTimingFunctionBounceEaseOut
+        
         restartNode.scaleAsSize = CGSize(width: 300, height: 300)
         restartNode.name = "restart"
-        addChild(restartNode)
+        restartNode.zPosition = bgNode.zPosition+1
+        
+
+        let scoreTexture = SKTexture(imageNamed: "bg_friends_score.png")
+        let starsBox = SKSpriteNode(texture: scoreTexture, color: UIColor.clearColor(), size: CGSize(width: bgNode.size.width/2, height: scoreTexture.size().height))
+        starsBox.zPosition = gameoverNode.zPosition+1
+        starsBox.position = CGPoint(x: 0, y: 200)
+        
+        let starsScore = SKLabelNode(fontNamed: "French_Fries")
+        starsScore.text = "0"
+        starsBox.addChild(starsScore)
+        starsScore.fontSize = 120
+        starsScore.zPosition=starsBox.zPosition+1
+        starsScore.verticalAlignmentMode = .Center
+        
+        
+        gameoverNode.addChild(starsBox)
+        
+        addChild(gameoverNode)
+        gameoverNode.addChild(bgNode)
+        bgNode.addChild(restartNode)
+        gameoverNode.runAction(move)
     }
     
     func restart()
@@ -475,7 +514,6 @@ extension GameScene: Powerupable
         
         switch(powerup) {
         case is Star:
-            print("Increasing score")
             self.starScore+=1
         case is Lightning:
             destroyEnemies()

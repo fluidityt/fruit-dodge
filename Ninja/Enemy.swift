@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 
 struct TextureLoader {
+    
     static var atlases:[SKTextureAtlas]?
     
     static func preloadTextures()

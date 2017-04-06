@@ -40,9 +40,11 @@ class Collected: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-        powerup.runAction(powerup.collectionSound)
-        powerup.removeFromParent()
-        powerup.activate()
+        
+        powerup.runAction(powerup.collectionSound) {
+            self.powerup.removeFromParent()
+            self.powerup.activate()
+        }
     }
     
     override func isValidNextState(stateClass: AnyClass) -> Bool {

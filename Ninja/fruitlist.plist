@@ -42,5 +42,13 @@
 		<key>baseMass</key>
 		<integer>1</integer>
 	</dict>
+	<dict>
+		<key>spritePrefix</key>
+		<string>apple</string>
+		<key>baseScale</key>
+		<integer>1</integer>
+		<key>baseMass</key>
+		<integer>1</integer>
+	</dict>
 </array>
 </plist>
