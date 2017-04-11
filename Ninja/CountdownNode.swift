@@ -11,15 +11,15 @@ import SpriteKit
 
 class CountdownNode: SKSpriteNode {
     
-    private var count:Int {
+    fileprivate var count:Int {
         didSet {
             internalCount-=oldValue
             internalCount+=count
         }
     }
-    private var delay:NSTimeInterval
-    private var countdownLabel = SKLabelNode(fontNamed: "French_Fries")
-    private var internalCount:Int = 0
+    fileprivate var delay:TimeInterval
+    fileprivate var countdownLabel = SKLabelNode(fontNamed: "French_Fries")
+    fileprivate var internalCount:Int = 0
     var initialText:String? {
         didSet {
             if initialText != nil {
@@ -50,7 +50,7 @@ class CountdownNode: SKSpriteNode {
     var scaleHeight:CGFloat = 0.4
     var bgLayer:SKSpriteNode
     
-    init(size: CGSize, count: Int, delay: NSTimeInterval, bgColor:UIColor)
+    init(size: CGSize, count: Int, delay: TimeInterval, bgColor:UIColor)
     {
         self.count = count
         self.internalCount = count
@@ -58,7 +58,7 @@ class CountdownNode: SKSpriteNode {
         
         bgLayer = SKSpriteNode(texture: nil, color: bgColor, size: size)
         //bgLayer.zPosition = -1
-        super.init(texture: nil, color: UIColor.clearColor(), size: size)
+        super.init(texture: nil, color: UIColor.clear, size: size)
         bgLayer.position = CGPoint(x: size.width/2, y: size.height/2)
         self.addChild(bgLayer)
         self.zPosition = 10000
@@ -71,7 +71,7 @@ class CountdownNode: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initChildren()
+    fileprivate func initChildren()
     {
         let countdownLayer = SKNode()
         countdownLayer.name = "countdown"
@@ -79,7 +79,7 @@ class CountdownNode: SKSpriteNode {
         countdownLayer.addChild(countdownLabel)
       
         countdownLabel.fontSize = 500
-        countdownLabel.verticalAlignmentMode = .Center
+        countdownLabel.verticalAlignmentMode = .center
         countdownLabel.position = CGPoint(x:0, y: 0)
         
         countdownLabel.text = initialText
@@ -87,12 +87,12 @@ class CountdownNode: SKSpriteNode {
         addChild(countdownLayer)
     }
     
-    func start(completion: (() -> Void)?)
+    func start(_ completion: (() -> Void)?)
     {
         var countDownTimer = count
         var internalTimer = internalCount
-        let wait = SKAction.waitForDuration(delay)
-        let updateLabel = SKAction.runBlock({
+        let wait = SKAction.wait(forDuration: delay)
+        let updateLabel = SKAction.run({
                       
             internalTimer-=1
             
@@ -109,15 +109,15 @@ class CountdownNode: SKSpriteNode {
         })
         
         let doTimer = SKAction.sequence([updateLabel, wait])
-        self.runAction(SKAction.repeatAction(doTimer, count: internalCount)) {
-            let slide = SKAction.moveBy(CGVector(dx: 0, dy: -self.size.height), duration: 0.3)
-            slide.timingMode = .EaseOut
+        self.run(SKAction.repeat(doTimer, count: internalCount), completion: {
+            let slide = SKAction.move(by: CGVector(dx: 0, dy: -self.size.height), duration: 0.3)
+            slide.timingMode = .easeOut
             
-            self.runAction(slide) {
+            self.run(slide, completion: {
                 self.removeFromParent()
                 completion?()
-            }
-        }
+            }) 
+        }) 
     }
 }
 

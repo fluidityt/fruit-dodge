@@ -11,7 +11,7 @@ import SpriteKit
 
 struct TextureLoader {
     
-    static var atlases:[SKTextureAtlas]?
+    private static var atlases:[SKTextureAtlas]?
     
     static func preloadTextures()
     {
@@ -20,6 +20,15 @@ struct TextureLoader {
             SKTextureAtlas.preloadTextureAtlases(atlases!, withCompletionHandler: {
                 print("Preloaded textures")
             })
+        }
+    }
+    
+    static func outputAtlases()
+    {
+        for atlas in atlases! {
+            for name in atlas.textureNames {
+                print(name)
+            }
         }
     }
 }
@@ -47,7 +56,7 @@ class Enemy: SKSpriteNode {
             squashTextures.append(squashTexture)
         }
         
-        super.init(texture: textures[0], color:UIColor.clearColor(), size: textures[0].size())
+        super.init(texture: textures[0], color:UIColor.clear, size: textures[0].size())
         
         self.name = "enemy"
         
@@ -76,21 +85,21 @@ class Enemy: SKSpriteNode {
     
     func bounce()
     {
-        self.runAction(Enemy.bounceSound)
+        self.run(Enemy.bounceSound)
     }
     
     func squash()
     {
-        self.removeActionForKey("blink")
-        self.runAction(Enemy.whackSound)
-        let squashAnimation = SKAction.animateWithTextures(squashTextures, timePerFrame: 0.032, resize: true, restore: false)
+        self.removeAction(forKey: "blink")
+        self.run(Enemy.whackSound)
+        let squashAnimation = SKAction.animate(with: squashTextures, timePerFrame: 0.032, resize: true, restore: false)
         self.physicsBody?.angularVelocity = 0.0
         self.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
         self.physicsBody?.affectedByGravity = false
-        let reduce = SKAction.fadeAlphaTo(0.0, duration: 0.004)
-        self.runAction(SKAction.sequence([squashAnimation, reduce])) {
+        let reduce = SKAction.fadeAlpha(to: 0.0, duration: 0.004)
+        self.run(SKAction.sequence([squashAnimation, reduce]), completion: {
             self.removeFromParent()
-        }
+        }) 
     }
     
     func clone() -> Enemy

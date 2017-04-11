@@ -24,7 +24,7 @@ class GameScene: SKScene {
     
     var playableRect:CGRect
     var player:Player! = nil
-    var lastUpdateTime:NSTimeInterval = 0.0
+    var lastUpdateTime:TimeInterval = 0.0
     var running = false
     var enemies:[Enemy] {
         return children.filter({$0.name == "enemy"}) as! [Enemy]
@@ -36,25 +36,25 @@ class GameScene: SKScene {
     var score:Int = 0 {
         didSet {
             doScoreChecks()
-            scoreNode.text = String(score)
+            scoreNode.setScore(score: score)
             scoreSinceLastSpawn+=score-oldValue
         }
     }
     
     var starScore:Int = 0 {
         didSet {
-            if let scoreNode = menuLayer.childNodeWithName("starscore") as? SKLabelNode {
+            if let scoreNode = menuLayer.childNode(withName: "starscore") as? SKLabelNode {
                 scoreNode.text = String(starScore)
             }
         }
     }
     
     var menuLayer:SKNode!
-    let scoreNode = SKLabelNode(text: "0")
+    let scoreNode = ScoreNode(imageNamed: "newstar")
 
     //MARK: Init
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         
         let bgNode = SKSpriteNode(imageNamed: "bg")
@@ -62,11 +62,11 @@ class GameScene: SKScene {
   
 
         addChild(bgNode)
-        bgNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        bgNode.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         bgNode.zPosition = -1
         self.physicsWorld.contactDelegate = self
         
-        view.multipleTouchEnabled = true
+        view.isMultipleTouchEnabled = true
         spawnCharacter()
         createWalls()
         createScoreBoard()
@@ -74,6 +74,8 @@ class GameScene: SKScene {
         
         startGame()
         //debugDrawPlayableArea()
+        
+        TextureLoader.outputAtlases()
         
         //let cheatRecogniser = UITapGestureRecognizer(target: self, action: #selector(self.destroyEnemies))
         //cheatRecogniser.numberOfTapsRequired = 4
@@ -110,10 +112,11 @@ class GameScene: SKScene {
     func debugDrawPlayableArea()
     {
         let shape = SKShapeNode()
-        let path = CGPathCreateMutable()
-        CGPathAddRect(path, nil, playableRect)
+        let path = CGMutablePath()
+
+        path.addRect(playableRect)
         shape.path = path
-        shape.strokeColor = SKColor.redColor()
+        shape.strokeColor = SKColor.red
         shape.lineWidth = 4.0
         addChild(shape)
     }
@@ -128,7 +131,7 @@ class GameScene: SKScene {
     // Preload enemies so we can just clone from this array.
     func loadEnemies()
     {
-        let filename = NSBundle.mainBundle().pathForResource("fruitlist", ofType: "plist")
+        let filename = Bundle.main.path(forResource: "fruitlist", ofType: "plist")
         if let enemyData = NSArray(contentsOfFile: filename!) as? [[String:AnyObject]] {
             for data in enemyData {
                 let fruit = Enemy(withTextureName: data["spritePrefix"] as! String)
@@ -144,9 +147,9 @@ class GameScene: SKScene {
     {
         let floorHeight:CGFloat = 270.0
         let leftWall = SKNode(); let rightWall = SKNode(); let ceiling = SKNode(); let floor = SKNode()
-        leftWall.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointZero, toPoint: CGPoint(x: 0, y: self.frame.height))
-        rightWall.physicsBody = SKPhysicsBody(edgeFromPoint: CGPoint(x: self.frame.width, y: 0), toPoint: CGPoint(x:self.frame.width, y: self.frame.height))
-        floor.physicsBody = SKPhysicsBody(edgeFromPoint: CGPoint(x: 0, y:floorHeight), toPoint: CGPoint(x: self.frame.width, y: floorHeight))
+        leftWall.physicsBody = SKPhysicsBody(edgeFrom: CGPoint.zero, to: CGPoint(x: 0, y: self.frame.height))
+        rightWall.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: self.frame.width, y: 0), to: CGPoint(x:self.frame.width, y: self.frame.height))
+        floor.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: 0, y:floorHeight), to: CGPoint(x: self.frame.width, y: floorHeight))
         
         leftWall.physicsBody?.restitution = 0
         rightWall.physicsBody?.restitution = 0
@@ -161,7 +164,7 @@ class GameScene: SKScene {
     
     func animateGameStart()
     {
-        let countDownTimer = CountdownNode(size: self.size, count: 3, delay: 0.75, bgColor: UIColor.blackColor())
+        let countDownTimer = CountdownNode(size: self.size, count: 3, delay: 0.75, bgColor: UIColor.black)
         countDownTimer.alpha = 0.5
         countDownTimer.finalText = "GO!"
         countDownTimer.initialText = "READY?"
@@ -178,31 +181,31 @@ class GameScene: SKScene {
             self.score += 1
         })
         
-        let count = SKAction.repeatActionForever(increment)
-        self.runAction(count, withKey: "count")
+        let count = SKAction.repeatForever(increment)
+        self.run(count, withKey: "count")
     }
     
     func stopTimer()
     {
-        self.removeActionForKey("count")
+        self.removeAction(forKey: "count")
     }
     
     
     func createScoreBoard()
     {
-        let convertedPoint = convertPointFromView(CGPoint(x: UIScreen.mainScreen().bounds.size.width/2, y: UIScreen.mainScreen().bounds.height/10))
+        let convertedPoint = convertPoint(fromView: CGPoint(x: UIScreen.main.bounds.size.width/2, y: UIScreen.main.bounds.height/10))
         
         menuLayer = SKNode()
         menuLayer.position = convertedPoint
         
         
-        scoreNode.fontName = "French_Fries"
+        //scoreNode.fontName = "French_Fries"
         menuLayer.addChild(scoreNode)
         
         let starScoreNode = SKLabelNode(fontNamed: "French_Fries")
         starScoreNode.name = "starscore"
         starScoreNode.text = "0"
-        scoreNode.fontSize = 120
+        //scoreNode.fontSize = 120
         starScoreNode.fontSize = 120
         
         starScoreNode.position = CGPoint(x: -self.frame.width/3, y: 0)
@@ -215,13 +218,13 @@ class GameScene: SKScene {
     // MARK: Touches
 
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        /* Called when a touch begins */
         
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             //print(location)
-            if let node = self.nodeAtPoint(location) as? SKSpriteNode {
+            if let node = self.atPoint(location) as? SKSpriteNode {
                 if node.name == "restart" {
                     restart()
                 }
@@ -235,35 +238,35 @@ class GameScene: SKScene {
     }
     
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // There is only one touch registered with this event, so stop moving now it has ended.
-        if (event?.allTouches()?.count == 1) {
-            player.state.enterState(Standing)
+        if (event?.allTouches?.count == 1) {
+            player.state.enter(Standing.self)
         }
     }
     
     
-    func getTouchDirection(touch:UITouch) -> GKState.Type
+    func getTouchDirection(_ touch:UITouch) -> GKState.Type
     {
-        let location = touch.locationInNode(self)
+        let location = touch.location(in: self)
         
-        if (location.x < CGRectGetMidX(self.frame)) {
+        if (location.x < self.frame.midX) {
             return RunLeft.self
         } else {
             return RunRight.self
         }
     }
     
-    func changeCharacterState(state: GKState.Type) {
-        player.state.enterState(state)
+    func changeCharacterState(_ state: GKState.Type) {
+        player.state.enter(state)
     }
     
     
 
     // MARK: Game loop and update logic
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         
         var timeSinceLast = currentTime - lastUpdateTime
@@ -284,9 +287,9 @@ class GameScene: SKScene {
             
         }
         
-        self.enumerateChildNodesWithName("powerup", usingBlock: { node, stop in
+        self.enumerateChildNodes(withName: "powerup", using: { node, stop in
             if let powerup = node as? Powerup {
-                powerup.state?.updateWithDeltaTime(timeSinceLast)
+                powerup.state?.update(deltaTime: timeSinceLast)
             }
         })
     }
@@ -307,7 +310,7 @@ class GameScene: SKScene {
         return toSpawn
     }
     
-    func updatePlayer(interval:CFTimeInterval)
+    func updatePlayer(_ interval:CFTimeInterval)
     {
         if (player.invincibleTimer > 0.0) {
             player.invincibleTimer -= interval
@@ -359,16 +362,16 @@ class GameScene: SKScene {
     {
         player = Player()
 
-        player.state.enterState(Standing)
+        player.state.enter(Standing.self)
 
         self.addChild(player)
         
-        player.position = CGPoint(x: CGRectGetMidX(self.frame), y: 270 + player.frame.size.height/2)
+        player.position = CGPoint(x: self.frame.midX, y: 270 + player.frame.size.height/2)
     }
     
     
     
-    func spawnPowerup(ofType:String)
+    func spawnPowerup(_ ofType:String)
     {
         guard let powerup = PowerupFactory.createPowerupOfType(ofType) else {
             return
@@ -383,9 +386,9 @@ class GameScene: SKScene {
             xPos = CGFloat.random(min: 0, max: self.frame.width)
         }
         while (
-        self.nodeAtPoint(CGPoint(x: xPos, y: 331)) is Powerup
-            || self.nodeAtPoint(CGPoint(x: xPos-powerup.size.width/2, y: 331)) is Powerup
-            || self.nodeAtPoint(CGPoint(x: xPos+powerup.size.width/2, y: 331)) is Powerup
+        self.atPoint(CGPoint(x: xPos, y: 331)) is Powerup
+            || self.atPoint(CGPoint(x: xPos-powerup.size.width/2, y: 331)) is Powerup
+            || self.atPoint(CGPoint(x: xPos+powerup.size.width/2, y: 331)) is Powerup
         )
         
 
@@ -393,7 +396,7 @@ class GameScene: SKScene {
         
         powerup.position = position
         addChild(powerup)
-        powerup.state?.enterState(Collectible)
+        powerup.state?.enter(Collectible.self)
     }
     
     func doScoreChecks()
@@ -425,7 +428,7 @@ class GameScene: SKScene {
         
         let bgNode = SKSpriteNode(imageNamed: "window_shop.png")
         
-        let end = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        let end = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         // Make sure the node is positioned before you create the move effect, or it won't work!
         gameoverNode.position =  CGPoint(x: self.frame.getMidPoint().x, y: self.frame.height+bgNode.frame.height)
@@ -435,30 +438,68 @@ class GameScene: SKScene {
         let move = SKAction.actionWithEffect(effect)
         effect.timingFunction = SKTTimingFunctionBounceEaseOut
         
-        restartNode.scaleAsSize = CGSize(width: 300, height: 300)
+        restartNode.scaleAsSize = CGSize(width: 200, height: 200)
         restartNode.name = "restart"
         restartNode.zPosition = bgNode.zPosition+1
+        restartNode.position = CGPoint(x: 0, y: -300)
         
 
         let scoreTexture = SKTexture(imageNamed: "bg_friends_score.png")
-        let starsBox = SKSpriteNode(texture: scoreTexture, color: UIColor.clearColor(), size: CGSize(width: bgNode.size.width/2, height: scoreTexture.size().height))
+        
+        let starsBox = SKSpriteNode(texture: scoreTexture, color: UIColor.clear, size: CGSize(width: bgNode.size.width/2, height: scoreTexture.size().height))
+        //let star = SKSpriteNode(imageNamed: "newstar")
+        
         starsBox.zPosition = gameoverNode.zPosition+1
         starsBox.position = CGPoint(x: 0, y: 200)
+        //star.position = CGPoint(x:-100, y:0)
         
-        let starsScore = SKLabelNode(fontNamed: "French_Fries")
-        starsScore.text = "0"
-        starsBox.addChild(starsScore)
+        
+        let scoreBox = starsBox.copy() as! SKSpriteNode
+        scoreBox.position = CGPoint(x: 0, y: 0)
+        
+        // Star score label
+        /*let starsScore = SKLabelNode(fontNamed: "French_Fries")
+        starsScore.horizontalAlignmentMode = .left
+        starsScore.text = "x 0"
         starsScore.fontSize = 120
         starsScore.zPosition=starsBox.zPosition+1
-        starsScore.verticalAlignmentMode = .Center
+        starsScore.verticalAlignmentMode = .center
         
+        
+        // Time score label
+        let scoreScore = starsScore.copy() as! SKLabelNode
+        
+        starsScore.addChild(star)
+        
+*/
+        
+        let starsScore = ScoreNode(imageNamed: "newstar")
+        let scoreScore = ScoreNode(imageNamed: "newstar")
+        starsScore.zPosition = starsBox.zPosition+1
+        scoreScore.zPosition = scoreBox.zPosition+1
+        
+        starsBox.addChild(starsScore)
+        scoreBox.addChild(scoreScore)
         
         gameoverNode.addChild(starsBox)
+        gameoverNode.addChild(scoreBox)
         
-        addChild(gameoverNode)
         gameoverNode.addChild(bgNode)
         bgNode.addChild(restartNode)
-        gameoverNode.runAction(move)
+        
+        // Present scoreboard
+        addChild(gameoverNode)
+        
+        
+        // Increment scorecounters
+        let wait = SKAction.wait(forDuration: 0.01)
+                
+        let updateStarScore = SKAction.repeat(SKAction.sequence([wait, starsScore.increment()]), count: starScore)
+        let updateTimeScore = SKAction.repeat(SKAction.sequence([wait, scoreScore.increment()]), count: score)
+        
+        let scoreUpdatesAction = SKAction.group([updateStarScore, updateTimeScore])
+        gameoverNode.run(SKAction.sequence([move, SKAction.wait(forDuration:0.5), scoreUpdatesAction]))
+        
     }
     
     func restart()
@@ -495,7 +536,7 @@ class GameScene: SKScene {
         }
     }
     
-    func checkEnemyHit(enemy: Enemy)
+    func checkEnemyHit(_ enemy: Enemy)
     {
         if (!player.invincible) {
             enemy.squash()
@@ -510,7 +551,7 @@ class GameScene: SKScene {
 
 extension GameScene: Powerupable
 {
-    func didExecutePowerup(powerup: Powerup) {
+    func didExecutePowerup(_ powerup: Powerup) {
         
         switch(powerup) {
         case is Star:
@@ -523,15 +564,15 @@ extension GameScene: Powerupable
     }
     
     
-    func didFinishExecutingPower(powerup: Powerup) {
+    func didFinishExecutingPower(_ powerup: Powerup) {
         
     }
     
     func destroyEnemies()
     {
         
-        if let node = self.childNodeWithName("lightning") as? LightningNode {
-            node.targetPoints.removeAll(keepCapacity: false)
+        if let node = self.childNode(withName: "lightning") as? LightningNode {
+            node.targetPoints.removeAll(keepingCapacity: false)
             node.startLightning()
         }
         
@@ -546,24 +587,24 @@ extension GameScene: Powerupable
             
             enemySprite.physicsBody = nil
             
-            if let node = self.childNodeWithName("lightning") as? LightningNode {
-                node.targetPoints.append(node.convertPoint(enemySprite.position, fromNode: self))
+            if let node = self.childNode(withName: "lightning") as? LightningNode {
+                node.targetPoints.append(node.convert(enemySprite.position, from: self))
             }
             
             let pop = SKAction.group([SKAction.screenShakeWithNode(enemySprite, amount:velocity/30, oscillations: 10, duration: 1.0)])
             
-            let removeAction = SKAction.sequence([pop, SKAction.runBlock({ enemySprite.squash() })])
-            enemySprite.runAction(removeAction)
+            let removeAction = SKAction.sequence([pop, SKAction.run({ enemySprite.squash() })])
+            enemySprite.run(removeAction)
         }
         
         
-        if let node = self.childNodeWithName("lightning") as? LightningNode {
+        if let node = self.childNode(withName: "lightning") as? LightningNode {
             
-            let switchOffLightning = SKAction.runBlock({ () in
+            let switchOffLightning = SKAction.run({ () in
                 node.stopLightning()
             })
             
-            node.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), switchOffLightning]))
+            node.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), switchOffLightning]))
         }
         
     }
@@ -573,7 +614,7 @@ extension GameScene: Powerupable
 
 extension GameScene: SKPhysicsContactDelegate
 {
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         var firstBody:SKPhysicsBody
         var secondBody:SKPhysicsBody
         
@@ -599,13 +640,13 @@ extension GameScene: SKPhysicsContactDelegate
         
         if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.sidewall.rawValue) {
             if let player = firstBody.node as? Player {
-                player.state.enterState(Standing)
+                player.state.enter(Standing.self)
             }
         }
         
         if(firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.powerup.rawValue) {
             if let powerUp = secondBody.node as? Powerup {
-                powerUp.state?.enterState(Collected)
+                powerUp.state?.enter(Collected.self)
             }
         }
     }
@@ -624,5 +665,9 @@ extension CGRect {
     func getMidPoint() -> CGPoint {
         return CGPoint(x: self.midX, y: self.midY)
     }
+}
+
+extension SKLabelNode {
+
 }
 

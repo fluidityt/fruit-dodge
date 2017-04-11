@@ -17,7 +17,7 @@ class Flashing: GKState {
         self.powerup = powerup
     }
     
-    override func updateWithDeltaTime(seconds: NSTimeInterval) {
+    override func update(deltaTime seconds: TimeInterval) {
         powerup.timeInExistence+=seconds
         if powerup.timeInExistence > powerup.lifeTime {
             powerup.removeFromParent()
@@ -25,7 +25,7 @@ class Flashing: GKState {
         }
     }
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         self.powerup.flash()
     }
 }
@@ -39,15 +39,15 @@ class Collected: GKState {
         self.powerup = powerup
     }
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         
-        powerup.runAction(powerup.collectionSound) {
+        powerup.run(powerup.collectionSound, completion: {
             self.powerup.removeFromParent()
             self.powerup.activate()
-        }
+        }) 
     }
     
-    override func isValidNextState(stateClass: AnyClass) -> Bool {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return false
     }
 }

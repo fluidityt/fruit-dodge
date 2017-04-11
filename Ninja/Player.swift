@@ -9,6 +9,30 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class Player: SKSpriteNode {
     
@@ -19,7 +43,7 @@ class Player: SKSpriteNode {
     var hitTextures = [SKTexture]()
     var runSpeed:CGFloat = 500
     var lives = 3
-    var invincibleTimer:NSTimeInterval = 0.0
+    var invincibleTimer:TimeInterval = 0.0
     
     var moving:Bool {
         return self.physicsBody?.velocity.dx > 0
@@ -35,7 +59,7 @@ class Player: SKSpriteNode {
     
     init() {
         
-        super.init(texture: SKTexture(imageNamed: "idle_0"), color: UIColor.clearColor(), size: CGSize(width: 166, height: 221))
+        super.init(texture: SKTexture(imageNamed: "idle_0"), color: UIColor.clear, size: CGSize(width: 166, height: 221))
         loadTextures()
         
         
@@ -44,7 +68,7 @@ class Player: SKSpriteNode {
         // Scale down physics body size so it isn't larger than the actual player.
         let physicsBodySize = CGSize(width: self.texture!.size().width*0.9, height: self.texture!.size().height)
  
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: physicsBodySize)
+        self.physicsBody = SKPhysicsBody(rectangleOf: physicsBodySize)
         
         
         self.physicsBody = SKPhysicsBody(texture: idleTextures[0], size: idleTextures[0].size())
@@ -81,14 +105,14 @@ class Player: SKSpriteNode {
         }
     }
     
-    func enterState(state:GKState) {
+    func enterState(_ state:GKState) {
         //self.state.enterState()
     }
     
     func kill()
     {
         self.lives = 0
-        self.state.enterState(Defeated)
+        self.state.enter(Defeated.self)
     }
     
     func decreaseLives()
@@ -96,20 +120,19 @@ class Player: SKSpriteNode {
         self.lives -= 1
     }
     
-    func makeInvincible(forDuration:NSTimeInterval)
+    func makeInvincible(_ forDuration:TimeInterval)
     {
         self.invincibleTimer = forDuration
-        self.blendMode = .Add
-        self.color = SKColor.redColor()
+        self.blendMode = .add
+        self.color = SKColor.red
         self.physicsBody?.contactTestBitMask = PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
     }
     
     func makeVincible()
     {
         self.invincibleTimer = 0.0
-        self.blendMode = .Alpha
+        self.blendMode = .alpha
         self.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
-        print(self.physicsBody?.contactTestBitMask)
     }
     
     required init?(coder aDecoder: NSCoder) {

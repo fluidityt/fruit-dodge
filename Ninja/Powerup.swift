@@ -11,15 +11,15 @@ import GameplayKit
 
 protocol Powerupable:class
 {
-    func didExecutePowerup(powerup:Powerup)
-    func didFinishExecutingPower(powerup:Powerup)
+    func didExecutePowerup(_ powerup:Powerup)
+    func didFinishExecutingPower(_ powerup:Powerup)
 }
 
 class PowerupFactory {
     
     static var powerups:[String:Powerup] = [:]
     
-    static func createPowerupOfType(type:String) -> Powerup?
+    static func createPowerupOfType(_ type:String) -> Powerup?
     {
         var powerup:Powerup
         
@@ -48,13 +48,13 @@ class Powerup: SKSpriteNode {
     var collectionSound:SKAction = SKAction()
     var lifeTime:CFTimeInterval = 6.0
     
-    private init(texture:String) {
+    fileprivate init(texture:String) {
         
     
         let texture = SKTexture(imageNamed: texture)
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.clear, size: texture.size())
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: texture.size().width, height: texture.size().height))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: texture.size().width, height: texture.size().height))
         self.physicsBody?.affectedByGravity = true
         
         self.physicsBody?.categoryBitMask = PhysicsCategories.powerup.rawValue
@@ -72,10 +72,10 @@ class Powerup: SKSpriteNode {
     
     func flash()
     {
-        let fadeoutAction = SKAction.fadeAlphaTo(0.01, duration: 0.1)
-        let fadeinAction = SKAction.fadeInWithDuration(0.1)
+        let fadeoutAction = SKAction.fadeAlpha(to: 0.01, duration: 0.1)
+        let fadeinAction = SKAction.fadeIn(withDuration: 0.1)
         let flashAction = SKAction.sequence([fadeoutAction, fadeinAction])
-        self.runAction(SKAction.repeatActionForever(flashAction))
+        self.run(SKAction.repeatForever(flashAction))
     }
     
 

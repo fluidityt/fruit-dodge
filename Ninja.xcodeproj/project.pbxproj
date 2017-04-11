@@ -59,8 +59,6 @@
 		F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BFCB2A1D92ACED0095A8EA /* Player.swift */; };
 		F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CC1D806D16001E8318 /* PlayerStates.swift */; };
 		F9CB94D31D807036001E8318 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94D21D807036001E8318 /* PlayerState.swift */; };
-		F9E9A9831E842C340064FC14 /* Burst.sks in Resources */ = {isa = PBXBuildFile; fileRef = F9E9A9821E842C340064FC14 /* Burst.sks */; };
-		F9E9A9851E842D220064FC14 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E9A9841E842D220064FC14 /* drop.png */; };
 		F9FDAC8D1E92A0A000F9273F /* window_shop.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FDAC8C1E92A0A000F9273F /* window_shop.png */; };
 /* End PBXBuildFile section */
 
@@ -140,8 +138,6 @@
 		F9BFCB2A1D92ACED0095A8EA /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F9CB94CC1D806D16001E8318 /* PlayerStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStates.swift; sourceTree = "<group>"; };
 		F9CB94D21D807036001E8318 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerState.swift; path = ../PlayerState.swift; sourceTree = "<group>"; };
-		F9E9A9821E842C340064FC14 /* Burst.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Burst.sks; sourceTree = "<group>"; };
-		F9E9A9841E842D220064FC14 /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
 		F9FDAC8C1E92A0A000F9273F /* window_shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = window_shop.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,8 +270,6 @@
 				F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */,
 				F93C356D1E697D30009C7DA3 /* SpriteKitLightning-Swift */,
 				F952E3D41E4E17AF0012CCA1 /* Powerup.swift */,
-				F9E9A9821E842C340064FC14 /* Burst.sks */,
-				F9E9A9841E842D220064FC14 /* drop.png */,
 				F9076C6E1E799E6D0002FF38 /* resized.atlas */,
 				F960928F1DA7FAD500749623 /* MenuViewController.swift */,
 				F952E3DC1E5B56B90012CCA1 /* bg.png */,
@@ -434,18 +428,18 @@
 					F93C42F81D79CB96006572C9 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 2AACAPTHUB;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 					F93C43101D79CB97006572C9 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 2AACAPTHUB;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						TestTargetID = F93C42F81D79CB96006572C9;
 					};
 					F93C431B1D79CB97006572C9 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 2AACAPTHUB;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						TestTargetID = F93C42F81D79CB96006572C9;
 					};
 				};
@@ -479,13 +473,11 @@
 				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
 				F93C359B1E697D30009C7DA3 /* shock3.aiff in Resources */,
 				F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */,
-				F9E9A9831E842C340064FC14 /* Burst.sks in Resources */,
 				F9BE8A0D1E95692400EE7AE1 /* fruit.atlas in Resources */,
 				F9896C501D9D718400B53571 /* bounce.mp3 in Resources */,
 				F9076C6F1E799E6D0002FF38 /* resized.atlas in Resources */,
 				F99F25F11E93F4AD0068B461 /* bg_friends_score.png in Resources */,
 				F952E3DD1E5B56B90012CCA1 /* bg.png in Resources */,
-				F9E9A9851E842D220064FC14 /* drop.png in Resources */,
 				F960928E1DA7F37E00749623 /* splat.wav in Resources */,
 				F97270101E4A23AC00D4F796 /* bw.fsh in Resources */,
 				F93C359C1E697D30009C7DA3 /* shock4.aiff in Resources */,
@@ -707,7 +699,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.Ninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -720,7 +712,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.Ninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -733,7 +725,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.NinjaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ninja.app/Ninja";
 			};
 			name = Debug;
@@ -746,7 +738,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.NinjaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ninja.app/Ninja";
 			};
 			name = Release;
@@ -759,7 +751,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.NinjaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Ninja;
 			};
 			name = Debug;
@@ -771,7 +763,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.NinjaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Ninja;
 			};
 			name = Release;

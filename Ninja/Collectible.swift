@@ -18,14 +18,14 @@ class Collectible: GKState {
         self.powerup = powerup
     }
     
-    override func updateWithDeltaTime(seconds: NSTimeInterval) {
+    override func update(deltaTime seconds: TimeInterval) {
         powerup.timeInExistence+=seconds
         if powerup.timeInExistence > 4.0 {
-            powerup.state!.enterState(Flashing)
+            powerup.state!.enter(Flashing.self)
         }
     }
     
-    override func isValidNextState(stateClass: AnyClass) -> Bool {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
         case is Flashing.Type :
             return true

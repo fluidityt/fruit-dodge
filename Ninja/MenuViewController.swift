@@ -15,17 +15,18 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        beginButton.userInteractionEnabled = true
+        beginButton.isUserInteractionEnabled = true
         beginButton.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(begin)))
         
         // Do any additional setup after loading the view.
+        TextureLoader.preloadTextures()
     }
     
     func begin()
     {
         let vc = GameViewController()
-        vc.modalTransitionStyle = .CrossDissolve
-        self.presentViewController(vc, animated: true, completion: nil)
+        vc.modalTransitionStyle = .crossDissolve
+        self.present(vc, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +34,7 @@ class MenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     

@@ -12,18 +12,18 @@ import SpriteKit
 
 class Standing: GKState {
         
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         node.physicsBody?.velocity.dx = 0
-        node.removeActionForKey("running")
-        node.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(node.idleTextures, timePerFrame: 0.20)), withKey:"idle")
+        node.removeAction(forKey: "running")
+        node.run(SKAction.repeatForever(SKAction.animate(with: node.idleTextures, timePerFrame: 0.20)), withKey:"idle")
         
     }
     
-    override func willExitWithNextState(nextState: GKState) {
-        node.removeActionForKey("idle")
+    override func willExit(to nextState: GKState) {
+        node.removeAction(forKey: "idle")
     }
     
-    override func isValidNextState(stateClass: AnyClass) -> Bool {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
         case is RunLeft.Type:
             return true
@@ -40,17 +40,17 @@ class Standing: GKState {
 class Defeated: GKState {
 
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         node.physicsBody?.velocity.dx = 0
-        node.removeActionForKey("running")
-        node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: node.size.height*0.8, height: node.size.width))
+        node.removeAction(forKey: "running")
+        node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: node.size.height*0.8, height: node.size.width))
         node.physicsBody?.categoryBitMask = PhysicsCategories.character.rawValue
         node.physicsBody?.collisionBitMask = PhysicsCategories.topwall.rawValue | PhysicsCategories.sidewall.rawValue
         node.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
-        node.runAction(SKAction.animateWithTextures(node.defeatedTextures, timePerFrame: 0.01, resize: true, restore: false))
+        node.run(SKAction.animate(with: node.defeatedTextures, timePerFrame: 0.01, resize: true, restore: false))
     }
     
-    override func isValidNextState(stateClass: AnyClass) -> Bool {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return false
     }
 }
@@ -59,15 +59,15 @@ class Hit: GKState {
     
     var entryState:GKState.Type?
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         
-        self.entryState = previousState!.dynamicType
+        self.entryState = type(of: previousState!)
         
-        node.removeActionForKey("running")
-        node.runAction(SKAction.animateWithTextures(node.hitTextures, timePerFrame: 0.10)) {
+        node.removeAction(forKey: "running")
+        node.run(SKAction.animate(with: node.hitTextures, timePerFrame: 0.10), completion: {
             
-            self.node.state.enterState(self.entryState!)
-        }
+            self.node.state.enter(self.entryState!)
+        }) 
         
     }
     
@@ -77,11 +77,11 @@ class Hit: GKState {
         }
     }*/
     
-    override func willExitWithNextState(nextState: GKState) {
+    override func willExit(to nextState: GKState) {
         
     }
     
-    override func isValidNextState(stateClass: AnyClass) -> Bool {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return true
     }
 }
@@ -89,16 +89,16 @@ class Hit: GKState {
 class RunLeft: GKState {
     
 
-    override func didEnterWithPreviousState(previousState: GKState?) {
-        node.removeActionForKey("running")
+    override func didEnter(from previousState: GKState?) {
+        node.removeAction(forKey: "running")
         if (node.xScale > 0) {
             node.xScale = -node.xScale
         }
-        node.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(node.runTextures, timePerFrame: 0.05)), withKey:"running")
+        node.run(SKAction.repeatForever(SKAction.animate(with: node.runTextures, timePerFrame: 0.05)), withKey:"running")
         node.physicsBody?.velocity.dx = -node.runSpeed
     }
     
-    override func isValidNextState(stateClass: AnyClass) -> Bool {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
         case is Standing.Type:
             return true
@@ -111,21 +111,21 @@ class RunLeft: GKState {
         }
     }
     
-    override func updateWithDeltaTime(seconds: NSTimeInterval) {
+    override func update(deltaTime seconds: TimeInterval) {
         
     }
 }
 
 class RunRight: GKState {
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
-        node.removeActionForKey("running")
+    override func didEnter(from previousState: GKState?) {
+        node.removeAction(forKey: "running")
         node.xScale = abs(node.xScale)
-        node.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(node.runTextures, timePerFrame: 0.05)), withKey: "running")
+        node.run(SKAction.repeatForever(SKAction.animate(with: node.runTextures, timePerFrame: 0.05)), withKey: "running")
         node.physicsBody?.velocity.dx = node.runSpeed
     }
     
-    override func isValidNextState(stateClass: AnyClass) -> Bool {
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
         case is RunLeft.Type:
             return true
@@ -140,11 +140,11 @@ class RunRight: GKState {
     
     
     
-    override func updateWithDeltaTime(seconds: NSTimeInterval) {
+    override func update(deltaTime seconds: TimeInterval) {
 
     }
     
-    override func willExitWithNextState(nextState: GKState) {
+    override func willExit(to nextState: GKState) {
         
     }
 }
