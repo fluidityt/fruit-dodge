@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import GameplayKit
 
 struct TextureLoader {
     
@@ -32,12 +33,18 @@ struct TextureLoader {
         }
     }
 }
+ 
+enum EnemyDirection {
+        case Left,
+        Right
+}
 
 class Enemy: SKSpriteNode {
     
     var textures = [SKTexture]()
     let textureName:String
     var squashTextures = [SKTexture]()
+    var direction:EnemyDirection?
     
     static let bounceSound = SKAction.playSoundFileNamed("bounce", waitForCompletion: false)
     static let whackSound = SKAction.playSoundFileNamed("splat.wav", waitForCompletion: false)
@@ -108,5 +115,5 @@ class Enemy: SKSpriteNode {
         enemy.scaleAsPoint = self.scaleAsPoint
         return enemy
     }
-    
 }
+ 

@@ -17,25 +17,16 @@ protocol Powerupable:class
 
 class PowerupFactory {
     
-    static var powerups:[String:Powerup] = [:]
-    
     static func createPowerupOfType(_ type:String) -> Powerup?
     {
-        var powerup:Powerup
-        
-        if let existing = self.powerups[type] {
-            powerup = existing.copy() as! Powerup
-        } else {
-            switch(type) {
+        switch(type) {
                 case "star":
                 return Star()
                 case "lightning":
                 return Lightning()
             default:
                 return nil;
-            }
         }
-        return powerup
     }
 }
 

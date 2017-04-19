@@ -25,7 +25,7 @@ class GameViewController: UIViewController {
             // Configure the view.
             let skView = self.view as! SKView
 
-
+        
             skView.showsFPS = true
             skView.showsNodeCount = true
             
@@ -34,9 +34,16 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .aspectFill
-            
+            //let weakSelf = weak self
+            scene.dismiss = {
+                skView.presentScene(nil)
+                self.dismiss(animated: true, completion: {})
+            }
             skView.presentScene(scene)
             //skView.showsPhysics = true
+        
+        
+    
         
     }
 

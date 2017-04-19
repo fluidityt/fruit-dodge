@@ -71,12 +71,6 @@ class Hit: GKState {
         
     }
     
-    /*override func updateWithDeltaTime(seconds: NSTimeInterval) {
-        if (seconds > 2.0) {
-                node.physicsBody?.contactTestBitMask = PhysicsCategories.enemy.rawValue | PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
-        }
-    }*/
-    
     override func willExit(to nextState: GKState) {
         
     }
@@ -153,7 +147,7 @@ extension GKState {
     var node:Player {
         get {
             let state = self.stateMachine as! PlayerState
-            return state.player
+            return state.player!
         }
     }
 }

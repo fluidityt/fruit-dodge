@@ -12,7 +12,7 @@ import SpriteKit
 
 class PlayerState: GKStateMachine {
     
-    let player:Player
+    weak var player:Player?
     
     init(player:Player) {
         

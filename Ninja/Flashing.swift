@@ -10,7 +10,8 @@ import UIKit
 import GameplayKit
 
 class Flashing: GKState {
-    var powerup:Powerup
+    
+    weak var powerup:Powerup?
     
     init(withPowerup powerup:Powerup)
     {
@@ -18,21 +19,21 @@ class Flashing: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-        powerup.timeInExistence+=seconds
-        if powerup.timeInExistence > powerup.lifeTime {
-            powerup.removeFromParent()
-            powerup.deactivate()
+        powerup?.timeInExistence+=seconds
+        if powerup!.timeInExistence > powerup!.lifeTime {
+            powerup?.removeFromParent()
+            powerup?.deactivate()
         }
     }
     
     override func didEnter(from previousState: GKState?) {
-        self.powerup.flash()
+        self.powerup?.flash()
     }
 }
 
 class Collected: GKState {
     
-    var powerup:Powerup
+    weak var powerup:Powerup?
     
     init(withPowerup powerup:Powerup)
     {
@@ -41,9 +42,9 @@ class Collected: GKState {
     
     override func didEnter(from previousState: GKState?) {
         
-        powerup.run(powerup.collectionSound, completion: {
-            self.powerup.removeFromParent()
-            self.powerup.activate()
+        powerup!.run(powerup!.collectionSound, completion: {
+            self.powerup!.removeFromParent()
+            self.powerup!.activate()
         }) 
     }
     

@@ -30,7 +30,7 @@ class GameScene: SKScene {
         return children.filter({$0.name == "enemy"}) as! [Enemy]
     }
     var enemyList:[Enemy] = []
-    var spawnRate = 10
+    var spawnRate = 15
     var maxEnemies = 2
     var scoreSinceLastSpawn = 0
     var score:Int = 0 {
@@ -51,7 +51,8 @@ class GameScene: SKScene {
     
     var menuLayer:SKNode!
     let scoreNode = ScoreNode(imageNamed: "newstar")
-
+    var dismiss:(()->())?
+    
     //MARK: Init
     
     override func didMove(to view: SKView) {
@@ -75,13 +76,8 @@ class GameScene: SKScene {
         startGame()
         //debugDrawPlayableArea()
         
-        TextureLoader.outputAtlases()
-        
-        //let cheatRecogniser = UITapGestureRecognizer(target: self, action: #selector(self.destroyEnemies))
-        //cheatRecogniser.numberOfTapsRequired = 4
-        //self.view?.addGestureRecognizer(cheatRecogniser)
-        
         let lightningNode = LightningNode(size: CGSize(width: 1, height:1))
+        
         lightningNode.zPosition = 500000
         
         lightningNode.position = CGPoint(x: self.frame.midX, y: self.frame.height)
@@ -193,7 +189,7 @@ class GameScene: SKScene {
     
     func createScoreBoard()
     {
-        let convertedPoint = convertPoint(fromView: CGPoint(x: UIScreen.main.bounds.size.width/2, y: UIScreen.main.bounds.height/10))
+        let convertedPoint = convertPoint(fromView: CGPoint(x: UIScreen.main.bounds.size.width/2, y: UIScreen.main.bounds.height/11))
         
         menuLayer = SKNode()
         menuLayer.position = convertedPoint
@@ -223,10 +219,14 @@ class GameScene: SKScene {
         
         for touch in touches {
             let location = touch.location(in: self)
-            //print(location)
             if let node = self.atPoint(location) as? SKSpriteNode {
+                
                 if node.name == "restart" {
                     restart()
+                }
+                
+                if node.name == "home" {
+                    self.dismiss!()
                 }
             }
         
@@ -281,7 +281,7 @@ class GameScene: SKScene {
             updatePlayer(timeSinceLast)
             
             if (shouldSpawnEnemy()) {
-                self.spawnDanger()
+                self.spawnDanger(fromSide: .Right)
                 scoreSinceLastSpawn = 0
             }
             
@@ -329,12 +329,14 @@ class GameScene: SKScene {
                 enemySprite.removeFromParent()
             }
             
-            enemySprite.physicsBody?.angularVelocity = -7.0
+            
+            enemySprite.physicsBody?.angularVelocity = (enemySprite.direction == .Left) ? -7.0 : 7.0
+        
         }
     }
     
     
-    func spawnDanger()
+    func spawnDanger(fromSide side:EnemyDirection = .Left)
     {
         var enemySprite:Enemy
         
@@ -347,12 +349,22 @@ class GameScene: SKScene {
         } while (enemySprite.textureName == enemyData.lastSpawn)
         
         enemyData.lastSpawn = enemySprite.textureName
-    
         
         let spawnHeight = CGFloat.random(min: self.frame.height*0.66, max: self.frame.height - enemySprite.frame.size.height)
         let minSpeed = enemySprite.physicsBody!.mass * 100
-        let moveSpeed = CGFloat.random(min: minSpeed, max: minSpeed*2.5)
-        enemySprite.position = CGPoint(x:0, y: spawnHeight)
+        var moveSpeed = CGFloat.random(min: minSpeed, max: minSpeed*2.5)
+        var xPos:CGFloat
+        enemySprite.direction = side
+        
+        switch side {
+        case .Left:
+            xPos = 0.0
+        case .Right:
+            xPos = self.frame.width
+            moveSpeed = -moveSpeed
+        }
+        
+        enemySprite.position = CGPoint(x:xPos, y: spawnHeight)
         addChild(enemySprite)
         enemySprite.physicsBody?.applyImpulse(CGVector(dx:moveSpeed, dy:0))
     }
@@ -422,6 +434,7 @@ class GameScene: SKScene {
         stopTimer()
         running = false
         let restartNode = SKSpriteNode(imageNamed: "restart")
+        let homeNode = SKSpriteNode(imageNamed: "home")
         
         let gameoverNode = SKNode()
         gameoverNode.zPosition = 10000
@@ -438,10 +451,15 @@ class GameScene: SKScene {
         let move = SKAction.actionWithEffect(effect)
         effect.timingFunction = SKTTimingFunctionBounceEaseOut
         
-        restartNode.scaleAsSize = CGSize(width: 200, height: 200)
+        restartNode.scaleAsSize = CGSize(width: 300, height: 300)
         restartNode.name = "restart"
         restartNode.zPosition = bgNode.zPosition+1
-        restartNode.position = CGPoint(x: 0, y: -300)
+        restartNode.position = CGPoint(x: 300, y: -300)
+        
+        homeNode.scaleAsSize = CGSize(width: 300, height: 300)
+        homeNode.name = "home"
+        homeNode.zPosition = bgNode.zPosition+1
+        homeNode.position = CGPoint(x: -300, y: -300)
         
 
         let scoreTexture = SKTexture(imageNamed: "bg_friends_score.png")
@@ -457,22 +475,7 @@ class GameScene: SKScene {
         let scoreBox = starsBox.copy() as! SKSpriteNode
         scoreBox.position = CGPoint(x: 0, y: 0)
         
-        // Star score label
-        /*let starsScore = SKLabelNode(fontNamed: "French_Fries")
-        starsScore.horizontalAlignmentMode = .left
-        starsScore.text = "x 0"
-        starsScore.fontSize = 120
-        starsScore.zPosition=starsBox.zPosition+1
-        starsScore.verticalAlignmentMode = .center
-        
-        
-        // Time score label
-        let scoreScore = starsScore.copy() as! SKLabelNode
-        
-        starsScore.addChild(star)
-        
-*/
-        
+
         let starsScore = ScoreNode(imageNamed: "newstar")
         let scoreScore = ScoreNode(imageNamed: "newstar")
         starsScore.zPosition = starsBox.zPosition+1
@@ -486,6 +489,7 @@ class GameScene: SKScene {
         
         gameoverNode.addChild(bgNode)
         bgNode.addChild(restartNode)
+        bgNode.addChild(homeNode)
         
         // Present scoreboard
         addChild(gameoverNode)
@@ -493,7 +497,8 @@ class GameScene: SKScene {
         
         // Increment scorecounters
         let wait = SKAction.wait(forDuration: 0.01)
-                
+        
+        // Move these to the node objects themselves.
         let updateStarScore = SKAction.repeat(SKAction.sequence([wait, starsScore.increment()]), count: starScore)
         let updateTimeScore = SKAction.repeat(SKAction.sequence([wait, scoreScore.increment()]), count: score)
         
@@ -526,12 +531,13 @@ class GameScene: SKScene {
         return false
     }
     
+    
     func checkUpdateDifficulty()
     {
         if (score % 100 == 0 && spawnRate > 0) {
             spawnRate-=1
         }
-        if (score % 150 == 0 && spawnRate < 10) {
+        if (score % 150 == 0 && spawnRate < 12) {
             maxEnemies+=1
         }
     }
@@ -557,7 +563,7 @@ extension GameScene: Powerupable
         case is Star:
             self.starScore+=1
         case is Lightning:
-            destroyEnemies()
+            destroyEnemies(withLightning: true)
         default:
             return
         }
@@ -568,22 +574,26 @@ extension GameScene: Powerupable
         
     }
     
-    func destroyEnemies()
+    func destroyEnemies(withLightning:Bool)
     {
+        if (withLightning) {
         
-        if let node = self.childNode(withName: "lightning") as? LightningNode {
-            node.targetPoints.removeAll(keepingCapacity: false)
-            node.startLightning()
+            if let node = self.childNode(withName: "lightning") as? LightningNode {
+                node.targetPoints.removeAll(keepingCapacity: false)
+                node.startLightning()
+                
+                let switchOffLightning = SKAction.run({ () in
+                    node.stopLightning()
+                })
+                
+                node.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), switchOffLightning]))
+            }
         }
         
         
         for enemySprite in enemies {
             
             let velocity = CGPoint(vector: enemySprite.physicsBody!.velocity)
-            
-            /*enemySprite.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            enemySprite.physicsBody?.angularVelocity = 0.0
-            enemySprite.physicsBody?.affectedByGravity = false*/
             
             enemySprite.physicsBody = nil
             
@@ -598,14 +608,15 @@ extension GameScene: Powerupable
         }
         
         
-        if let node = self.childNode(withName: "lightning") as? LightningNode {
+        
+        /*if let node = self.childNode(withName: "lightning") as? LightningNode {
             
             let switchOffLightning = SKAction.run({ () in
                 node.stopLightning()
             })
             
             node.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), switchOffLightning]))
-        }
+        }*/
         
     }
 }
@@ -667,7 +678,4 @@ extension CGRect {
     }
 }
 
-extension SKLabelNode {
-
-}
 

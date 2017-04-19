@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F9076C691E71BDD80002FF38 /* icons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9076C681E71BDD80002FF38 /* icons.atlas */; };
 		F9076C6F1E799E6D0002FF38 /* resized.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9076C6E1E799E6D0002FF38 /* resized.atlas */; };
 		F9216BE21D917FB500E8E923 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BD61D917FB500E8E923 /* CGFloat+Extensions.swift */; };
 		F9216BE31D917FB500E8E923 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BD71D917FB500E8E923 /* CGPoint+Extensions.swift */; };
@@ -50,16 +49,14 @@
 		F9658E231E65DFCA00233B6A /* star_collect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9658E221E65DFCA00233B6A /* star_collect.mp3 */; };
 		F9658E251E6879C600233B6A /* Menubar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9658E241E6879C600233B6A /* Menubar.swift */; };
 		F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F972700A1E44E94600D4F796 /* French_Fries.ttf */; };
-		F972700E1E4A06DD00D4F796 /* shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F972700D1E4A06DD00D4F796 /* shader.fsh */; };
-		F97270101E4A23AC00D4F796 /* bw.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F972700F1E4A23AC00D4F796 /* bw.fsh */; };
 		F9896C501D9D718400B53571 /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9896C4F1D9D718400B53571 /* bounce.mp3 */; };
 		F99F25F11E93F4AD0068B461 /* bg_friends_score.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F25F01E93F4AD0068B461 /* bg_friends_score.png */; };
 		F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9A176FD1DCB929900534EBA /* fruitlist.plist */; };
+		F9BACFD01E9D3066007A7340 /* icons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9BACFCF1E9D3066007A7340 /* icons.atlas */; };
 		F9BE8A0D1E95692400EE7AE1 /* fruit.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */; };
 		F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BFCB2A1D92ACED0095A8EA /* Player.swift */; };
 		F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CC1D806D16001E8318 /* PlayerStates.swift */; };
 		F9CB94D31D807036001E8318 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94D21D807036001E8318 /* PlayerState.swift */; };
-		F9FDAC8D1E92A0A000F9273F /* window_shop.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FDAC8C1E92A0A000F9273F /* window_shop.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +77,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F9076C681E71BDD80002FF38 /* icons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = icons.atlas; sourceTree = "<group>"; };
 		F9076C6E1E799E6D0002FF38 /* resized.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = resized.atlas; sourceTree = "<group>"; };
 		F9216BD61D917FB500E8E923 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		F9216BD71D917FB500E8E923 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -129,16 +125,14 @@
 		F9658E221E65DFCA00233B6A /* star_collect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = star_collect.mp3; sourceTree = "<group>"; };
 		F9658E241E6879C600233B6A /* Menubar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menubar.swift; sourceTree = "<group>"; };
 		F972700A1E44E94600D4F796 /* French_Fries.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = French_Fries.ttf; sourceTree = "<group>"; };
-		F972700D1E4A06DD00D4F796 /* shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.fsh; sourceTree = "<group>"; };
-		F972700F1E4A23AC00D4F796 /* bw.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bw.fsh; sourceTree = "<group>"; };
 		F9896C4F1D9D718400B53571 /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bounce.mp3; sourceTree = "<group>"; };
 		F99F25F01E93F4AD0068B461 /* bg_friends_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_friends_score.png; sourceTree = "<group>"; };
 		F9A176FD1DCB929900534EBA /* fruitlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fruitlist.plist; sourceTree = "<group>"; };
+		F9BACFCF1E9D3066007A7340 /* icons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = icons.atlas; sourceTree = "<group>"; };
 		F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fruit.atlas; sourceTree = "<group>"; };
 		F9BFCB2A1D92ACED0095A8EA /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F9CB94CC1D806D16001E8318 /* PlayerStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStates.swift; sourceTree = "<group>"; };
 		F9CB94D21D807036001E8318 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerState.swift; path = ../PlayerState.swift; sourceTree = "<group>"; };
-		F9FDAC8C1E92A0A000F9273F /* window_shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = window_shop.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,7 +251,8 @@
 		F93C42FB1D79CB97006572C9 /* Ninja */ = {
 			isa = PBXGroup;
 			children = (
-				F972700C1E4A01DF00D4F796 /* Shaders */,
+				F9BACFD11E9EA0D6007A7340 /* Textures */,
+				F93C356D1E697D30009C7DA3 /* SpriteKitLightning-Swift */,
 				F97270091E44E92C00D4F796 /* Fonts */,
 				F96092911DA7FBD200749623 /* Sounds */,
 				F9216BD51D917FB500E8E923 /* SKTUtils */,
@@ -266,20 +261,15 @@
 				F93C43001D79CB97006572C9 /* GameScene.swift */,
 				F9658E241E6879C600233B6A /* Menubar.swift */,
 				F93C43021D79CB97006572C9 /* GameViewController.swift */,
-				F9076C681E71BDD80002FF38 /* icons.atlas */,
 				F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */,
-				F93C356D1E697D30009C7DA3 /* SpriteKitLightning-Swift */,
 				F952E3D41E4E17AF0012CCA1 /* Powerup.swift */,
-				F9076C6E1E799E6D0002FF38 /* resized.atlas */,
 				F960928F1DA7FAD500749623 /* MenuViewController.swift */,
 				F952E3DC1E5B56B90012CCA1 /* bg.png */,
 				F99F25F01E93F4AD0068B461 /* bg_friends_score.png */,
-				F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */,
 				F9BFCB2A1D92ACED0095A8EA /* Player.swift */,
 				F95D2EF41D8BF23700542CD9 /* Enemy.swift */,
 				F93C43041D79CB97006572C9 /* Main.storyboard */,
 				F93C43071D79CB97006572C9 /* Assets.xcassets */,
-				F9FDAC8C1E92A0A000F9273F /* window_shop.png */,
 				F93C43091D79CB97006572C9 /* LaunchScreen.storyboard */,
 				F93C430C1D79CB97006572C9 /* Info.plist */,
 				F9A176FD1DCB929900534EBA /* fruitlist.plist */,
@@ -341,13 +331,14 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		F972700C1E4A01DF00D4F796 /* Shaders */ = {
+		F9BACFD11E9EA0D6007A7340 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				F972700D1E4A06DD00D4F796 /* shader.fsh */,
-				F972700F1E4A23AC00D4F796 /* bw.fsh */,
+				F9076C6E1E799E6D0002FF38 /* resized.atlas */,
+				F9BACFCF1E9D3066007A7340 /* icons.atlas */,
+				F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */,
 			);
-			name = Shaders;
+			name = Textures;
 			sourceTree = "<group>";
 		};
 		F9CB94CB1D806CF9001E8318 /* States */ = {
@@ -471,6 +462,7 @@
 			files = (
 				F93C359A1E697D30009C7DA3 /* shock2.aiff in Resources */,
 				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
+				F9BACFD01E9D3066007A7340 /* icons.atlas in Resources */,
 				F93C359B1E697D30009C7DA3 /* shock3.aiff in Resources */,
 				F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */,
 				F9BE8A0D1E95692400EE7AE1 /* fruit.atlas in Resources */,
@@ -479,15 +471,11 @@
 				F99F25F11E93F4AD0068B461 /* bg_friends_score.png in Resources */,
 				F952E3DD1E5B56B90012CCA1 /* bg.png in Resources */,
 				F960928E1DA7F37E00749623 /* splat.wav in Resources */,
-				F97270101E4A23AC00D4F796 /* bw.fsh in Resources */,
 				F93C359C1E697D30009C7DA3 /* shock4.aiff in Resources */,
-				F972700E1E4A06DD00D4F796 /* shader.fsh in Resources */,
 				F93C35981E697D30009C7DA3 /* Lightning.xcassets in Resources */,
 				F93C430B1D79CB97006572C9 /* LaunchScreen.storyboard in Resources */,
 				F9658E231E65DFCA00233B6A /* star_collect.mp3 in Resources */,
-				F9076C691E71BDD80002FF38 /* icons.atlas in Resources */,
 				F93C43081D79CB97006572C9 /* Assets.xcassets in Resources */,
-				F9FDAC8D1E92A0A000F9273F /* window_shop.png in Resources */,
 				F93C359D1E697D30009C7DA3 /* shock5.aiff in Resources */,
 				F93C43061D79CB97006572C9 /* Main.storyboard in Resources */,
 				F93C359E1E697D30009C7DA3 /* shock6.aiff in Resources */,

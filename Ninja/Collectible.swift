@@ -11,7 +11,7 @@ import GameplayKit
 
 class Collectible: GKState {
 
-    var powerup:Powerup
+    weak var powerup:Powerup?
     
     init(withPowerup powerup:Powerup)
     {
@@ -19,9 +19,9 @@ class Collectible: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-        powerup.timeInExistence+=seconds
-        if powerup.timeInExistence > 4.0 {
-            powerup.state!.enter(Flashing.self)
+        powerup!.timeInExistence+=seconds
+        if powerup!.timeInExistence > 4.0 {
+            powerup!.state!.enter(Flashing.self)
         }
     }
     
