@@ -36,7 +36,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class Player: SKSpriteNode {
     
-    var state:PlayerState!
+    var state:PlayerStateMachine!
     var idleTextures = [SKTexture]()
     var runTextures = [SKTexture]()
     var defeatedTextures = [SKTexture]()
@@ -63,7 +63,7 @@ class Player: SKSpriteNode {
         loadTextures()
         
         
-        state = PlayerState(player:self)
+        state = PlayerStateMachine(player:self)
         
         // Scale down physics body size so it isn't larger than the actual player.
         let physicsBodySize = CGSize(width: self.texture!.size().width*0.9, height: self.texture!.size().height)

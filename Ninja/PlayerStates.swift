@@ -10,7 +10,7 @@ import UIKit
 import GameplayKit
 import SpriteKit
 
-class Standing: GKState {
+class Standing: PlayerState {
         
     override func didEnter(from previousState: GKState?) {
         node.physicsBody?.velocity.dx = 0
@@ -37,7 +37,7 @@ class Standing: GKState {
     }
 }
 
-class Defeated: GKState {
+class Defeated: PlayerState {
 
     
     override func didEnter(from previousState: GKState?) {
@@ -55,32 +55,7 @@ class Defeated: GKState {
     }
 }
 
-class Hit: GKState {
-    
-    var entryState:GKState.Type?
-    
-    override func didEnter(from previousState: GKState?) {
-        
-        self.entryState = type(of: previousState!)
-        
-        node.removeAction(forKey: "running")
-        node.run(SKAction.animate(with: node.hitTextures, timePerFrame: 0.10), completion: {
-            
-            self.node.state.enter(self.entryState!)
-        }) 
-        
-    }
-    
-    override func willExit(to nextState: GKState) {
-        
-    }
-    
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return true
-    }
-}
-
-class RunLeft: GKState {
+class RunLeft: PlayerState {
     
 
     override func didEnter(from previousState: GKState?) {
@@ -110,7 +85,7 @@ class RunLeft: GKState {
     }
 }
 
-class RunRight: GKState {
+class RunRight: PlayerState {
     
     override func didEnter(from previousState: GKState?) {
         node.removeAction(forKey: "running")
@@ -143,10 +118,11 @@ class RunRight: GKState {
     }
 }
 
-extension GKState {
+
+class PlayerState:GKState {
     var node:Player {
         get {
-            let state = self.stateMachine as! PlayerState
+            let state = self.stateMachine as! PlayerStateMachine
             return state.player!
         }
     }

@@ -9,7 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-
 enum PhysicsCategories:UInt32 {
     case character = 0b001
     case enemy = 0b010
@@ -21,6 +20,7 @@ enum PhysicsCategories:UInt32 {
 class GameScene: SKScene {
     
     // MARK: Properties
+    //HINSPDebug.start()
     
     var playableRect:CGRect
     var player:Player! = nil
@@ -127,6 +127,7 @@ class GameScene: SKScene {
     // Preload enemies so we can just clone from this array.
     func loadEnemies()
     {
+        print("preloading enemies")
         let filename = Bundle.main.path(forResource: "fruitlist", ofType: "plist")
         if let enemyData = NSArray(contentsOfFile: filename!) as? [[String:AnyObject]] {
             for data in enemyData {
@@ -277,8 +278,7 @@ class GameScene: SKScene {
         
 
         if (running) {
-            updateEnemies()
-            updatePlayer(timeSinceLast)
+            updateEnemies(timeSinceLast)
             
             if (shouldSpawnEnemy()) {
                 self.spawnDanger(fromSide: .Right)
@@ -310,28 +310,11 @@ class GameScene: SKScene {
         return toSpawn
     }
     
-    func updatePlayer(_ interval:CFTimeInterval)
-    {
-        if (player.invincibleTimer > 0.0) {
-            player.invincibleTimer -= interval
-        } else {
-            if (player.invincible) {
-                player.makeVincible()
-            }
-        }
-    }
     
-    func updateEnemies()
+    func updateEnemies(_ delta:TimeInterval)
     {
         for enemySprite in enemies {
-            
-            if enemySprite.position.x - enemySprite.size.width/2 > self.frame.size.width && self.running {
-                enemySprite.removeFromParent()
-            }
-            
-            
-            enemySprite.physicsBody?.angularVelocity = (enemySprite.direction == .Left) ? -7.0 : 7.0
-        
+            enemySprite.stateMachine.update(deltaTime: delta)
         }
     }
     
@@ -359,9 +342,11 @@ class GameScene: SKScene {
         switch side {
         case .Left:
             xPos = 0.0
+            enemySprite.stateMachine.enter(BouncingRight.self)
         case .Right:
             xPos = self.frame.width
-            moveSpeed = -moveSpeed
+            enemySprite.stateMachine.enter(BouncingLeft.self)
+            
         }
         
         enemySprite.position = CGPoint(x:xPos, y: spawnHeight)
@@ -532,6 +517,10 @@ class GameScene: SKScene {
     }
     
     
+    /*
+    /   main algorithm for determining difficulty
+    /
+    */
     func checkUpdateDifficulty()
     {
         if (score % 100 == 0 && spawnRate > 0) {
@@ -545,7 +534,7 @@ class GameScene: SKScene {
     func checkEnemyHit(_ enemy: Enemy)
     {
         if (!player.invincible) {
-            enemy.squash()
+            enemy.stateMachine.enter(Squashed.self)
             endGame()
         }
     }
@@ -606,18 +595,7 @@ extension GameScene: Powerupable
             let removeAction = SKAction.sequence([pop, SKAction.run({ enemySprite.squash() })])
             enemySprite.run(removeAction)
         }
-        
-        
-        
-        /*if let node = self.childNode(withName: "lightning") as? LightningNode {
-            
-            let switchOffLightning = SKAction.run({ () in
-                node.stopLightning()
-            })
-            
-            node.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), switchOffLightning]))
-        }*/
-        
+
     }
 }
 
@@ -663,19 +641,6 @@ extension GameScene: SKPhysicsContactDelegate
     }
     
 
-}
-
-extension Array {
-    func randomItem() -> Element {
-        let index = Int(arc4random_uniform(UInt32(self.count)))
-        return self[index]
-    }
-}
-
-extension CGRect {
-    func getMidPoint() -> CGPoint {
-        return CGPoint(x: self.midX, y: self.midY)
-    }
 }
 
 

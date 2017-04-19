@@ -10,7 +10,7 @@ import UIKit
 import GameplayKit
 import SpriteKit
 
-class PlayerState: GKStateMachine {
+class PlayerStateMachine: GKStateMachine {
     
     weak var player:Player?
     
@@ -20,7 +20,7 @@ class PlayerState: GKStateMachine {
         
         var states = [GKState]()
     
-        states = [Standing(), RunRight(), RunLeft(), Defeated(), Hit()]
+        states = [Standing(), RunRight(), RunLeft(), Defeated()]
         super.init(states: states)
     }    
 }

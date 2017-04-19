@@ -15,9 +15,9 @@ class GameViewController: UIViewController {
         view = SKView(frame: UIScreen.main.bounds)
     }
     
-    override func viewDidLayoutSubviews() {
-        
-        super.viewDidLayoutSubviews()
+    override func viewDidLoad() {
+    
+        super.viewDidLoad()
         
          let gameSize = CGSize(width: 2048, height: 1536)
         
@@ -36,7 +36,7 @@ class GameViewController: UIViewController {
             scene.scaleMode = .aspectFill
             //let weakSelf = weak self
             scene.dismiss = {
-                skView.presentScene(nil)
+                //skView.presentScene(nil)
                 self.dismiss(animated: true, completion: {})
             }
             skView.presentScene(scene)

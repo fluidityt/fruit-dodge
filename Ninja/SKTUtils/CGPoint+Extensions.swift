@@ -243,3 +243,17 @@ public func /= (left: inout CGPoint, right: CGVector) {
 public func lerp(start: CGPoint, end: CGPoint, t: CGFloat) -> CGPoint {
   return start + (end - start) * t
 }
+
+extension Array {
+    func randomItem() -> Element {
+        let index = Int(arc4random_uniform(UInt32(self.count)))
+        return self[index]
+    }
+}
+
+extension CGRect {
+    func getMidPoint() -> CGPoint {
+        return CGPoint(x: self.midX, y: self.midY)
+    }
+}
+
