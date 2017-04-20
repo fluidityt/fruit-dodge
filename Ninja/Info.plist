@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>playtime.ttf</string>
 		<string>French_Fries.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>

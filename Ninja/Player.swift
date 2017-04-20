@@ -74,7 +74,7 @@ class Player: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(texture: idleTextures[0], size: idleTextures[0].size())
         self.physicsBody?.categoryBitMask = PhysicsCategories.character.rawValue
         self.physicsBody?.collisionBitMask = PhysicsCategories.topwall.rawValue | PhysicsCategories.sidewall.rawValue
-        self.physicsBody?.contactTestBitMask = PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue
+        self.physicsBody?.contactTestBitMask = PhysicsCategories.sidewall.rawValue | PhysicsCategories.powerup.rawValue | PhysicsCategories.enemy.rawValue
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.friction = 0.0

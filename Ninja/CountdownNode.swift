@@ -18,7 +18,7 @@ class CountdownNode: SKSpriteNode {
         }
     }
     fileprivate var delay:TimeInterval
-    fileprivate var countdownLabel = SKLabelNode(fontNamed: "French_Fries")
+    fileprivate var countdownLabel = MKOutlinedLabelNode(fontNamed: "PlaytimeWithHotToddies", fontSize: 120)
     fileprivate var internalCount:Int = 0
     var initialText:String? {
         didSet {

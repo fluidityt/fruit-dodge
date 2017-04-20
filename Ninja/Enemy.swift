@@ -43,7 +43,6 @@ class Enemy: SKSpriteNode {
     
     var textures = [SKTexture]()
     let textureName:String
-    var direction:EnemyDirection?
     var stateMachine:EnemyStateMachine!
     
     static let bounceSound = SKAction.playSoundFileNamed("bounce", waitForCompletion: false)

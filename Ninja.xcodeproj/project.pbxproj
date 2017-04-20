@@ -53,13 +53,18 @@
 		F9658E251E6879C600233B6A /* Menubar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9658E241E6879C600233B6A /* Menubar.swift */; };
 		F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F972700A1E44E94600D4F796 /* French_Fries.ttf */; };
 		F9896C501D9D718400B53571 /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9896C4F1D9D718400B53571 /* bounce.mp3 */; };
+		F98E402C1EA8E48300F9B749 /* playtime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F98E402B1EA8E47200F9B749 /* playtime.ttf */; };
+		F98E40321EA8F0AA00F9B749 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F98E402E1EA8F0AA00F9B749 /* LICENSE */; };
+		F98E40331EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98E402F1EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift */; };
+		F98E40341EA8F0AA00F9B749 /* OutlinedText.png in Resources */ = {isa = PBXBuildFile; fileRef = F98E40301EA8F0AA00F9B749 /* OutlinedText.png */; };
+		F98E40351EA8F0AA00F9B749 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F98E40311EA8F0AA00F9B749 /* README.md */; };
+		F98E40391EA8F14500F9B749 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98E40381EA8F14500F9B749 /* PlayerState.swift */; };
 		F99F25F11E93F4AD0068B461 /* bg_friends_score.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F25F01E93F4AD0068B461 /* bg_friends_score.png */; };
 		F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9A176FD1DCB929900534EBA /* fruitlist.plist */; };
 		F9BACFD01E9D3066007A7340 /* icons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9BACFCF1E9D3066007A7340 /* icons.atlas */; };
 		F9BE8A0D1E95692400EE7AE1 /* fruit.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */; };
 		F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BFCB2A1D92ACED0095A8EA /* Player.swift */; };
 		F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CC1D806D16001E8318 /* PlayerStates.swift */; };
-		F9CB94D31D807036001E8318 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94D21D807036001E8318 /* PlayerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,13 +144,18 @@
 		F972700A1E44E94600D4F796 /* French_Fries.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = French_Fries.ttf; sourceTree = "<group>"; };
 		F9896C4F1D9D718400B53571 /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bounce.mp3; sourceTree = "<group>"; };
 		F98E40271EA77B9600F9B749 /* HeapInspector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HeapInspector.framework; path = "Pods/../build/Debug-iphoneos/HeapInspector/HeapInspector.framework"; sourceTree = "<group>"; };
+		F98E402B1EA8E47200F9B749 /* playtime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = playtime.ttf; sourceTree = "<group>"; };
+		F98E402E1EA8F0AA00F9B749 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F98E402F1EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKOutlinedLabelNode.swift; sourceTree = "<group>"; };
+		F98E40301EA8F0AA00F9B749 /* OutlinedText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OutlinedText.png; sourceTree = "<group>"; };
+		F98E40311EA8F0AA00F9B749 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F98E40381EA8F14500F9B749 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		F99F25F01E93F4AD0068B461 /* bg_friends_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_friends_score.png; sourceTree = "<group>"; };
 		F9A176FD1DCB929900534EBA /* fruitlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fruitlist.plist; sourceTree = "<group>"; };
 		F9BACFCF1E9D3066007A7340 /* icons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = icons.atlas; sourceTree = "<group>"; };
 		F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fruit.atlas; sourceTree = "<group>"; };
 		F9BFCB2A1D92ACED0095A8EA /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F9CB94CC1D806D16001E8318 /* PlayerStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStates.swift; sourceTree = "<group>"; };
-		F9CB94D21D807036001E8318 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerState.swift; path = ../PlayerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +303,7 @@
 		F93C42FB1D79CB97006572C9 /* Ninja */ = {
 			isa = PBXGroup;
 			children = (
+				F98E402D1EA8F0AA00F9B749 /* MKOutlinedLabelNode */,
 				F9BACFD11E9EA0D6007A7340 /* Textures */,
 				F93C356D1E697D30009C7DA3 /* SpriteKitLightning-Swift */,
 				F97270091E44E92C00D4F796 /* Fonts */,
@@ -340,7 +351,7 @@
 		F952E3D21E4CD0BD0012CCA1 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				F9CB94D21D807036001E8318 /* PlayerState.swift */,
+				F98E40381EA8F14500F9B749 /* PlayerState.swift */,
 				F9CB94CC1D806D16001E8318 /* PlayerStates.swift */,
 			);
 			name = Player;
@@ -368,9 +379,22 @@
 		F97270091E44E92C00D4F796 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F98E402B1EA8E47200F9B749 /* playtime.ttf */,
 				F972700A1E44E94600D4F796 /* French_Fries.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		F98E402D1EA8F0AA00F9B749 /* MKOutlinedLabelNode */ = {
+			isa = PBXGroup;
+			children = (
+				F98E402E1EA8F0AA00F9B749 /* LICENSE */,
+				F98E402F1EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift */,
+				F98E40301EA8F0AA00F9B749 /* OutlinedText.png */,
+				F98E40311EA8F0AA00F9B749 /* README.md */,
+			);
+			name = MKOutlinedLabelNode;
+			path = "SpriteKitLightning-Swift/MKOutlinedLabelNode";
 			sourceTree = "<group>";
 		};
 		F9BACFD11E9EA0D6007A7340 /* Textures */ = {
@@ -514,6 +538,7 @@
 				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
 				F9BACFD01E9D3066007A7340 /* icons.atlas in Resources */,
 				F93C359B1E697D30009C7DA3 /* shock3.aiff in Resources */,
+				F98E402C1EA8E48300F9B749 /* playtime.ttf in Resources */,
 				F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */,
 				F9BE8A0D1E95692400EE7AE1 /* fruit.atlas in Resources */,
 				F9896C501D9D718400B53571 /* bounce.mp3 in Resources */,
@@ -525,10 +550,12 @@
 				F93C35981E697D30009C7DA3 /* Lightning.xcassets in Resources */,
 				F93C430B1D79CB97006572C9 /* LaunchScreen.storyboard in Resources */,
 				F9658E231E65DFCA00233B6A /* star_collect.mp3 in Resources */,
+				F98E40321EA8F0AA00F9B749 /* LICENSE in Resources */,
 				F93C43081D79CB97006572C9 /* Assets.xcassets in Resources */,
 				F93C359D1E697D30009C7DA3 /* shock5.aiff in Resources */,
 				F93C43061D79CB97006572C9 /* Main.storyboard in Resources */,
 				F93C359E1E697D30009C7DA3 /* shock6.aiff in Resources */,
+				F98E40341EA8F0AA00F9B749 /* OutlinedText.png in Resources */,
 				F93C35991E697D30009C7DA3 /* shock1.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -682,22 +709,24 @@
 				F93C35971E697D30009C7DA3 /* LightningNode.swift in Sources */,
 				F9216BE91D917FB500E8E923 /* SKNode+Extensions.swift in Sources */,
 				F9216BEC1D917FB500E8E923 /* SKTTimingFunctions.swift in Sources */,
+				F98E40331EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift in Sources */,
 				F9216BE21D917FB500E8E923 /* CGFloat+Extensions.swift in Sources */,
 				F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */,
 				F9216BE71D917FB500E8E923 /* SKAction+SpecialEffects.swift in Sources */,
 				F93C43011D79CB97006572C9 /* GameScene.swift in Sources */,
 				F93C35951E697D30009C7DA3 /* LightningBoltNode.swift in Sources */,
 				F952E3D91E55D8870012CCA1 /* Collectible.swift in Sources */,
+				F98E40351EA8F0AA00F9B749 /* README.md in Sources */,
 				F9216BE61D917FB500E8E923 /* SKAction+Extensions.swift in Sources */,
 				F9216BEA1D917FB500E8E923 /* SKTAudio.swift in Sources */,
 				F9216BEB1D917FB500E8E923 /* SKTEffects.swift in Sources */,
 				F9216BE41D917FB500E8E923 /* CGVector+Extensions.swift in Sources */,
-				F9CB94D31D807036001E8318 /* PlayerState.swift in Sources */,
 				F93C35961E697D30009C7DA3 /* LightningLineNode.swift in Sources */,
 				F95B2A5D1E2E6C88007A62EC /* CountdownNode.swift in Sources */,
 				F95D2EF51D8BF23700542CD9 /* Enemy.swift in Sources */,
 				F9216BE31D917FB500E8E923 /* CGPoint+Extensions.swift in Sources */,
 				F9216BE81D917FB500E8E923 /* SKColor+Extensions.swift in Sources */,
+				F98E40391EA8F14500F9B749 /* PlayerState.swift in Sources */,
 				F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */,
 				F9216BE51D917FB500E8E923 /* Int+Extensions.swift in Sources */,
 				F93C43031D79CB97006572C9 /* GameViewController.swift in Sources */,

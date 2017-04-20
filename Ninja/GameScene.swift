@@ -20,7 +20,6 @@ enum PhysicsCategories:UInt32 {
 class GameScene: SKScene {
     
     // MARK: Properties
-    //HINSPDebug.start()
     
     var playableRect:CGRect
     var player:Player! = nil
@@ -281,7 +280,7 @@ class GameScene: SKScene {
             updateEnemies(timeSinceLast)
             
             if (shouldSpawnEnemy()) {
-                self.spawnDanger(fromSide: .Right)
+                self.spawnDanger(fromSide: .Left)
                 scoreSinceLastSpawn = 0
             }
             
@@ -337,7 +336,6 @@ class GameScene: SKScene {
         let minSpeed = enemySprite.physicsBody!.mass * 100
         var moveSpeed = CGFloat.random(min: minSpeed, max: minSpeed*2.5)
         var xPos:CGFloat
-        enemySprite.direction = side
         
         switch side {
         case .Left:
@@ -345,6 +343,7 @@ class GameScene: SKScene {
             enemySprite.stateMachine.enter(BouncingRight.self)
         case .Right:
             xPos = self.frame.width
+            moveSpeed = -moveSpeed
             enemySprite.stateMachine.enter(BouncingLeft.self)
             
         }
@@ -420,6 +419,7 @@ class GameScene: SKScene {
         running = false
         let restartNode = SKSpriteNode(imageNamed: "restart")
         let homeNode = SKSpriteNode(imageNamed: "home")
+        let highScore = UserDefaults.standard.integer(forKey: "highscore")
         
         let gameoverNode = SKNode()
         gameoverNode.zPosition = 10000
@@ -489,6 +489,11 @@ class GameScene: SKScene {
         
         let scoreUpdatesAction = SKAction.group([updateStarScore, updateTimeScore])
         gameoverNode.run(SKAction.sequence([move, SKAction.wait(forDuration:0.5), scoreUpdatesAction]))
+        
+        
+        if starScore > highScore {
+            UserDefaults.standard.set(starsScore, forKey: "highscore")
+        }
         
     }
     
@@ -592,7 +597,7 @@ extension GameScene: Powerupable
             
             let pop = SKAction.group([SKAction.screenShakeWithNode(enemySprite, amount:velocity/30, oscillations: 10, duration: 1.0)])
             
-            let removeAction = SKAction.sequence([pop, SKAction.run({ enemySprite.squash() })])
+            let removeAction = SKAction.sequence([pop, SKAction.run({ enemySprite.stateMachine.enter(Squashed.self) })])
             enemySprite.run(removeAction)
         }
 
@@ -617,6 +622,7 @@ extension GameScene: SKPhysicsContactDelegate
         
         if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.enemy.rawValue) {
             if let enemy = secondBody.node as? Enemy {
+                print("checking enemy hit")
                 checkEnemyHit(enemy)
             }
         }

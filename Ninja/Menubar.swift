@@ -23,7 +23,7 @@ class ScoreNode: SKNode {
         
         icon = SKSpriteNode(imageNamed: image)
 
-        label = SKLabelNode(fontNamed: "French_Fries")
+        label = SKLabelNode(fontNamed: "PlaytimeWithHotToddies")
         label.text = "x 0"
         label.fontSize = 120
         label.horizontalAlignmentMode = .left
