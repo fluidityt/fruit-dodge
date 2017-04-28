@@ -5,11 +5,13 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "09DD5204768D17955A38D1C1BC332335D7157DB1" : 9223372036854775807,
+    "27CD181793DFE3DA0DE19F78F0840328C8A15F12" : 9223372036854775807,
     "243F91E912E79D9FD58BB3065FB08C070D6BA52C" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A0B6470C-609E-43B5-A285-A36ECD25F68C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "09DD5204768D17955A38D1C1BC332335D7157DB1" : "Ninja\/",
+    "27CD181793DFE3DA0DE19F78F0840328C8A15F12" : "Ninja\/Ninja\/SpriteKitLightning-Swift\/MKOutlinedLabelNode\/",
     "243F91E912E79D9FD58BB3065FB08C070D6BA52C" : "Ninja\/Ninja\/SpriteKitLightning-Swift\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Ninja",
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andrew8712\/SpriteKitLightning-Swift.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "243F91E912E79D9FD58BB3065FB08C070D6BA52C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/marioklaver\/MKOutlinedLabelNode.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "27CD181793DFE3DA0DE19F78F0840328C8A15F12"
     }
   ]
 }

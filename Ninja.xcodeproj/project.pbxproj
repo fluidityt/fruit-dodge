@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B0E3550B183B31E9C4435EB /* Pods_NinjaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7018EEC2E57C724EEA00BB23 /* Pods_NinjaTests.framework */; };
-		81262E4453D5ACE060FAE6F2 /* Pods_Ninja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6239833AC4FBBE6E0700B342 /* Pods_Ninja.framework */; };
-		8A5C11EB614BCC04BEC117EB /* Pods_NinjaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3E146FF9E53E67BD541849 /* Pods_NinjaUITests.framework */; };
 		F9076C6F1E799E6D0002FF38 /* resized.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9076C6E1E799E6D0002FF38 /* resized.atlas */; };
 		F9216BE21D917FB500E8E923 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BD61D917FB500E8E923 /* CGFloat+Extensions.swift */; };
 		F9216BE31D917FB500E8E923 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BD71D917FB500E8E923 /* CGPoint+Extensions.swift */; };
@@ -23,6 +20,8 @@
 		F9216BEB1D917FB500E8E923 /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BDF1D917FB500E8E923 /* SKTEffects.swift */; };
 		F9216BEC1D917FB500E8E923 /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BE01D917FB500E8E923 /* SKTTimingFunctions.swift */; };
 		F9216BED1D917FB500E8E923 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9216BE11D917FB500E8E923 /* Vector3.swift */; };
+		F93B073E1EB35BB500BBE6A4 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93B073D1EB35BB500BBE6A4 /* ProgressBar.swift */; };
+		F93B07401EB3666800BBE6A4 /* icons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F93B073F1EB3666800BBE6A4 /* icons.atlas */; };
 		F93C35951E697D30009C7DA3 /* LightningBoltNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C35781E697D30009C7DA3 /* LightningBoltNode.swift */; };
 		F93C35961E697D30009C7DA3 /* LightningLineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C35791E697D30009C7DA3 /* LightningLineNode.swift */; };
 		F93C35971E697D30009C7DA3 /* LightningNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93C357A1E697D30009C7DA3 /* LightningNode.swift */; };
@@ -50,18 +49,14 @@
 		F960928E1DA7F37E00749623 /* splat.wav in Resources */ = {isa = PBXBuildFile; fileRef = F960928D1DA7F37E00749623 /* splat.wav */; };
 		F96092901DA7FAD500749623 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960928F1DA7FAD500749623 /* MenuViewController.swift */; };
 		F9658E231E65DFCA00233B6A /* star_collect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9658E221E65DFCA00233B6A /* star_collect.mp3 */; };
-		F9658E251E6879C600233B6A /* Menubar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9658E241E6879C600233B6A /* Menubar.swift */; };
+		F9658E251E6879C600233B6A /* ScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9658E241E6879C600233B6A /* ScoreNode.swift */; };
 		F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F972700A1E44E94600D4F796 /* French_Fries.ttf */; };
 		F9896C501D9D718400B53571 /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9896C4F1D9D718400B53571 /* bounce.mp3 */; };
 		F98E402C1EA8E48300F9B749 /* playtime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F98E402B1EA8E47200F9B749 /* playtime.ttf */; };
-		F98E40321EA8F0AA00F9B749 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F98E402E1EA8F0AA00F9B749 /* LICENSE */; };
 		F98E40331EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98E402F1EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift */; };
-		F98E40341EA8F0AA00F9B749 /* OutlinedText.png in Resources */ = {isa = PBXBuildFile; fileRef = F98E40301EA8F0AA00F9B749 /* OutlinedText.png */; };
-		F98E40351EA8F0AA00F9B749 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F98E40311EA8F0AA00F9B749 /* README.md */; };
 		F98E40391EA8F14500F9B749 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98E40381EA8F14500F9B749 /* PlayerState.swift */; };
 		F99F25F11E93F4AD0068B461 /* bg_friends_score.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F25F01E93F4AD0068B461 /* bg_friends_score.png */; };
 		F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9A176FD1DCB929900534EBA /* fruitlist.plist */; };
-		F9BACFD01E9D3066007A7340 /* icons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9BACFCF1E9D3066007A7340 /* icons.atlas */; };
 		F9BE8A0D1E95692400EE7AE1 /* fruit.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */; };
 		F9BFCB2B1D92ACED0095A8EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BFCB2A1D92ACED0095A8EA /* Player.swift */; };
 		F9CB94CD1D806D17001E8318 /* PlayerStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB94CC1D806D16001E8318 /* PlayerStates.swift */; };
@@ -85,15 +80,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6239833AC4FBBE6E0700B342 /* Pods_Ninja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ninja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7018EEC2E57C724EEA00BB23 /* Pods_NinjaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NinjaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E61DF0778A5CA706AE2FD36 /* Pods-Ninja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ninja.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ninja/Pods-Ninja.debug.xcconfig"; sourceTree = "<group>"; };
-		A1969529B94ED5F899DF9115 /* Pods-NinjaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NinjaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NinjaTests/Pods-NinjaTests.release.xcconfig"; sourceTree = "<group>"; };
-		A1A890294741074DF8D708B8 /* Pods-NinjaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NinjaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NinjaUITests/Pods-NinjaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		AD9DEEF9EBD3C5B21E4F0B1D /* Pods-Ninja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ninja.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ninja/Pods-Ninja.release.xcconfig"; sourceTree = "<group>"; };
-		CA3E146FF9E53E67BD541849 /* Pods_NinjaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NinjaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7D1D3FC62BE9066CBC39398 /* Pods-NinjaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NinjaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NinjaTests/Pods-NinjaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E744BEB3A4DE6D179AF28061 /* Pods-NinjaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NinjaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NinjaUITests/Pods-NinjaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F9076C6E1E799E6D0002FF38 /* resized.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = resized.atlas; sourceTree = "<group>"; };
 		F9216BD61D917FB500E8E923 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		F9216BD71D917FB500E8E923 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -107,6 +93,8 @@
 		F9216BDF1D917FB500E8E923 /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		F9216BE01D917FB500E8E923 /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		F9216BE11D917FB500E8E923 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		F93B073D1EB35BB500BBE6A4 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		F93B073F1EB3666800BBE6A4 /* icons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = icons.atlas; sourceTree = "<group>"; };
 		F93C35781E697D30009C7DA3 /* LightningBoltNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningBoltNode.swift; sourceTree = "<group>"; };
 		F93C35791E697D30009C7DA3 /* LightningLineNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningLineNode.swift; sourceTree = "<group>"; };
 		F93C357A1E697D30009C7DA3 /* LightningNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningNode.swift; sourceTree = "<group>"; };
@@ -140,19 +128,14 @@
 		F960928D1DA7F37E00749623 /* splat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splat.wav; sourceTree = "<group>"; };
 		F960928F1DA7FAD500749623 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		F9658E221E65DFCA00233B6A /* star_collect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = star_collect.mp3; sourceTree = "<group>"; };
-		F9658E241E6879C600233B6A /* Menubar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menubar.swift; sourceTree = "<group>"; };
+		F9658E241E6879C600233B6A /* ScoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreNode.swift; sourceTree = "<group>"; };
 		F972700A1E44E94600D4F796 /* French_Fries.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = French_Fries.ttf; sourceTree = "<group>"; };
 		F9896C4F1D9D718400B53571 /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bounce.mp3; sourceTree = "<group>"; };
-		F98E40271EA77B9600F9B749 /* HeapInspector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HeapInspector.framework; path = "Pods/../build/Debug-iphoneos/HeapInspector/HeapInspector.framework"; sourceTree = "<group>"; };
 		F98E402B1EA8E47200F9B749 /* playtime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = playtime.ttf; sourceTree = "<group>"; };
-		F98E402E1EA8F0AA00F9B749 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F98E402F1EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKOutlinedLabelNode.swift; sourceTree = "<group>"; };
-		F98E40301EA8F0AA00F9B749 /* OutlinedText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OutlinedText.png; sourceTree = "<group>"; };
-		F98E40311EA8F0AA00F9B749 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F98E40381EA8F14500F9B749 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		F99F25F01E93F4AD0068B461 /* bg_friends_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_friends_score.png; sourceTree = "<group>"; };
 		F9A176FD1DCB929900534EBA /* fruitlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fruitlist.plist; sourceTree = "<group>"; };
-		F9BACFCF1E9D3066007A7340 /* icons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = icons.atlas; sourceTree = "<group>"; };
 		F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fruit.atlas; sourceTree = "<group>"; };
 		F9BFCB2A1D92ACED0095A8EA /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F9CB94CC1D806D16001E8318 /* PlayerStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStates.swift; sourceTree = "<group>"; };
@@ -163,7 +146,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81262E4453D5ACE060FAE6F2 /* Pods_Ninja.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +153,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B0E3550B183B31E9C4435EB /* Pods_NinjaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,37 +160,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A5C11EB614BCC04BEC117EB /* Pods_NinjaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		289A329DCE5F9DA7ECFA8032 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F98E40271EA77B9600F9B749 /* HeapInspector.framework */,
-				6239833AC4FBBE6E0700B342 /* Pods_Ninja.framework */,
-				7018EEC2E57C724EEA00BB23 /* Pods_NinjaTests.framework */,
-				CA3E146FF9E53E67BD541849 /* Pods_NinjaUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		8A9E3AD1A19DB43E7A1D3E7E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9E61DF0778A5CA706AE2FD36 /* Pods-Ninja.debug.xcconfig */,
-				AD9DEEF9EBD3C5B21E4F0B1D /* Pods-Ninja.release.xcconfig */,
-				D7D1D3FC62BE9066CBC39398 /* Pods-NinjaTests.debug.xcconfig */,
-				A1969529B94ED5F899DF9115 /* Pods-NinjaTests.release.xcconfig */,
-				A1A890294741074DF8D708B8 /* Pods-NinjaUITests.debug.xcconfig */,
-				E744BEB3A4DE6D179AF28061 /* Pods-NinjaUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F9216BD51D917FB500E8E923 /* SKTUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,8 +241,6 @@
 				F93C43141D79CB97006572C9 /* NinjaTests */,
 				F93C431F1D79CB97006572C9 /* NinjaUITests */,
 				F93C42FA1D79CB96006572C9 /* Products */,
-				8A9E3AD1A19DB43E7A1D3E7E /* Pods */,
-				289A329DCE5F9DA7ECFA8032 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -312,9 +266,10 @@
 				F9CB94CB1D806CF9001E8318 /* States */,
 				F93C42FC1D79CB97006572C9 /* AppDelegate.swift */,
 				F93C43001D79CB97006572C9 /* GameScene.swift */,
-				F9658E241E6879C600233B6A /* Menubar.swift */,
+				F9658E241E6879C600233B6A /* ScoreNode.swift */,
 				F93C43021D79CB97006572C9 /* GameViewController.swift */,
 				F95B2A5C1E2E6C88007A62EC /* CountdownNode.swift */,
+				F93B073D1EB35BB500BBE6A4 /* ProgressBar.swift */,
 				F952E3D41E4E17AF0012CCA1 /* Powerup.swift */,
 				F960928F1DA7FAD500749623 /* MenuViewController.swift */,
 				F952E3DC1E5B56B90012CCA1 /* bg.png */,
@@ -388,10 +343,7 @@
 		F98E402D1EA8F0AA00F9B749 /* MKOutlinedLabelNode */ = {
 			isa = PBXGroup;
 			children = (
-				F98E402E1EA8F0AA00F9B749 /* LICENSE */,
 				F98E402F1EA8F0AA00F9B749 /* MKOutlinedLabelNode.swift */,
-				F98E40301EA8F0AA00F9B749 /* OutlinedText.png */,
-				F98E40311EA8F0AA00F9B749 /* README.md */,
 			);
 			name = MKOutlinedLabelNode;
 			path = "SpriteKitLightning-Swift/MKOutlinedLabelNode";
@@ -400,8 +352,8 @@
 		F9BACFD11E9EA0D6007A7340 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				F93B073F1EB3666800BBE6A4 /* icons.atlas */,
 				F9076C6E1E799E6D0002FF38 /* resized.atlas */,
-				F9BACFCF1E9D3066007A7340 /* icons.atlas */,
 				F9BE8A0C1E95692400EE7AE1 /* fruit.atlas */,
 			);
 			name = Textures;
@@ -423,12 +375,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F93C43251D79CB97006572C9 /* Build configuration list for PBXNativeTarget "Ninja" */;
 			buildPhases = (
-				B0F7CBFC3371EF607175E6DB /* [CP] Check Pods Manifest.lock */,
 				F93C42F51D79CB96006572C9 /* Sources */,
 				F93C42F61D79CB96006572C9 /* Frameworks */,
 				F93C42F71D79CB96006572C9 /* Resources */,
-				F21DBDCFF91C4D74EEFBC404 /* [CP] Embed Pods Frameworks */,
-				AB19C2C52845DB107F13D4C3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -536,7 +485,6 @@
 			files = (
 				F93C359A1E697D30009C7DA3 /* shock2.aiff in Resources */,
 				F972700B1E44EA3E00D4F796 /* French_Fries.ttf in Resources */,
-				F9BACFD01E9D3066007A7340 /* icons.atlas in Resources */,
 				F93C359B1E697D30009C7DA3 /* shock3.aiff in Resources */,
 				F98E402C1EA8E48300F9B749 /* playtime.ttf in Resources */,
 				F9A176FE1DCB929900534EBA /* fruitlist.plist in Resources */,
@@ -550,12 +498,11 @@
 				F93C35981E697D30009C7DA3 /* Lightning.xcassets in Resources */,
 				F93C430B1D79CB97006572C9 /* LaunchScreen.storyboard in Resources */,
 				F9658E231E65DFCA00233B6A /* star_collect.mp3 in Resources */,
-				F98E40321EA8F0AA00F9B749 /* LICENSE in Resources */,
+				F93B07401EB3666800BBE6A4 /* icons.atlas in Resources */,
 				F93C43081D79CB97006572C9 /* Assets.xcassets in Resources */,
 				F93C359D1E697D30009C7DA3 /* shock5.aiff in Resources */,
 				F93C43061D79CB97006572C9 /* Main.storyboard in Resources */,
 				F93C359E1E697D30009C7DA3 /* shock6.aiff in Resources */,
-				F98E40341EA8F0AA00F9B749 /* OutlinedText.png in Resources */,
 				F93C35991E697D30009C7DA3 /* shock1.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,36 +584,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NinjaTests/Pods-NinjaTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AB19C2C52845DB107F13D4C3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ninja/Pods-Ninja-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0F7CBFC3371EF607175E6DB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		BDEF7445E1EB1306C2F8DFA9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -682,21 +599,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F21DBDCFF91C4D74EEFBC404 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ninja/Pods-Ninja-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -705,7 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F952E3D51E4E17AF0012CCA1 /* Powerup.swift in Sources */,
-				F9658E251E6879C600233B6A /* Menubar.swift in Sources */,
+				F9658E251E6879C600233B6A /* ScoreNode.swift in Sources */,
 				F93C35971E697D30009C7DA3 /* LightningNode.swift in Sources */,
 				F9216BE91D917FB500E8E923 /* SKNode+Extensions.swift in Sources */,
 				F9216BEC1D917FB500E8E923 /* SKTTimingFunctions.swift in Sources */,
@@ -716,7 +618,6 @@
 				F93C43011D79CB97006572C9 /* GameScene.swift in Sources */,
 				F93C35951E697D30009C7DA3 /* LightningBoltNode.swift in Sources */,
 				F952E3D91E55D8870012CCA1 /* Collectible.swift in Sources */,
-				F98E40351EA8F0AA00F9B749 /* README.md in Sources */,
 				F9216BE61D917FB500E8E923 /* SKAction+Extensions.swift in Sources */,
 				F9216BEA1D917FB500E8E923 /* SKTAudio.swift in Sources */,
 				F9216BEB1D917FB500E8E923 /* SKTEffects.swift in Sources */,
@@ -733,6 +634,7 @@
 				F9216BED1D917FB500E8E923 /* Vector3.swift in Sources */,
 				F952E3DB1E55DE540012CCA1 /* Flashing.swift in Sources */,
 				F93C42FD1D79CB97006572C9 /* AppDelegate.swift in Sources */,
+				F93B073E1EB35BB500BBE6A4 /* ProgressBar.swift in Sources */,
 				F96092901DA7FAD500749623 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -882,14 +784,9 @@
 		};
 		F93C43261D79CB97006572C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E61DF0778A5CA706AE2FD36 /* Pods-Ninja.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2AACAPTHUB;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/HeapInspector",
-				);
 				INFOPLIST_FILE = Ninja/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.Ninja;
@@ -900,14 +797,9 @@
 		};
 		F93C43271D79CB97006572C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD9DEEF9EBD3C5B21E4F0B1D /* Pods-Ninja.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2AACAPTHUB;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/HeapInspector",
-				);
 				INFOPLIST_FILE = Ninja/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pelling.Ninja;
@@ -918,7 +810,6 @@
 		};
 		F93C43291D79CB97006572C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7D1D3FC62BE9066CBC39398 /* Pods-NinjaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -933,7 +824,6 @@
 		};
 		F93C432A1D79CB97006572C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1969529B94ED5F899DF9115 /* Pods-NinjaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NinjaTests/Info.plist;
@@ -947,7 +837,6 @@
 		};
 		F93C432C1D79CB97006572C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1A890294741074DF8D708B8 /* Pods-NinjaUITests.debug.xcconfig */;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = NinjaUITests/Info.plist;
@@ -961,7 +850,6 @@
 		};
 		F93C432D1D79CB97006572C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E744BEB3A4DE6D179AF28061 /* Pods-NinjaUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = NinjaUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
