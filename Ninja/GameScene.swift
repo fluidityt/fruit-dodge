@@ -49,7 +49,8 @@ class GameScene: SKScene {
     }
     
     var menuLayer:SKNode!
-    let scoreNode = ScoreNode(imageNamed: "newstar")
+    let scoreNode = ScoreNode(imageNamed: "star_icon")
+    let starNode = ScoreNode(imageNamed: "star_icon")
     var dismiss:(()->())?
     
     //MARK: Init
@@ -96,7 +97,6 @@ class GameScene: SKScene {
         let playableHeight = size.width / maxAspectRatio
         let playableMargin = (size.height-playableHeight)/2.0
         playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
-        
         super.init(size: size)
     }
     
@@ -119,6 +119,12 @@ class GameScene: SKScene {
     func startGame()
     {
         animateGameStart()
+    }
+    
+    func pauseGame()
+    {
+        self.running = !self.running
+        self.isPaused = !self.isPaused
     }
     
     //MARK: Preloading and setup
@@ -195,17 +201,16 @@ class GameScene: SKScene {
         menuLayer.position = convertedPoint
         
         
-        //scoreNode.fontName = "French_Fries"
         menuLayer.addChild(scoreNode)
+    
+        starNode.position = CGPoint(x: -self.frame.width/3, y: 0)
+        menuLayer.addChild(starNode)
         
-        let starScoreNode = SKLabelNode(fontNamed: "French_Fries")
-        starScoreNode.name = "starscore"
-        starScoreNode.text = "0"
-        //scoreNode.fontSize = 120
-        starScoreNode.fontSize = 120
-        
-        starScoreNode.position = CGPoint(x: -self.frame.width/3, y: 0)
-        menuLayer.addChild(starScoreNode)
+        let pauseNode = SKSpriteNode(imageNamed: "pause")
+        pauseNode.name = "pause"
+        pauseNode.position = CGPoint(x: self.frame.width/3, y:0)
+        pauseNode.setScale(0.5)
+        menuLayer.addChild(pauseNode)
         
         addChild(menuLayer)
     }
@@ -227,6 +232,11 @@ class GameScene: SKScene {
                 
                 if node.name == "home" {
                     self.dismiss!()
+                }
+                
+                if node.name == "pause" {
+                    self.running = !self.running
+                    self.isPaused = !self.isPaused
                 }
             }
         
@@ -423,6 +433,7 @@ class GameScene: SKScene {
         
         let gameoverNode = SKNode()
         gameoverNode.zPosition = 10000
+        gameoverNode.name = "gameOver"
         
         let bgNode = SKSpriteNode(imageNamed: "window_shop.png")
         
@@ -488,21 +499,37 @@ class GameScene: SKScene {
         let updateTimeScore = SKAction.repeat(SKAction.sequence([wait, scoreScore.increment()]), count: score)
         
         let scoreUpdatesAction = SKAction.group([updateStarScore, updateTimeScore])
-        gameoverNode.run(SKAction.sequence([move, SKAction.wait(forDuration:0.5), scoreUpdatesAction]))
+        gameoverNode.run(SKAction.sequence([SKAction.wait(forDuration:0.5), move, SKAction.wait(forDuration:0.5), scoreUpdatesAction]))
         
         
         if starScore > highScore {
-            UserDefaults.standard.set(starsScore, forKey: "highscore")
+            UserDefaults.standard.set(starScore, forKey: "highscore")
         }
         
     }
     
     func restart()
     {
-        self.removeAllChildren()
-        let scene = GameScene(size: self.size)
-        scene.scaleMode = self.scaleMode
-        self.view?.presentScene(scene)
+        if let gameoverNode = self.childNode(withName: "gameOver") {
+            print(gameoverNode.position)
+            let effect = SKTMoveEffect(node: gameoverNode, duration: 0.7, startPosition: gameoverNode.position, endPosition: CGPoint(x: self.frame.width+gameoverNode.calculateAccumulatedFrame().width/2, y:self.frame.midY))
+            
+            effect.timingFunction = SKTTimingFunctionBackEaseIn
+            let move = SKAction.actionWithEffect(effect)
+            
+            gameoverNode.run(move) {
+                self.removeAllChildren()
+                let scene = GameScene(size: self.size)
+                scene.scaleMode = self.scaleMode
+                self.view?.presentScene(scene)
+            }
+        } else {
+            self.removeAllChildren()
+            let scene = GameScene(size: self.size)
+            scene.scaleMode = self.scaleMode
+            self.view?.presentScene(scene)
+        }
+
     }
     
     func shouldSpawnEnemy() -> Bool
@@ -622,7 +649,6 @@ extension GameScene: SKPhysicsContactDelegate
         
         if (firstBody.categoryBitMask == PhysicsCategories.character.rawValue && secondBody.categoryBitMask == PhysicsCategories.enemy.rawValue) {
             if let enemy = secondBody.node as? Enemy {
-                print("checking enemy hit")
                 checkEnemyHit(enemy)
             }
         }
